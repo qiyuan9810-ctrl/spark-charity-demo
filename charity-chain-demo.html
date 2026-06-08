@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星火慈善基金 · 链上透明捐赠平台</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root{
+    --bg1:#fff6ec; --bg2:#ffe9ee; --bg3:#fff0d9;
+    --card:#ffffff; --ink:#5a4636; --muted:#a48c79; --line:#f1e1d0;
+    --brand:#ff7a45; --brand2:#f25c2a; --amber:#f6a51d; --sun:#ffcf5c;
+    --rose:#ff6f9c; --green:#27b97a; --teal:#22bdbf; --purple:#a273ff; --red:#ef5350;
+    --radius:18px; --shadow:0 8px 24px rgba(214,140,90,.12);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);line-height:1.6;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2) 45%,var(--bg3));background-attachment:fixed}
+  a{color:var(--brand)}
+  header{padding:22px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    background:linear-gradient(100deg,#fff3e0,#ffe3ec);border-bottom:3px solid #ffd9c2}
+  .brandmark{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#ff9a45,#ff5e7e);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(255,110,80,.35);flex:none}
+  .logo{font-size:25px;font-weight:900;letter-spacing:.5px;color:#e8542a}
+  .logo small{display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:1px}
+  .tagline{font-size:13px;color:#c2724a;background:#fff;border:1px solid #ffd9c2;padding:5px 12px;border-radius:999px;font-weight:600}
+  .wallet{margin-left:auto;font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;background:#fff;
+    border:1px solid var(--line);padding:7px 13px;border-radius:999px}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+  nav{display:flex;gap:8px;padding:16px 28px 0;flex-wrap:wrap;max-width:1180px;margin:0 auto}
+  nav button{background:#fff;border:1px solid var(--line);color:var(--muted);padding:10px 16px;border-radius:999px;
+    font-size:14px;cursor:pointer;font-weight:700;transition:.15s}
+  nav button:hover{color:var(--brand);border-color:#ffc7ab}
+  nav button.active{color:#fff;background:linear-gradient(135deg,var(--brand),var(--rose));border-color:transparent;box-shadow:0 4px 12px rgba(255,110,90,.3)}
+  main{padding:24px 28px 60px;max-width:1180px;margin:0 auto}
+  .view{display:none;animation:fade .25s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-size:21px;margin:6px 0 4px;color:#e8542a}
+  .sub{color:var(--muted);font-size:13.5px;margin-bottom:18px}
+  .grid{display:grid;gap:16px}
+  .cards{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+  .kpi{position:relative;overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px}
+  .kpi.c1::before{background:var(--green)} .kpi.c2::before{background:var(--brand)}
+  .kpi.c3::before{background:var(--amber)} .kpi.c4::before{background:var(--purple)} .kpi.c5::before{background:var(--teal)}
+  .kpi .label{font-size:13px;color:var(--muted)}
+  .kpi .num{font-size:27px;font-weight:900;margin-top:6px}
+  .kpi.c1 .num{color:var(--green)} .kpi.c2 .num{color:var(--brand)} .kpi.c3 .num{color:var(--amber)} .kpi.c4 .num{color:var(--purple)} .kpi.c5 .num{color:var(--teal)}
+  .kpi .sub2{font-size:11px;color:var(--muted);margin-top:3px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  @media(max-width:880px){.row,.row3{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;color:var(--muted);margin:12px 0 5px;font-weight:600}
+  input,select,textarea{width:100%;background:#fffdfb;border:1.5px solid var(--line);color:var(--ink);
+    padding:11px 13px;border-radius:11px;font-size:14px;font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--brand)}
+  .btn{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border:none;padding:12px 18px;border-radius:11px;
+    font-weight:800;font-size:14px;cursor:pointer;margin-top:14px;box-shadow:0 4px 12px rgba(255,110,80,.28)}
+  .btn:hover{filter:brightness(1.05)}
+  .btn.ghost{background:#fff;border:1.5px solid var(--line);color:var(--ink);box-shadow:none}
+  .btn.green{background:linear-gradient(135deg,#34d399,#16a34a)}
+  .btn.blue{background:linear-gradient(135deg,#38bdf8,#2563eb)}
+  .btn.purple{background:linear-gradient(135deg,#c084fc,#8b5cf6)}
+  .btn.amber{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#5a3b00}
+  .btn.rose{background:linear-gradient(135deg,#ff9bbf,#ff5e8a)}
+  .btn.danger{background:linear-gradient(135deg,#fb7185,#ef4444)}
+  .btn.sm{padding:7px 13px;font-size:13px;margin-top:0}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+  th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:700}
+  .hash{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;color:var(--brand2);word-break:break-all}
+  .pill{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;font-weight:800}
+  .pill.don{background:#dcfce7;color:#16a34a} .pill.dis{background:#dbeafe;color:#2563eb}
+  .pill.ink{background:#f3e8ff;color:#8b5cf6} .pill.pend{background:#fef3c7;color:#b45309}
+  .pill.ok{background:#dcfce7;color:#16a34a} .pill.bad{background:#fee2e2;color:#dc2626}
+  /* payment grid */
+  .pays{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:6px}
+  .pay{background:#fffdfb;border:1.5px solid var(--line);border-radius:13px;padding:12px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.15s}
+  .pay:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .pay .ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex:none}
+  .pay .nm{font-size:13px;font-weight:800;line-height:1.2}
+  .pay .nm small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+  /* project cards */
+  .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .proj{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:.18s}
+  .proj:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(214,140,90,.2)}
+  .proj .pic{width:100%;display:block}
+  .proj .pbody{padding:16px 18px}
+  .proj .pname{font-size:18px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:space-between;color:var(--ink)}
+  .proj .pname .chev{font-size:14px;color:var(--brand);transition:.2s}
+  .proj.open .pname .chev{transform:rotate(180deg)}
+  .proj .ptease{font-size:13px;color:var(--muted);margin-top:4px}
+  .proj .detail{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:14px;color:#6b5644}
+  .proj.open .detail{max-height:420px}
+  .proj .detail p{margin:12px 0 4px}
+  .proj .dbtn{margin-top:10px}
+  /* modal */
+  .overlay{position:fixed;inset:0;background:rgba(90,60,40,.5);display:none;align-items:center;justify-content:center;z-index:80;padding:20px}
+  .overlay.show{display:flex}
+  .modal{background:#fff;border-radius:20px;padding:24px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+  .qrwrap{background:#fff;width:206px;height:206px;margin:16px auto;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:10px;border:1px solid var(--line)}
+  .qrfallback{font-size:11px;color:#5a4636;word-break:break-all;padding:8px}
+  .ordno{font-family:ui-monospace,monospace;font-size:12px;color:var(--muted)}
+  .block{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .block.invalid{border-color:var(--red);box-shadow:0 0 0 2px var(--red) inset}
+  .block .bhead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  .block .bidx{font-weight:900;font-size:15px;color:#e8542a}
+  .kv{font-size:12.5px;color:#7a6552;margin-top:5px}
+  .chain-link{text-align:center;color:var(--brand);font-size:20px;margin:-6px 0 8px}
+  .note{background:#fff7ee;border:1.5px dashed #ffd9bf;border-radius:12px;padding:12px 14px;font-size:13px;color:#8a6f59;margin-top:14px}
+  .note b{color:var(--ink)}
+  .approvers{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .approvers .ap{font-size:12px;padding:6px 11px;border:1.5px solid var(--line);border-radius:9px;cursor:pointer;color:var(--muted);font-weight:600}
+  .approvers .ap.signed{background:#dcfce7;color:#16a34a;border-color:#86efac;cursor:default}
+  .feed{max-height:320px;overflow:auto}
+  .seg{display:inline-flex;background:#fff3ea;border:1px solid var(--line);border-radius:11px;padding:4px;gap:4px;margin-bottom:6px}
+  .seg button{border:none;background:transparent;padding:8px 14px;border-radius:8px;font-weight:700;font-size:13px;color:var(--muted);cursor:pointer}
+  .seg button.on{background:#fff;color:var(--brand);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+  .puimg{max-width:130px;border-radius:10px;border:1px solid var(--line);margin-top:8px}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;border:2px solid var(--brand);
+    color:var(--ink);padding:13px 22px;border-radius:14px;font-size:14px;font-weight:600;opacity:0;transition:.3s;
+    pointer-events:none;z-index:99;max-width:90%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.15)}
+  .toast.show{opacity:1;bottom:34px}
+  .mintip{font-size:12.5px;color:#c2724a;margin-top:8px;min-height:16px;font-weight:600}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
+  .heartline{color:var(--rose)}
+</style>
+</head>
+<body>
+<header>
+  <div class="brandmark">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2c1 3-1 4-1 6a3 3 0 1 0 6 0c0-1 0-2-1-3 3 2 4 5 4 8a8 8 0 0 1-16 0c0-4 3-6 4-9 1 2 2 2 4 1-1-1-1-2-1-2z" fill="#fff"/></svg>
+  </div>
+  <div class="logo">星火慈善基金<small>SPARK CHARITY FOUNDATION · 链上透明</small></div>
+  <div class="tagline">🤍 让每一份爱心都被看见</div>
+  <div class="wallet"><span class="dot"></span> 模拟链已连接 · 区块 <b id="walletHeight" style="color:var(--ink);margin-left:4px">0</b></div>
+</header>
+
+<nav id="nav">
+  <button class="active" data-view="dashboard">📊 透明仪表盘</button>
+  <button data-view="projects">💝 捐赠用途详情</button>
+  <button data-view="donate">🧡 现金捐款</button>
+  <button data-view="inkind">📦 物资捐赠</button>
+  <button data-view="disburse">🏦 拨款审批</button>
+  <button data-view="explorer">🔗 区块链浏览器</button>
+  <button data-view="about">ℹ️ 原理说明</button>
+</nav>
+
+<main>
+  <!-- DASHBOARD -->
+  <section class="view active" id="view-dashboard">
+    <h2>公开透明仪表盘</h2>
+    <p class="sub">任何人无需登录即可查看每一分善款与每一件物资的去向。数据全部来自下方不可篡改的链上账本。</p>
+    <div class="grid cards">
+      <div class="card kpi c1"><div class="label">现金募集 (链上)</div><div class="num" id="kRaised">¥0</div><div class="sub2" id="kRaisedCnt">0 笔</div></div>
+      <div class="card kpi c2"><div class="label">已拨付</div><div class="num" id="kDisbursed">¥0</div></div>
+      <div class="card kpi c3"><div class="label">资金池余额</div><div class="num" id="kBalance">¥0</div></div>
+      <div class="card kpi c4"><div class="label">物资捐赠 (参考估值)</div><div class="num" id="kInkind">¥0</div><div class="sub2" id="kInkindCnt">0 件</div></div>
+      <div class="card kpi c5"><div class="label">链上交易总数</div><div class="num" id="kTx">0</div></div>
+    </div>
+    <div class="row3" style="margin-top:16px">
+      <div class="card"><h2 style="font-size:15px;color:var(--ink)">资金流向 (按救助项目)</h2><canvas id="pie" height="200"></canvas></div>
+      <div class="card"><h2 style="font-size:15px;color:var(--ink)">捐款渠道分布</h2><canvas id="chan" height="200"></canvas></div>
+      <div class="card"><h2 style="font-size:15px;color:var(--ink)">募集 vs 拨付</h2><canvas id="bar" height="200"></canvas></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h2 style="font-size:15px;color:var(--ink)">最新链上动态</h2>
+      <div class="feed"><table id="feedTable"><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="view" id="view-projects">
+    <h2>捐赠用途详情 · 你的爱心去了哪里</h2>
+    <p class="sub">点击每个项目的名字，看看这份善意背后的故事。每一个项目，都是一群人正在等待的光。</p>
+    <div class="projects" id="projectGrid"></div>
+  </section>
+
+  <!-- DONATE -->
+  <section class="view" id="view-donate">
+    <h2>现金捐款 · 多渠道支付</h2>
+    <p class="sub">选择你习惯的支付方式，扫码完成支付后，系统会在收到支付平台「回调」的瞬间自动把这笔捐款写入区块链——无需人工补登，不会漏款。</p>
+    <div class="row">
+      <div class="card">
+        <label>捐款人 / 昵称</label>
+        <input id="dName" placeholder="例如：匿名爱心人士" value="爱心市民小星">
+        <label>捐款金额 (¥)</label>
+        <input id="dAmount" type="number" min="1" value="500">
+        <label>指定用途（可选，详情见「捐赠用途详情」）</label>
+        <select id="dPurpose">
+          <option value="不指定，由基金会统筹">不指定，由基金会统筹</option>
+          <option value="山区留守儿童救助">山区留守儿童救助</option>
+          <option value="事实孤儿救助">事实孤儿救助</option>
+          <option value="孤寡老人慰问">孤寡老人慰问</option>
+          <option value="乡村应急备灾">乡村应急备灾</option>
+          <option value="生命救援助力">生命救援助力</option>
+        </select>
+        <div style="margin-top:14px;background:#fff7ee;border:1.5px dashed #ffd9bf;border-radius:12px;padding:12px 14px">
+          <div style="font-weight:800;color:var(--ink);font-size:13.5px">📢 拨款动态通知（可选）</div>
+          <label style="display:flex;align-items:center;gap:8px;margin:10px 0 0;cursor:pointer;color:#6b5644;font-weight:500">
+            <input type="checkbox" id="subAll" style="width:auto"> 订阅基金<b style="margin:0 2px">所有</b>拨款动态通知
+          </label>
+          <label id="subProjWrap" style="display:none;align-items:center;gap:8px;margin:9px 0 0;cursor:pointer;color:#6b5644;font-weight:500">
+            <input type="checkbox" id="subProject" style="width:auto"> 仅订阅<b id="subProjName" style="color:var(--brand2)"></b>的拨款动态
+          </label>
+          <input id="subContact" placeholder="接收通知的邮箱 / 手机（可选）" style="margin-top:10px;display:none">
+        </div>
+        <label>选择支付方式（点击生成付款二维码）</label>
+        <div class="pays" id="payGrid"></div>
+        <div class="mintip" id="mineTip"></div>
+      </div>
+      <div class="card">
+        <h2 style="font-size:15px;color:var(--ink)">为什么不会漏款？ 🧾</h2>
+        <p style="font-size:13.5px;color:#6b5644">不同支付平台（微信、支付宝、AlipayHK、银联、Amex、PayMe/转数快…）的款项最终都进入基金会的受监管账户。系统的对接逻辑是：</p>
+        <ol style="font-size:13.5px;color:#6b5644;padding-left:18px">
+          <li>捐款人扫码 → 在所选平台完成付款</li>
+          <li>支付平台向系统发送<b>支付成功回调</b></li>
+          <li>系统<b>自动</b>把该笔捐款（金额、渠道、收据号）写入区块链</li>
+        </ol>
+        <div class="note">本 Demo 的「我已完成支付」按钮就是在<b>模拟这一步回调</b>。真实系统里由支付平台触发，没有人工环节，因此每一笔都不会遗漏。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN-KIND -->
+  <section class="view" id="view-inkind">
+    <h2>物资捐赠 📦</h2>
+    <p class="sub">实物捐赠（衣物、毛毯、食品等）由收货点登记上链；如果是旧衣旧物，也可以申请<b>快递上门取件</b>。每件物资的去向全程可追溯。</p>
+    <div class="seg" id="inkindSeg">
+      <button class="on" data-tab="dropoff">🏠 送达 / 收货点登记</button>
+      <button data-tab="pickup">🚚 申请上门取件（旧物）</button>
+    </div>
+
+    <!-- dropoff -->
+    <div class="row" id="tab-dropoff">
+      <div class="card">
+        <h2 style="font-size:15px;color:var(--ink)">登记一笔物资捐赠</h2>
+        <label>捐赠人 / 机构</label>
+        <input id="kDonor" placeholder="例如：某连锁超市" value="阳光食品公司">
+        <label>物资名称</label>
+        <input id="kItem" placeholder="例如：保暖毛毯" value="保暖毛毯">
+        <label>类别</label>
+        <select id="kCat"></select>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label>数量</label><input id="kQty" type="number" min="1" value="200"></div>
+          <div><label>单位</label><input id="kUnit" value="张"></div>
+        </div>
+        <label>参考估值 (¥，可选)</label>
+        <input id="kVal" type="number" min="0" value="20000">
+        <label>备注 (可选)</label>
+        <input id="kNote" placeholder="例如：全新、含运送">
+        <button class="btn purple" id="inkindBtn">📦 登记并上链</button>
+        <div class="mintip" id="inkindTip"></div>
+      </div>
+      <div class="card">
+        <h2 style="font-size:15px;color:var(--ink)">物资台账（链上）</h2>
+        <div class="feed"><table id="inkindTable"><tbody></tbody></table></div>
+        <div class="note">物资按<b>件数和参考估值</b>单独统计，<b>不计入现金资金池</b>。点台账里的按钮推进状态，每次状态变更都会生成一条新的链上记录。</div>
+      </div>
+    </div>
+
+    <!-- pickup -->
+    <div class="row" id="tab-pickup" style="display:none">
+      <div class="card">
+        <h2 style="font-size:15px;color:var(--ink)">申请快递上门取件 🚚</h2>
+        <p style="font-size:13px;color:var(--muted);margin-top:0">家里的旧衣旧鞋旧家具，也许正是山里孩子、独居老人需要的温暖。填写申请，审核通过后我们安排快递上门。</p>
+        <label>联系人</label>
+        <input id="puName" value="捐赠人小李">
+        <label>联系电话</label>
+        <input id="puPhone" placeholder="11 位手机号" value="138****6688">
+        <label>物资类型</label>
+        <select id="puType"></select>
+        <label>数量 / 描述</label>
+        <input id="puDesc" placeholder="例如：8成新冬季外套约15件" value="8成新冬季外套约15件">
+        <label>物资照片（供审核人员评估是否适用）</label>
+        <input type="file" id="puImg" accept="image/*">
+        <div id="puPreview"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label>预约取件日期</label><input id="puDate" type="date"></div>
+          <div><label>时间段</label><select id="puSlot"><option>上午 9:00-12:00</option><option>下午 13:00-17:00</option><option>晚间 18:00-20:00</option></select></div>
+        </div>
+        <label>取件地址</label>
+        <input id="puAddr" placeholder="详细地址" value="XX市XX区阳光花园3栋2单元">
+        <label style="display:flex;align-items:center;gap:8px;margin-top:14px;cursor:pointer">
+          <input type="checkbox" id="puFee" style="width:auto" checked> 我已知悉并同意<b style="color:var(--brand2)">运费由捐赠人自付</b>
+        </label>
+        <button class="btn rose" id="pickupBtn">🚚 提交上门取件申请</button>
+        <div class="mintip" id="pickupTip"></div>
+      </div>
+      <div class="card">
+        <h2 style="font-size:15px;color:var(--ink)">取件申请审核台</h2>
+        <div id="pickupList" class="feed"><p class="sub" style="margin:0">暂无取件申请。</p></div>
+        <div class="note">流程：捐赠人提交 → 审核人员看照片评估 →<b>审核通过并安排快递</b> →快递取件后<b>确认入库并上链</b>，正式进入物资台账，全程可追溯。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISBURSE -->
+  <section class="view" id="view-disburse">
+    <h2>拨款审批 (多签机制)</h2>
+    <p class="sub">基金会发起拨款后，必须由 3 位理事中至少 2 位审批签名，资金才会真正拨出并上链——模拟智能合约的 multi-sig 规则，防止一个人独自动用善款。</p>
+    <div class="row">
+      <div class="card">
+        <h2 style="font-size:15px;color:var(--ink)">发起一笔拨款申请</h2>
+        <label>受款项目 / 机构</label>
+        <input id="pProject" placeholder="例如：XX小学" value="星光乡村小学">
+        <label>金额 (¥)</label>
+        <input id="pAmount" type="number" min="1" value="8000">
+        <label>此笔拨款服务于哪个救助项目</label>
+        <select id="pProjectTag"></select>
+        <label>用途说明</label>
+        <input id="pReason" placeholder="例如：采购冬季校服" value="为留守儿童采购冬季校服">
+        <button class="btn blue" id="proposeBtn">📝 发起拨款申请</button>
+        <div class="mintip" id="proposeTip"></div>
+      </div>
+      <div class="card">
+        <h2 style="font-size:15px;color:var(--ink)">待审批申请</h2>
+        <div id="pendingList" class="feed"><p class="sub" style="margin:0">暂无待审批申请。</p></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h2 style="font-size:15px;color:var(--ink)">📢 拨款通知推送记录</h2>
+      <div id="notifyLog" class="feed"><p class="sub" style="margin:0">暂无通知记录。</p></div>
+    </div>
+    <div class="note">分级审批门槛：拨款 <b>&lt; ¥10,000</b> 需 2 理事 + 1 代表；<b>≥ ¥10,000</b> 需 3 理事 + 1 代表；<b>超过基金池总额 10%</b> 需 3 理事 + 3 代表（全体同意）。可用余额 = 现金募集 − 已拨付，拨款不能超过余额。</div>
+  </section>
+
+  <!-- EXPLORER -->
+  <section class="view" id="view-explorer">
+    <h2>区块链浏览器 & 防篡改演示</h2>
+    <p class="sub">完整链上账本。每个区块都存着自己和「前一个区块」的哈希，环环相扣。试着篡改任意一笔金额，再点验证，整条链会立刻报错。</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      <button class="btn sm" id="validateBtn">🔍 验证整条链完整性</button>
+      <button class="btn sm amber" id="tamperBtn">😈 一键篡改一笔金额(搞破坏)</button>
+      <button class="btn sm ghost" id="resetBtn">♻️ 重新挖矿修复</button>
+      <span id="chainStatus" class="pill ok" style="align-self:center">链状态：未验证</span>
+    </div>
+    <div id="chainView"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="view" id="view-about">
+    <h2>这个平台用到了哪些区块链知识？</h2>
+    <p class="sub">可直接写进白皮书 / 答辩。</p>
+    <div class="card">
+      <table>
+        <tr><th>概念</th><th>在本平台中的体现</th></tr>
+        <tr><td><b>区块 Block</b></td><td>每个区块含：序号、时间戳、交易列表、前块哈希、nonce、本块哈希。</td></tr>
+        <tr><td><b>哈希 SHA-256</b></td><td>用真实 SHA-256 算法对区块内容计算指纹；数据变一个字，哈希全变。</td></tr>
+        <tr><td><b>链式结构</b></td><td>每块保存前一块的哈希，首尾相连，这是「不可篡改」的根本来源。</td></tr>
+        <tr><td><b>工作量证明 PoW</b></td><td>挖矿时不断改 nonce，直到哈希以 "00" 开头，模拟比特币挖矿。</td></tr>
+        <tr><td><b>智能合约逻辑</b></td><td>「2/3 多签才放款」「金额不超余额」即合约规则的模拟。</td></tr>
+        <tr><td><b>支付回调自动上链</b></td><td>多渠道支付成功后由网关回调触发，系统自动记账，无人工补登、零漏款。</td></tr>
+        <tr><td><b>链下资产上链 (Oracle 思想)</b></td><td>物资是链下实物，由可信收货点 / 上门取件审核后登记并上链，全生命周期可追溯。</td></tr>
+        <tr><td><b>去中心化应用 Dapp</b></td><td>本页 = 合约逻辑 + 前端界面 + 钱包/支付状态，即一个 Dapp 的结构。</td></tr>
+      </table>
+      <div class="note" style="margin-top:16px"><b>真实部署路径：</b>把这里的 JS 合约逻辑改写成 Solidity 智能合约，部署到以太坊测试网 (Sepolia)，前端用 ethers.js + MetaMask 连接；支付侧对接微信/支付宝/Stripe(Amex) 等网关回调，由后端把确认后的捐款写入合约。本 Demo 在本地模拟了相同行为，便于课堂讲解。</div>
+    </div>
+  </section>
+</main>
+
+<footer>星火慈善基金 ChariChain Demo · 教学演示用模拟区块链 · 数据保存在浏览器内存中，刷新即重置 · 🤍</footer>
+
+<!-- 支付二维码弹窗 -->
+<div class="overlay" id="payOverlay">
+  <div class="modal">
+    <div id="payTitle" style="font-weight:900;font-size:16px;color:var(--ink)"></div>
+    <div class="qrwrap"><div id="qrbox"></div></div>
+    <div id="payAmt" style="font-size:22px;font-weight:900;color:var(--brand)"></div>
+    <div class="ordno" id="payOrder"></div>
+    <p style="font-size:12px;color:var(--muted);margin:10px 0">请用对应 App 扫码完成支付（演示二维码，扫描不会真实扣款）</p>
+    <button class="btn" id="confirmPayBtn" style="width:100%">✅ 我已完成支付（模拟支付回调）</button>
+    <button class="btn ghost sm" id="cancelPayBtn" style="width:100%;margin-top:8px">取消</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================== 真实 SHA-256 ===================== */
+function sha256(ascii){
+  function rr(v,a){return (v>>>a)|(v<<(32-a));}
+  var mp=Math.pow,mw=mp(2,32),i,j,res='',words=[];
+  var bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[]; var k=sha256.k=sha256.k||[];
+  var pc=k.length,comp={};
+  for(var c=2;pc<64;c++){ if(!comp[c]){ for(i=0;i<313;i+=c)comp[i]=c;
+    hash[pc]=(mp(c,.5)*mw)|0; k[pc++]=(mp(c,1/3)*mw)|0; } }
+  ascii+='\x80'; while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){ j=ascii.charCodeAt(i); if(j>>8)return; words[i>>2]|=j<<((3-i)%4)*8; }
+  words[words.length]=((bitLen/mw)|0); words[words.length]=bitLen;
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),oh=hash; hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]
+        +(w[i]=(i<16)?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10)))|0);
+      var t2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash); hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+oh[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){ var b=(hash[i]>>(j*8))&255; res+=((b<16)?0:'')+b.toString(16); }
+  return res;
+}
+function hashStr(s){ return sha256(encodeURIComponent(s)); }
+
+/* ===================== 区块链 ===================== */
+const DIFFICULTY=2; let txCounter=0;
+function txid(p){ return (p||'TX')+(++txCounter).toString().padStart(4,'0'); }
+let receiptCounter=1000; function receiptNo(){ return 'RC'+(++receiptCounter); }
+class Block{
+  constructor(index,transactions,prevHash){ this.index=index;this.timestamp=new Date().toISOString().replace('T',' ').slice(0,19);
+    this.transactions=transactions;this.prevHash=prevHash;this.nonce=0;this.hash=''; }
+  contents(){ return this.index+'|'+this.timestamp+'|'+JSON.stringify(this.transactions)+'|'+this.prevHash+'|'+this.nonce; }
+  computeHash(){ return hashStr(this.contents()); }
+  mine(){ const p='0'.repeat(DIFFICULTY);this.nonce=0;do{this.nonce++;this.hash=this.computeHash();}while(!this.hash.startsWith(p));return this.nonce; }
+}
+class Chain{
+  constructor(){ const g=new Block(0,[{id:'GENESIS',type:'system',note:'创世区块 · 星火慈善基金成立'}],'0'.repeat(64));g.mine();this.blocks=[g]; }
+  last(){ return this.blocks[this.blocks.length-1]; }
+  addTxBlock(t){ const b=new Block(this.blocks.length,t,this.last().hash);const n=b.mine();this.blocks.push(b);return {block:b,nonce:n}; }
+  firstInvalid(){ const p='0'.repeat(DIFFICULTY);
+    for(let i=0;i<this.blocks.length;i++){ const b=this.blocks[i];
+      if(b.computeHash()!==b.hash)return i; if(i>0&&b.prevHash!==this.blocks[i-1].hash)return i; if(!b.hash.startsWith(p))return i; }
+    return -1; }
+}
+
+/* ===================== 业务状态 ===================== */
+const chain=new Chain();
+let pendingProposals=[], pendingPickups=[], notifications=[];
+const APPROVERS_DIR=['理事·林审计','理事·王监理','理事·陈财务'];
+const APPROVERS_REP=['捐赠人代表·赵爱心','捐赠人代表·钱明德','捐赠人代表·孙慷慨'];
+// 分级多签门槛：<1万→2理事+1代表；≥1万→3理事+1代表；>基金池10%→3理事+3代表（全员）
+function approvalReq(amount){
+  const pool=totalRaised();
+  if(pool>0 && amount > pool*0.10) return {dir:3,rep:3,tier:`> 基金池10%（约¥${Math.ceil(pool*0.1).toLocaleString()}），需全体审批`};
+  if(amount >= 10000) return {dir:3,rep:1,tier:'≥ ¥10,000，需 3 理事 + 1 代表'};
+  return {dir:2,rep:1,tier:'< ¥10,000，需 2 理事 + 1 代表'};
+}
+const INKIND_STATES=['已登记','已入库','已发放'];
+const PAY_METHODS=[
+  {id:'wechat',name:'微信支付',sub:'WeChat Pay',color:'#1aad19',ic:'微'},
+  {id:'alipay',name:'支付宝',sub:'Alipay',color:'#1677ff',ic:'支'},
+  {id:'alipayhk',name:'AlipayHK',sub:'支付宝香港',color:'#1677ff',ic:'HK'},
+  {id:'unionpay',name:'银联',sub:'UnionPay',color:'#e21836',ic:'银'},
+  {id:'amex',name:'American Express',sub:'运通卡',color:'#006fcf',ic:'AE'},
+  {id:'card',name:'Visa / Mastercard',sub:'信用卡',color:'#f59e0b',ic:'💳'},
+  {id:'payme',name:'PayMe / 转数快FPS',sub:'香港本地',color:'#d81b60',ic:'📲'},
+  {id:'bank',name:'银行转账',sub:'Bank',color:'#64748b',ic:'🏦'},
+];
+const methodById=id=>PAY_METHODS.find(m=>m.id===id);
+
+/* ===================== 项目数据（含原创SVG插画 + 煽情文案） ===================== */
+function svgChildren(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe6b8"/><stop offset="1" stop-color="#ffd2c2"/></linearGradient></defs><rect width="400" height="200" fill="url(#cg)"/><circle cx="330" cy="48" r="26" fill="#ffd24d"/><g stroke="#ffd24d" stroke-width="4" stroke-linecap="round"><line x1="330" y1="6" x2="330" y2="16"/><line x1="372" y1="48" x2="382" y2="48"/><line x1="360" y1="20" x2="367" y2="13"/></g><polygon points="0,200 110,95 220,200" fill="#82c98c"/><polygon points="150,200 270,80 400,200" fill="#5fae74"/><polygon points="240,80 270,110 300,80" fill="#fffdf5" opacity=".8"/><g><circle cx="150" cy="120" r="16" fill="#ffe0bd"/><rect x="134" y="135" width="32" height="38" rx="9" fill="#ff7a45"/><rect x="128" y="140" width="12" height="26" rx="6" fill="#ff7a45"/><rect x="160" y="140" width="12" height="26" rx="6" fill="#ff7a45"/></g><g transform="translate(205,118)"><rect x="0" y="0" width="46" height="34" rx="7" fill="#ff6f9c"/><rect x="-9" y="3" width="16" height="14" rx="6" fill="#ff6f9c"/><rect x="39" y="3" width="16" height="14" rx="6" fill="#ff6f9c"/><circle cx="23" cy="17" r="6" fill="#fff" opacity=".7"/></g></svg>`;}
+function svgOrphan(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="og" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9e6"/><stop offset="1" stop-color="#ffe9d6"/></linearGradient></defs><rect width="400" height="200" fill="url(#og)"/><path d="M200 40 C150 40 120 80 120 130 L280 130 C280 80 250 40 200 40 Z" fill="#ff8fb0" opacity=".55"/><g><circle cx="200" cy="118" r="18" fill="#ffe0bd"/><rect x="182" y="134" width="36" height="42" rx="10" fill="#a273ff"/></g><path d="M200 150 c-10 -14 -34 -10 -34 8 c0 14 22 26 34 34 c12 -8 34 -20 34 -34 c0 -18 -24 -22 -34 -8 z" fill="#ff5e8a" transform="translate(0,-4) scale(0.8)" transform-origin="200 170"/><circle cx="92" cy="60" r="9" fill="#fff" opacity=".7"/><circle cx="320" cy="70" r="7" fill="#fff" opacity=".7"/></svg>`;}
+function svgElder(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8f0ea"/><stop offset="1" stop-color="#fff0d6"/></linearGradient></defs><rect width="400" height="200" fill="url(#eg)"/><polygon points="100,110 200,55 300,110" fill="#ff9a76"/><rect x="120" y="110" width="160" height="78" fill="#fff3e6"/><rect x="180" y="140" width="40" height="48" fill="#c2724a"/><rect x="135" y="125" width="34" height="30" rx="4" fill="#bfe7ff"/><g><circle cx="300" cy="120" r="16" fill="#ffe0bd"/><rect x="285" y="135" width="30" height="40" rx="9" fill="#22bdbf"/><path d="M285 150 q-12 6 -10 26" stroke="#8a6f59" stroke-width="3" fill="none" stroke-linecap="round"/></g><path d="M70 150 c-7 -10 -24 -7 -24 6 c0 10 16 18 24 24 c8 -6 24 -14 24 -24 c0 -13 -17 -16 -24 -6 z" fill="#ff6f9c"/></svg>`;}
+function svgDisaster(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe2bf"/><stop offset="1" stop-color="#ffd0cf"/></linearGradient></defs><rect width="400" height="200" fill="url(#dg)"/><path d="M200 38 l54 18 v40 c0 40 -28 58 -54 70 c-26 -12 -54 -30 -54 -70 v-40 z" fill="#f6a51d"/><path d="M200 38 l54 18 v40 c0 40 -28 58 -54 70 z" fill="#f28c00"/><path d="M178 92 l16 18 l34 -36" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="40" y="120" width="64" height="50" rx="6" fill="#ff7a45"/><path d="M40 120 h64 M72 120 v50" stroke="#fff3e6" stroke-width="3"/><ellipse cx="320" cy="60" rx="34" ry="20" fill="#fff" opacity=".85"/><g stroke="#7fbfff" stroke-width="4" stroke-linecap="round"><line x1="305" y1="84" x2="300" y2="96"/><line x1="322" y1="84" x2="317" y2="98"/><line x1="339" y1="84" x2="334" y2="96"/></g></svg>`;}
+function svgRescue(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6d2"/><stop offset="1" stop-color="#ffe7cf"/></linearGradient></defs><rect width="400" height="200" fill="url(#rg)"/><path d="M200 70 c-22 -30 -74 -22 -74 18 c0 30 46 56 74 74 c28 -18 74 -44 74 -74 c0 -40 -52 -48 -74 -18 z" fill="#ef5350"/><path d="M120 132 h44 l14 -30 l20 56 l16 -34 h66" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="80" cy="56" r="8" fill="#fff" opacity=".7"/><circle cx="330" cy="150" r="6" fill="#fff" opacity=".7"/></svg>`;}
+
+const PROJECTS=[
+  {key:'山区留守儿童救助',color:'var(--brand)',svg:svgChildren,
+   tease:'让每个山里的孩子，每年都有新衣裳。',
+   detail:'在大山深处，有一群孩子的父母常年在外打工，他们一年也见不到爸爸妈妈几次。每到换季，别的孩子有新衣裳，他们却还穿着洗得发白、袖口磨破的旧衣。<br><br>星火想做的，是让每一个山里的孩子，每年都能收到一份属于自己的新衣——合身的棉袄、暖和的鞋子，还有一句「有人记得你」。我们相信，一件新衣服暖的不只是身子，更是一颗盼望被爱的、小小的心。'},
+  {key:'事实孤儿救助',color:'var(--purple)',svg:svgOrphan,
+   tease:'就算命运给了缺口，也总有人为你补上。',
+   detail:'他们的父母也许还在世，却因重病、服刑或失联，无法再给他们一个家。这些「事实孤儿」，常常被政策和人群同时遗忘。<br><br>星火为他们提供每月的生活与助学金，确保他们有饭吃、有学上，还有志愿者定期上门，看看他们过得好不好。我们想让这些孩子知道：就算命运给了你一个缺口，也总会有人，愿意为你补上一角。'},
+  {key:'孤寡老人慰问',color:'var(--teal)',svg:svgElder,
+   tease:'愿走到暮年的他们，依然被温柔记挂。',
+   detail:'村口那间老屋里，住着一位无儿无女的老人。一日三餐冷锅冷灶，生了病也没人知道。<br><br>星火的志愿者会定期上门，为他们送去米油、药品和一顿热乎乎的饭，陪他们说说话，听听那些被岁月尘封的故事。我们做的不只是物质慰问，更想让走到人生暮年的他们，依然被这个世界，温柔地记挂着。'},
+  {key:'乡村应急备灾',color:'var(--amber)',svg:svgDisaster,
+   tease:'灾难来临时，多一分准备，多一线生机。',
+   detail:'洪水、地震、山火……灾难来临时，最先受伤的往往是偏远的乡村。<br><br>星火在易灾地区提前储备应急物资——饮用水、棉被、手电、急救包，并培训村民应对突发灾害。我们没法阻止灾难发生，但可以让它来临时，乡亲们多一分准备、多一线生机。每一份备灾，都是与时间赛跑的守护。'},
+  {key:'生命救援助力',color:'var(--red)',svg:svgRescue,
+   tease:'不该有人因为没钱，被迫放弃活下去。',
+   detail:'有些家庭，被一场突如其来的重病或意外推到了悬崖边——高昂的医药费，让本就拮据的他们走投无路。<br><br>星火设立生命救援专项，为这些与命运抗争的人提供紧急医疗资助，帮他们抓住那根「救命稻草」。我们坚信：不该有人，因为没钱，就被迫放弃活下去的希望。'},
+];
+function renderProjects(){
+  document.getElementById('projectGrid').innerHTML=PROJECTS.map((p,i)=>`
+    <div class="proj" id="proj-${i}">
+      ${p.svg()}
+      <div class="pbody">
+        <div class="pname" onclick="toggleProj(${i})"><span style="border-left:5px solid ${p.color};padding-left:10px">${p.key}</span><span class="chev">▼</span></div>
+        <div class="ptease">${p.tease}</div>
+        <div class="detail"><p>${p.detail}</p>
+          <button class="btn sm dbtn" onclick="donateTo('${p.key}')">🧡 我要支持这个项目</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function toggleProj(i){ document.getElementById('proj-'+i).classList.toggle('open'); }
+function donateTo(key){
+  document.querySelector('[data-view="donate"]').click();
+  const sel=document.getElementById('dPurpose'); sel.value=key;
+  toast('已为你选好用途：'+key+'，填金额选支付方式即可');
+}
+
+/* ===================== 视图切换 ===================== */
+document.querySelectorAll('#nav button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('#nav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('view-'+btn.dataset.view).classList.add('active');
+    const v=btn.dataset.view;
+    if(v==='dashboard')renderDashboard();
+    if(v==='explorer')renderChain();
+    if(v==='disburse'){renderPending();renderNotifications();}
+    if(v==='inkind'){renderInkind();renderPickups();}
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+});
+
+/* ===================== Toast ===================== */
+let toastTimer;
+function toast(msg){ const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2800); }
+
+/* ===================== 支付 + 二维码 ===================== */
+function renderPayGrid(){
+  document.getElementById('payGrid').innerHTML=PAY_METHODS.map(m=>`
+    <div class="pay" onclick="openPay('${m.id}')"><div class="ic" style="background:${m.color}">${m.ic}</div>
+    <div class="nm">${m.name}<small>${m.sub}</small></div></div>`).join('');
+}
+let payCtx=null;
+function openPay(methodId){
+  const name=document.getElementById('dName').value.trim()||'匿名';
+  const amount=Math.floor(+document.getElementById('dAmount').value);
+  const purpose=document.getElementById('dPurpose').value;
+  if(!amount||amount<=0){ toast('请先输入有效金额'); return; }
+  const m=methodById(methodId), orderNo='SP'+Date.now().toString().slice(-9);
+  payCtx={name,amount,purpose,method:m,orderNo};
+  document.getElementById('payTitle').textContent=`${m.name} 付款`;
+  document.getElementById('payAmt').textContent='¥'+amount.toLocaleString();
+  document.getElementById('payOrder').textContent='订单号 '+orderNo;
+  const payload=`SPARKCHARITY|${m.name}|¥${amount}|order:${orderNo}|用途:${purpose}|星火慈善基金`;
+  const box=document.getElementById('qrbox'); box.innerHTML='';
+  try{ if(typeof QRCode!=='undefined'){ new QRCode(box,{text:payload,width:184,height:184,colorDark:'#4a3528',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M}); } else throw 0; }
+  catch(e){ box.innerHTML='<div class="qrfallback">【演示二维码】'+payload+'</div>'; }
+  document.getElementById('payOverlay').classList.add('show');
+}
+document.getElementById('cancelPayBtn').onclick=()=>document.getElementById('payOverlay').classList.remove('show');
+document.getElementById('payOverlay').onclick=e=>{ if(e.target.id==='payOverlay')e.currentTarget.classList.remove('show'); };
+document.getElementById('confirmPayBtn').onclick=()=>{
+  if(!payCtx)return; const rc=receiptNo();
+  const subAll=document.getElementById('subAll').checked;
+  const subProject=document.getElementById('subProject').checked;
+  const contact=document.getElementById('subContact').value.trim();
+  const tx={id:txid(),type:'donation',from:payCtx.name,amount:payCtx.amount,purpose:payCtx.purpose,method:payCtx.method.id,methodName:payCtx.method.name,orderNo:payCtx.orderNo,receipt:rc,subAll,subProject,contact};
+  const {block,nonce}=chain.addTxBlock([tx]);
+  document.getElementById('payOverlay').classList.remove('show');
+  let subMsg='';
+  if(subAll) subMsg=' · 已订阅全基金拨款通知';
+  else if(subProject) subMsg=` · 已订阅「${payCtx.purpose}」拨款通知`;
+  document.getElementById('mineTip').textContent=`✅ 支付回调已确认并上链! 区块 #${block.index} · 渠道 ${payCtx.method.name} · 收据号 ${rc} · 挖矿 ${nonce} 次${subMsg}`;
+  toast(`${payCtx.method.name} 捐款 ¥${payCtx.amount.toLocaleString()} 已自动上链 🧡`);
+  payCtx=null; updateHeight(); renderDashboard();
+};
+
+/* ===================== 物资 - 送达登记 ===================== */
+function fillCats(){ document.getElementById('kCat').innerHTML=['食品/饮用水','衣物','床上用品/毛毯','婴幼儿用品','医疗/卫生用品','学习用品','其他'].map(c=>`<option>${c}</option>`).join(''); }
+function fillPuTypes(){ document.getElementById('puType').innerHTML=['旧衣物','旧鞋子','旧家具','旧书籍','旧家电','母婴旧物','其他'].map(c=>`<option>${c}</option>`).join(''); }
+document.getElementById('inkindBtn').onclick=()=>{
+  const donor=document.getElementById('kDonor').value.trim(), item=document.getElementById('kItem').value.trim();
+  const cat=document.getElementById('kCat').value, qty=Math.floor(+document.getElementById('kQty').value);
+  const unit=document.getElementById('kUnit').value.trim()||'件', estValue=Math.floor(+document.getElementById('kVal').value)||0;
+  const note=document.getElementById('kNote').value.trim(), tip=document.getElementById('inkindTip');
+  if(!donor||!item||!qty){ tip.style.color='var(--red)'; tip.textContent='❌ 请填写捐赠人、物资名称与数量'; return; }
+  const id=txid('IK');
+  const {block}=chain.addTxBlock([{id,type:'inkind',donor,item,category:cat,qty,unit,estValue,note,source:'收货点登记'}]);
+  tip.style.color='var(--green)'; tip.textContent=`✅ 已登记上链! 物资编号 ${id} · 区块 #${block.index}`;
+  toast(`物资「${item} ×${qty}${unit}」已登记上链`); updateHeight(); renderInkind(); renderDashboard();
+};
+function advanceInkind(refId){
+  const cur=inkindStatus(refId), idx=INKIND_STATES.indexOf(cur);
+  if(idx>=INKIND_STATES.length-1){ toast('该物资已发放，流程结束'); return; }
+  const next=INKIND_STATES[idx+1];
+  chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId,status:next}]);
+  toast(`物资 ${refId} 状态更新为「${next}」并上链`); updateHeight(); renderInkind(); renderDashboard();
+}
+function renderInkind(){
+  const tb=document.querySelector('#inkindTable tbody'), items=inkindItems();
+  if(!items.length){ tb.innerHTML='<tr><td class="sub">暂无物资登记。</td></tr>'; return; }
+  tb.innerHTML=items.slice().reverse().map(t=>{ const st=inkindStatus(t.id), done=st===INKIND_STATES[2];
+    return `<tr><td><b>${escapeHtml(t.item)}</b> ×${t.qty}${escapeHtml(t.unit)}<div class="kv">${escapeHtml(t.category)} · ${escapeHtml(t.donor)} · 估值¥${(t.estValue||0).toLocaleString()} · ${escapeHtml(t.source||'')} · ${t.id}</div></td>
+      <td><span class="pill ${done?'ok':'pend'}">${st}</span></td>
+      <td>${done?'<span class="kv">已完成</span>':`<button class="btn sm purple" onclick="advanceInkind('${t.id}')">推进 ▶</button>`}</td></tr>`;
+  }).join('');
+}
+
+/* ===================== 物资 - 上门取件 ===================== */
+document.getElementById('inkindSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b)return;
+  document.querySelectorAll('#inkindSeg button').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  document.getElementById('tab-dropoff').style.display = b.dataset.tab==='dropoff'?'grid':'none';
+  document.getElementById('tab-pickup').style.display  = b.dataset.tab==='pickup'?'grid':'none';
+});
+let puImgData=null;
+document.getElementById('puImg').addEventListener('change',function(){
+  const f=this.files[0]; if(!f){ puImgData=null; document.getElementById('puPreview').innerHTML=''; return; }
+  const r=new FileReader(); r.onload=e=>{ puImgData=e.target.result; document.getElementById('puPreview').innerHTML=`<img class="puimg" src="${puImgData}">`; }; r.readAsDataURL(f);
+});
+document.getElementById('pickupBtn').onclick=()=>{
+  const name=document.getElementById('puName').value.trim(), phone=document.getElementById('puPhone').value.trim();
+  const type=document.getElementById('puType').value, desc=document.getElementById('puDesc').value.trim();
+  const date=document.getElementById('puDate').value, slot=document.getElementById('puSlot').value;
+  const addr=document.getElementById('puAddr').value.trim(), fee=document.getElementById('puFee').checked;
+  const tip=document.getElementById('pickupTip');
+  if(!name||!phone||!desc||!addr){ tip.style.color='var(--red)'; tip.textContent='❌ 请填写联系人、电话、描述与地址'; return; }
+  if(!fee){ tip.style.color='var(--red)'; tip.textContent='❌ 需勾选同意「运费由捐赠人自付」'; return; }
+  const id=txid('PU');
+  pendingPickups.push({id,name,phone,type,desc,img:puImgData,date:date||'待定',slot,addr,status:'待审核'});
+  tip.style.color='var(--green)'; tip.textContent=`✅ 申请已提交 (编号 ${id})，等待审核人员评估物资照片。`;
+  toast('上门取件申请已提交，待审核 🚚');
+  puImgData=null; document.getElementById('puPreview').innerHTML=''; document.getElementById('puImg').value='';
+  renderPickups();
+};
+function approvePickup(id){
+  const p=pendingPickups.find(x=>x.id===id); if(!p)return;
+  p.status='审核通过·已安排快递'; toast(`已审核通过，安排快递于 ${p.date} ${p.slot} 上门取件`); renderPickups();
+}
+function rejectPickup(id){ pendingPickups=pendingPickups.filter(x=>x.id!==id); toast('已婉拒该申请'); renderPickups(); }
+function receivePickup(id){
+  const p=pendingPickups.find(x=>x.id===id); if(!p)return;
+  const ikid=txid('IK');
+  chain.addTxBlock([{id:ikid,type:'inkind',donor:p.name,item:p.type+'（'+p.desc+'）',category:p.type,qty:1,unit:'批',estValue:0,note:'上门取件·运费自付',source:'上门取件 '+p.id}]);
+  pendingPickups=pendingPickups.filter(x=>x.id!==id);
+  toast(`快递已取件入库，物资 ${ikid} 上链 📦`); updateHeight(); renderPickups(); renderInkind(); renderDashboard();
+}
+function renderPickups(){
+  const box=document.getElementById('pickupList');
+  if(!pendingPickups.length){ box.innerHTML='<p class="sub" style="margin:0">暂无取件申请。</p>'; return; }
+  box.innerHTML=pendingPickups.map(p=>{
+    let actions='';
+    if(p.status==='待审核') actions=`<button class="btn sm green" onclick="approvePickup('${p.id}')">✔ 审核通过·安排快递</button> <button class="btn sm ghost" onclick="rejectPickup('${p.id}')">婉拒</button>`;
+    else actions=`<button class="btn sm purple" onclick="receivePickup('${p.id}')">📦 确认取件入库并上链</button>`;
+    return `<div class="card" style="margin-bottom:10px;padding:14px">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>${escapeHtml(p.type)} · ${p.id}</b><span class="pill ${p.status==='待审核'?'pend':'ok'}">${p.status}</span></div>
+      <div class="kv">${escapeHtml(p.desc)}</div>
+      <div class="kv">${escapeHtml(p.name)} · ${escapeHtml(p.phone)} · ${escapeHtml(p.date)} ${escapeHtml(p.slot)}</div>
+      <div class="kv">📍 ${escapeHtml(p.addr)} · 运费自付</div>
+      ${p.img?`<img class="puimg" src="${p.img}">`:'<div class="kv">（未上传照片）</div>'}
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">${actions}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ===================== 拨款多签 ===================== */
+document.getElementById('proposeBtn').onclick=()=>{
+  const project=document.getElementById('pProject').value.trim(), amount=Math.floor(+document.getElementById('pAmount').value);
+  const reason=document.getElementById('pReason').value.trim(), projectTag=document.getElementById('pProjectTag').value, tip=document.getElementById('proposeTip');
+  if(!project||!reason){ toast('请填写受款项目与用途'); return; }
+  if(!amount||amount<=0){ toast('请输入有效金额'); return; }
+  if(amount>balance()){ tip.style.color='var(--red)'; tip.textContent=`❌ 超出资金池余额 (¥${balance().toLocaleString()})，合约拒绝。`; return; }
+  const req=approvalReq(amount);
+  pendingProposals.push({id:txid(),project,amount,reason,projectTag,signersDir:[],signersRep:[]});
+  tip.style.color='var(--green)';
+  tip.textContent=`📝 已发起。门槛：${req.tier}。`; toast('拨款申请已提交，待审批'); renderPending();
+};
+function sign(propId,person,group){
+  const p=pendingProposals.find(x=>x.id===propId); if(!p)return;
+  const arr = group==='dir'? p.signersDir : p.signersRep;
+  if(arr.includes(person))return;
+  arr.push(person);
+  const req=approvalReq(p.amount);
+  if(p.signersDir.length>=req.dir && p.signersRep.length>=req.rep){
+    const {block}=chain.addTxBlock([{id:p.id,type:'disbursement',project:p.project,amount:p.amount,reason:p.reason,projectTag:p.projectTag,approvedBy:[...p.signersDir,...p.signersRep]}]);
+    pendingProposals=pendingProposals.filter(x=>x.id!==p.id);
+    toast(`✅ 审批通过！拨款 ¥${p.amount.toLocaleString()} 已上链 (区块 #${block.index})`);
+    notifySubscribers(p.projectTag,p.amount,p.project);
+    updateHeight(); renderDashboard();
+  } else toast(`${person} 已签名（理事 ${p.signersDir.length}/${req.dir} · 代表 ${p.signersRep.length}/${req.rep}）`);
+  renderPending();
+}
+function renderPending(){
+  const box=document.getElementById('pendingList');
+  if(!pendingProposals.length){ box.innerHTML='<p class="sub" style="margin:0">暂无待审批申请。</p>'; return; }
+  box.innerHTML=pendingProposals.map(p=>{
+    const req=approvalReq(p.amount);
+    const dirChips=APPROVERS_DIR.map(a=>{const s=p.signersDir.includes(a);return `<span class="ap ${s?'signed':''}" ${s?'':`onclick="sign('${p.id}','${a}','dir')"`}>${s?'✔ ':''}${a}</span>`;}).join('');
+    const repChips=APPROVERS_REP.map(a=>{const s=p.signersRep.includes(a);return `<span class="ap ${s?'signed':''}" ${s?'':`onclick="sign('${p.id}','${a}','rep')"`}>${s?'✔ ':''}${a}</span>`;}).join('');
+    return `<div class="card" style="margin-bottom:10px;padding:14px">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>${escapeHtml(p.project)}</b><span class="pill pend">需 ${req.dir}理事 + ${req.rep}代表</span></div>
+      <div class="kv">金额 ¥${p.amount.toLocaleString()} · 用途：${escapeHtml(p.reason)} · 服务项目：${escapeHtml(p.projectTag||'统筹')}</div>
+      <div class="kv" style="color:var(--brand2);margin-top:6px">审批门槛：${req.tier}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:9px;font-weight:700">理事会（${p.signersDir.length}/${req.dir}）</div>
+      <div class="approvers">${dirChips}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:9px;font-weight:700">捐赠人代表（${p.signersRep.length}/${req.rep}）</div>
+      <div class="approvers">${repChips}</div>
+    </div>`;
+  }).join('');
+}
+function notifySubscribers(projectTag,amount,project){
+  const dons=allTx().filter(t=>t.type==='donation');
+  const recip=dons.filter(d=> d.subAll || (d.subProject && d.purpose===projectTag));
+  const count=new Set(recip.map(d=>d.contact||d.from)).size;
+  notifications.unshift({time:new Date().toISOString().replace('T',' ').slice(0,19),projectTag:projectTag||'统筹',amount,project,count});
+  if(count>0) toast(`📢 已向 ${count} 位订阅者推送本次拨款通知`);
+  renderNotifications();
+}
+function renderNotifications(){
+  const box=document.getElementById('notifyLog'); if(!box)return;
+  box.innerHTML=notifications.length?notifications.map(n=>`<div class="kv" style="padding:9px 0;border-bottom:1px solid var(--line)">📢 「<b>${escapeHtml(n.projectTag)}</b>」拨款 ¥${n.amount.toLocaleString()} 给 ${escapeHtml(n.project)} → 已通知 <b style="color:var(--brand2)">${n.count}</b> 位订阅者 <span style="color:var(--muted)">· ${n.time}</span></div>`).join(''):'<p class="sub" style="margin:0">暂无通知记录。</p>';
+}
+
+/* ===================== 派生统计 ===================== */
+function allTx(){ const l=[]; chain.blocks.forEach(b=>b.transactions.forEach(t=>{ if(['donation','disbursement','inkind','inkind_status'].includes(t.type))l.push({...t,blockIndex:b.index,timestamp:b.timestamp}); })); return l; }
+function totalRaised(){ return allTx().filter(t=>t.type==='donation').reduce((s,t)=>s+t.amount,0); }
+function totalDisbursed(){ return allTx().filter(t=>t.type==='disbursement').reduce((s,t)=>s+t.amount,0); }
+function balance(){ return totalRaised()-totalDisbursed(); }
+function inkindItems(){ return allTx().filter(t=>t.type==='inkind'); }
+function inkindValue(){ return inkindItems().reduce((s,t)=>s+(t.estValue||0),0); }
+function inkindStatus(refId){ let s=INKIND_STATES[0]; allTx().filter(t=>t.type==='inkind_status'&&t.refId===refId).forEach(t=>s=t.status); return s; }
+const yuan=n=>'¥'+Number(n).toLocaleString();
+
+/* ===================== 仪表盘 ===================== */
+let pieChart,chanChart,barChart;
+function renderDashboard(){
+  document.getElementById('kRaised').textContent=yuan(totalRaised());
+  document.getElementById('kRaisedCnt').textContent=allTx().filter(t=>t.type==='donation').length+' 笔';
+  document.getElementById('kDisbursed').textContent=yuan(totalDisbursed());
+  document.getElementById('kBalance').textContent=yuan(balance());
+  document.getElementById('kInkind').textContent=yuan(inkindValue());
+  document.getElementById('kInkindCnt').textContent=inkindItems().length+' 件';
+  document.getElementById('kTx').textContent=allTx().length;
+  const tb=document.querySelector('#feedTable tbody');
+  const tx=allTx().filter(t=>t.type!=='inkind_status').slice().reverse();
+  tb.innerHTML=tx.length?tx.map(t=>{
+    if(t.type==='donation')return `<tr><td><span class="pill don">捐款</span></td><td>${escapeHtml(t.from)}<div class="kv">${escapeHtml(t.methodName||'')} · ${t.receipt||''}</div></td><td style="font-weight:800;color:var(--green)">+${yuan(t.amount)}</td><td class="kv">区块 #${t.blockIndex} · ${t.timestamp}</td></tr>`;
+    if(t.type==='disbursement')return `<tr><td><span class="pill dis">拨款</span></td><td>${escapeHtml(t.project)}</td><td style="font-weight:800;color:#2563eb">−${yuan(t.amount)}</td><td class="kv">区块 #${t.blockIndex} · ${t.timestamp}</td></tr>`;
+    if(t.type==='inkind')return `<tr><td><span class="pill ink">物资</span></td><td>${escapeHtml(t.item)} ×${t.qty}${escapeHtml(t.unit)}<div class="kv">${escapeHtml(t.donor)}</div></td><td style="font-weight:800;color:var(--purple)">≈${yuan(t.estValue)}</td><td class="kv">区块 #${t.blockIndex} · ${t.timestamp}</td></tr>`;
+    return '';
+  }).join(''):'<tr><td class="sub">暂无交易，去捐一笔吧。</td></tr>';
+  const byProj={}; allTx().filter(t=>t.type==='disbursement').forEach(t=>{const k=t.projectTag||'统筹/未指定';byProj[k]=(byProj[k]||0)+t.amount;});
+  const undis=balance(); const pl=Object.keys(byProj).concat(undis>0?['未拨付(资金池)']:[]); const pd=Object.values(byProj).concat(undis>0?[undis]:[]);
+  drawDoughnut('pie',pieChart,pl.length?pl:['暂无'],pd.length?pd:[1],['#3b82f6','#27b97a','#f6a51d','#ff7a45','#a273ff','#ff6f9c','#22bdbf'],c=>pieChart=c);
+  const byChan={}; allTx().filter(t=>t.type==='donation').forEach(t=>{ const n=t.methodName||'其他'; byChan[n]=(byChan[n]||0)+t.amount; });
+  const cl=Object.keys(byChan), cd=Object.values(byChan);
+  drawDoughnut('chan',chanChart,cl.length?cl:['暂无'],cd.length?cd:[1],['#1aad19','#1677ff','#e21836','#006fcf','#f59e0b','#d81b60','#64748b','#a273ff'],c=>chanChart=c);
+  if(barChart)barChart.destroy();
+  barChart=new Chart(document.getElementById('bar'),{type:'bar',data:{labels:['现金募集','已拨付','资金池余额'],datasets:[{data:[totalRaised(),totalDisbursed(),balance()],backgroundColor:['#27b97a','#3b82f6','#f6a51d'],borderRadius:8}]},options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#a48c79'},grid:{display:false}},y:{ticks:{color:'#a48c79'},grid:{color:'#f1e1d0'}}}}});
+}
+function drawDoughnut(id,prev,labels,data,colors,store){
+  if(prev)prev.destroy();
+  const c=new Chart(document.getElementById(id),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors,borderColor:'#fff',borderWidth:3}]},options:{plugins:{legend:{position:'bottom',labels:{color:'#a48c79',font:{size:11},boxWidth:12}}}}});
+  store(c);
+}
+
+/* ===================== 浏览器 + 篡改 ===================== */
+function renderChain(){
+  const wrap=document.getElementById('chainView');
+  wrap.innerHTML=chain.blocks.map((b,i)=>{
+    const txHtml=b.transactions.map(t=>{
+      if(t.type==='donation')return `<div class="kv"><span class="pill don">捐款</span> ${escapeHtml(t.from)} 捐 ${yuan(t.amount)} 经 ${escapeHtml(t.methodName||'')}（用途：${escapeHtml(t.purpose)}）· 收据 ${t.receipt||''}</div>`;
+      if(t.type==='disbursement')return `<div class="kv"><span class="pill dis">拨款</span> ${yuan(t.amount)} → ${escapeHtml(t.project)}（${escapeHtml(t.reason)}）· 服务项目：${escapeHtml(t.projectTag||'统筹')} · 签名：${(t.approvedBy||[]).join('、')}</div>`;
+      if(t.type==='inkind')return `<div class="kv"><span class="pill ink">物资</span> ${escapeHtml(t.donor)} 捐 ${escapeHtml(t.item)} ×${t.qty}${escapeHtml(t.unit)}（${escapeHtml(t.category)}，估值${yuan(t.estValue)}）· ${escapeHtml(t.source||'')} · ${t.id}</div>`;
+      if(t.type==='inkind_status')return `<div class="kv"><span class="pill ink">物资状态</span> ${t.refId} → ${escapeHtml(t.status)}</div>`;
+      return `<div class="kv">⛓️ ${escapeHtml(t.note||'系统交易')}</div>`;
+    }).join('');
+    const donation=b.transactions.find(t=>t.type==='donation');
+    const editBox=donation?`<div style="margin-top:10px"><label style="margin-top:6px">✏️ 篡改这笔捐款金额（试试看，然后去验证）</label>
+      <div style="display:flex;gap:8px"><input type="number" value="${donation.amount}" id="edit-${i}" style="max-width:160px"><button class="btn sm danger" onclick="tamperBlock(${i})">改写数据</button></div></div>`:'';
+    return `${i>0?'<div class="chain-link">🔗</div>':''}
+    <div class="block" id="blk-${i}"><div class="bhead"><span class="bidx">区块 #${b.index}${i===0?' · 创世区块':''}</span><span class="kv">${b.timestamp} · nonce ${b.nonce}</span></div>
+    ${txHtml}<div class="kv" style="margin-top:8px">prevHash：<span class="hash">${b.prevHash}</span></div><div class="kv">本块 hash：<span class="hash">${b.hash}</span></div>${editBox}</div>`;
+  }).join('');
+  document.getElementById('chainStatus').className='pill ok'; document.getElementById('chainStatus').textContent='链状态：未验证';
+}
+function tamperBlock(i){ const v=Math.floor(+document.getElementById('edit-'+i).value); const d=chain.blocks[i].transactions.find(t=>t.type==='donation'); if(d){ d.amount=v; toast(`已偷偷把区块 #${i} 金额改成 ${yuan(v)}（但没重算哈希）`); } renderChain(); }
+document.getElementById('tamperBtn').onclick=()=>{ for(let i=1;i<chain.blocks.length;i++){ const d=chain.blocks[i].transactions.find(t=>t.type==='donation'); if(d){ d.amount=d.amount+99999; toast(`😈 已把区块 #${i} 金额偷偷改大`); renderChain(); return; } } toast('链上还没有捐款记录'); };
+document.getElementById('validateBtn').onclick=()=>{
+  const bad=chain.firstInvalid(), status=document.getElementById('chainStatus');
+  document.querySelectorAll('.block').forEach(el=>el.classList.remove('invalid'));
+  if(bad===-1){ status.className='pill ok'; status.textContent='✅ 链状态：完整有效，未被篡改'; toast('✅ 全链校验通过'); }
+  else{ status.className='pill bad'; status.textContent=`❌ 链已损坏！从区块 #${bad} 起全部失效`;
+    for(let i=bad;i<chain.blocks.length;i++){ const el=document.getElementById('blk-'+i); if(el)el.classList.add('invalid'); } toast(`❌ 检测到篡改：区块 #${bad} 哈希对不上`); }
+};
+document.getElementById('resetBtn').onclick=()=>{ for(let i=0;i<chain.blocks.length;i++){ if(i>0)chain.blocks[i].prevHash=chain.blocks[i-1].hash; chain.blocks[i].mine(); } renderChain(); document.getElementById('chainStatus').className='pill ok'; document.getElementById('chainStatus').textContent='链状态：已重新挖矿修复'; toast('♻️ 已重新挖矿，链恢复有效'); };
+
+/* ===================== 工具 ===================== */
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function updateHeight(){ document.getElementById('walletHeight').textContent=chain.blocks.length-1; }
+
+/* ===================== 项目标签 & 订阅设置 ===================== */
+function fillProjectTags(){ document.getElementById('pProjectTag').innerHTML = PROJECTS.map(p=>`<option>${p.key}</option>`).join('')+'<option>统筹 / 不指定</option>'; }
+function setupSubscription(){
+  const sel=document.getElementById('dPurpose'), wrap=document.getElementById('subProjWrap');
+  const updateContact=()=>{ const show=document.getElementById('subAll').checked||document.getElementById('subProject').checked; document.getElementById('subContact').style.display=show?'block':'none'; };
+  const updateProj=()=>{ const v=sel.value, isProj=PROJECTS.some(p=>p.key===v);
+    if(isProj){ wrap.style.display='flex'; document.getElementById('subProjName').textContent='「'+v+'」'; }
+    else{ wrap.style.display='none'; document.getElementById('subProject').checked=false; }
+    updateContact(); };
+  sel.addEventListener('change',updateProj);
+  document.getElementById('subAll').addEventListener('change',updateContact);
+  document.getElementById('subProject').addEventListener('change',updateContact);
+  updateProj();
+}
+
+/* ===================== 初始示例 ===================== */
+(function seed(){
+  renderPayGrid(); fillCats(); fillPuTypes(); renderProjects(); fillProjectTags(); setupSubscription();
+  document.getElementById('puDate').valueAsDate=new Date(Date.now()+86400000);
+  chain.addTxBlock([{id:txid(),type:'donation',from:'爱心企业·绿源科技',amount:50000,purpose:'山区留守儿童救助',method:'wechat',methodName:'微信支付',orderNo:'SP100000001',receipt:receiptNo(),subProject:true,subAll:false,contact:'green@corp.com'}]);
+  chain.addTxBlock([{id:txid(),type:'donation',from:'匿名爱心人士',amount:12000,purpose:'孤寡老人慰问',method:'alipay',methodName:'支付宝',orderNo:'SP100000002',receipt:receiptNo(),subAll:true,subProject:false,contact:'anon@mail.com'}]);
+  chain.addTxBlock([{id:txid(),type:'donation',from:'David Wong',amount:8000,purpose:'生命救援助力',method:'payme',methodName:'PayMe / 转数快FPS',orderNo:'SP100000003',receipt:receiptNo(),subAll:false,subProject:false,contact:''}]);
+  chain.addTxBlock([{id:txid('IK'),type:'inkind',donor:'暖心服装厂',item:'全新儿童棉袄',category:'衣物',qty:300,unit:'件',estValue:30000,note:'捐赠给山区儿童',source:'收货点登记'}]);
+  chain.addTxBlock([{id:txid(),type:'disbursement',project:'星光乡村小学',amount:20000,reason:'为留守儿童采购冬季校服',projectTag:'山区留守儿童救助',approvedBy:['理事·林审计','理事·王监理','理事·陈财务','捐赠人代表·赵爱心']}]);
+  updateHeight(); renderDashboard(); renderNotifications();
+})();
+</script>
+</body>
+</html>
