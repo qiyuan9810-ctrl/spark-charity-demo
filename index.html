@@ -149,6 +149,16 @@
   /* 物资状态下拉 */
   .stsel{padding:5px 7px;border-radius:8px;font-size:12px;border:1.5px solid var(--line);background:#fffdfb;margin-top:6px;width:auto}
   .chart-fallback{font-size:12px;color:var(--muted);text-align:center;padding:34px 10px}
+  /* 资质证照画廊 */
+  .docgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .doc{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:.18s}
+  .doc:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(214,140,90,.2)}
+  .doc:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+  .docimg{width:100%;height:auto;display:block;background:#fbf6ef;border-bottom:1px solid var(--line)}
+  .doc .doccap{padding:12px 14px;font-weight:800;font-size:14px;color:var(--ink)}
+  .doc .doccap small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:2px}
+  #docBig{max-height:74vh;overflow:auto;border-radius:10px}
+  #docBig svg{width:100%;height:auto}
 </style>
 </head>
 <body>
@@ -164,6 +174,7 @@
 <nav id="nav">
   <button class="active" data-view="dashboard" title="募集/拨付/物资的实时链上总览" aria-label="透明仪表盘">📊 透明仪表盘</button>
   <button data-view="projects" title="了解每个救助项目的故事与用途" aria-label="捐赠用途详情">💝 捐赠用途详情</button>
+  <button data-view="trust" title="查看基金会登记证照与合作证明" aria-label="资质与证照">🛡️ 资质与证照</button>
   <button data-view="donate" title="多渠道扫码捐款，自动上链" aria-label="现金捐款">🧡 现金捐款</button>
   <button data-view="inkind" title="登记捐赠物资或申请上门取件" aria-label="物资捐赠">📦 物资捐赠</button>
   <button data-view="disburse" title="多签审批拨款并推送通知" aria-label="拨款审批">🏦 拨款审批</button>
@@ -202,6 +213,14 @@
     <h2>捐赠用途详情 · 你的爱心去了哪里</h2>
     <p class="sub">点击每个项目的名字，看看这份善意背后的故事。每一个项目，都是一群人正在等待的光。</p>
     <div class="projects" id="projectGrid"></div>
+  </section>
+
+  <!-- TRUST / 资质与证照 -->
+  <section class="view" id="view-trust">
+    <h2>资质与证照 · 我们是谁 🛡️</h2>
+    <p class="sub">星火慈善基金依法登记、合规运作，并与多家机构建立长期合作。以下为基金会的登记证照与合作证明，点击任意一张可放大查看。
+      <b style="color:var(--brand2)">（注：本页所有证件均为教学演示用样本，非真实证件，仅用于展示栏目效果）</b></p>
+    <div class="docgrid" id="docGrid"></div>
   </section>
 
   <!-- DONATE -->
@@ -418,6 +437,16 @@
   </div>
 </div>
 
+<!-- 证照放大查看 -->
+<div class="overlay" id="docOverlay">
+  <div class="modal" style="max-width:540px">
+    <div id="docTitle" style="font-weight:900;font-size:16px;color:var(--ink);margin-bottom:12px"></div>
+    <div id="docBig"></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:10px">本证件为教学演示样本，非真实证件。</div>
+    <button class="btn ghost sm" id="closeDocBtn" style="width:100%;margin-top:10px">关闭</button>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -542,6 +571,74 @@ function donateTo(key){
   const sel=document.getElementById('dPurpose'); sel.value=key;
   toast('已为你选好用途：'+key+'，填金额选支付方式即可');
 }
+
+/* ===================== 资质与证照（原创样本，带DEMO水印） ===================== */
+function wmark(){ let w=''; for(let y=70;y<560;y+=120){ for(let x=-30;x<470;x+=210){ w+=`<text x="${x}" y="${y}" transform="rotate(-26 ${x} ${y})" font-size="20" fill="#e8542a" opacity="0.07" font-weight="800">样本 DEMO 仅供演示</text>`; } } return w; }
+function redSeal(cx,cy,label){
+  return `<g transform="translate(${cx},${cy})" opacity="0.9">
+    <circle r="44" fill="none" stroke="#c0392b" stroke-width="3.5"/><circle r="38" fill="none" stroke="#c0392b" stroke-width="1"/>
+    <path d="M0,-19 L5.6,-5.9 L19.7,-5.9 L8.3,2.8 L12.5,17.5 L0,8.9 L-12.5,17.5 L-8.3,2.8 L-19.7,-5.9 L-5.6,-5.9 Z" fill="#c0392b"/>
+    <text y="30" text-anchor="middle" font-size="8.5" fill="#c0392b" font-weight="700">${label}</text></g>`;
+}
+function makeCert(o){
+  const a=o.accent||'#e8542a';
+  const rows=o.rows.map((r,i)=>`<text x="48" y="${300+i*34}" font-size="12.5" fill="#a48c79">${r[0]}</text>
+    <text x="172" y="${300+i*34}" font-size="13" fill="#5a4636" font-weight="700">${r[1]}</text>
+    <line x1="48" y1="${309+i*34}" x2="372" y2="${309+i*34}" stroke="#f1e1d0"/>`).join('');
+  return `<svg class="docimg" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+    <rect width="420" height="560" fill="#fffdf8"/>
+    <rect x="14" y="14" width="392" height="532" fill="none" stroke="${a}" stroke-width="4"/>
+    <rect x="22" y="22" width="376" height="516" fill="none" stroke="${a}" stroke-width="1"/>
+    ${wmark()}
+    <g transform="translate(210,84)"><circle r="30" fill="${a}" opacity="0.12"/>
+      <path d="M0,-20 L5.9,-6.2 L20.8,-6.2 L8.8,3 L13.2,18.5 L0,9.4 L-13.2,18.5 L-8.8,3 L-20.8,-6.2 L-5.9,-6.2 Z" fill="${a}"/></g>
+    <text x="210" y="148" text-anchor="middle" font-size="24" fill="${a}" font-weight="900" letter-spacing="3">${o.title}</text>
+    <text x="210" y="174" text-anchor="middle" font-size="11" fill="#a48c79" letter-spacing="1.5">${o.subtitle||''}</text>
+    <text x="210" y="224" text-anchor="middle" font-size="16" fill="#5a4636" font-weight="800">星火慈善基金</text>
+    <text x="210" y="246" text-anchor="middle" font-size="10.5" fill="#a48c79">SPARK CHARITY FOUNDATION</text>
+    ${rows}
+    ${redSeal(328,498,o.sealLabel||'星火慈善基金')}
+    <text x="48" y="528" font-size="10.5" fill="#a48c79">${o.note||''}</text>
+  </svg>`;
+}
+function makePartner(o){
+  const a='#3b82f6';
+  const items=o.items.map((t,i)=>`<text x="50" y="${298+i*32}" font-size="12.5" fill="#5a4636">· ${t}</text>`).join('');
+  return `<svg class="docimg" viewBox="0 0 420 560" xmlns="http://www.w3.org/2000/svg">
+    <rect width="420" height="560" fill="#fffdf8"/>
+    <rect x="14" y="14" width="392" height="532" fill="none" stroke="${a}" stroke-width="4"/>
+    <rect x="22" y="22" width="376" height="516" fill="none" stroke="${a}" stroke-width="1"/>
+    ${wmark()}
+    <text x="210" y="92" text-anchor="middle" font-size="26" fill="${a}" font-weight="900" letter-spacing="6">合 作 证 明</text>
+    <line x1="130" y1="108" x2="290" y2="108" stroke="${a}" stroke-width="2"/>
+    <text x="50" y="160" font-size="13" fill="#5a4636">兹证明，星火慈善基金 与</text>
+    <text x="50" y="190" font-size="17" fill="${a}" font-weight="800">${o.partner}</text>
+    <text x="50" y="220" font-size="13" fill="#5a4636">就「${o.kind}」达成长期合作，主要内容包括：</text>
+    ${items}
+    <text x="50" y="430" font-size="12" fill="#a48c79">双方依约履行；相关善款与物资使用情况全程上链公开可查。</text>
+    ${redSeal(120,492,'星火慈善基金')}
+    ${redSeal(300,492,o.partner.slice(0,5))}
+    <text x="210" y="538" text-anchor="middle" font-size="10.5" fill="#a48c79">签订日期：${o.date} · 教学演示样本</text>
+  </svg>`;
+}
+const DOCS=[
+  {cap:'基金会法人登记证书', sub:'民政部门登记', svg:()=>makeCert({title:'登 记 证 书', subtitle:'CERTIFICATE OF REGISTRATION', accent:'#e8542a', rows:[['证书编号','基金登记字第 0571 号'],['法定代表人','李星火'],['业务主管单位','省民政厅'],['原始基金','人民币 200 万元'],['成立日期','2021 年 3 月 15 日'],['住所','XX市XX区爱心路 1 号']], sealLabel:'登记专用章', note:'有效期：长期 · 本件为教学演示样本'})},
+  {cap:'公开募捐资格证书', sub:'依法可面向公众募捐', svg:()=>makeCert({title:'公开募捐资格', subtitle:'PUBLIC FUNDRAISING QUALIFICATION', accent:'#27b97a', rows:[['证书编号','募捐资字第 2021-088 号'],['募捐方式','互联网公开募捐'],['募捐区域','全国'],['指定平台','星火链上透明平台'],['发证日期','2021 年 6 月 1 日'],['有效状态','正常有效']], sealLabel:'民政登记章', note:'本件为教学演示样本'})},
+  {cap:'统一社会信用代码证', sub:'相当于"营业执照"', svg:()=>makeCert({title:'登 记 证', subtitle:'UNIFIED SOCIAL CREDIT CODE', accent:'#a273ff', rows:[['统一社会信用代码','5310 0000 5XXXX XX1A'],['名称','星火慈善基金'],['类型','慈善基金会（非营利法人）'],['法定代表人','李星火'],['登记机关','省民政厅'],['登记日期','2021 年 3 月 15 日']], sealLabel:'法人登记章', note:'本件为教学演示样本'})},
+  {cap:'合作证明 · 星光乡村小学（希望小学）', sub:'结对帮扶', svg:()=>makePartner({partner:'星光乡村小学（希望小学）', kind:'希望小学结对帮扶', items:['每年为全校学生提供过冬棉衣与鞋子','资助校舍图书室与冬季取暖设备','建立留守儿童一对一关爱档案'], date:'2022 年 9 月 1 日'})},
+  {cap:'合作证明 · 暖阳敬老院', sub:'孤寡老人慰问', svg:()=>makePartner({partner:'暖阳敬老院', kind:'孤寡老人定期慰问', items:['每月上门送米油、药品与热餐','节假日组织志愿者陪伴探访','为失能老人提供应急救助金'], date:'2023 年 1 月 10 日'})},
+  {cap:'第三方年度审计报告', sub:'财务公开透明', svg:()=>makeCert({title:'年度审计报告', subtitle:'INDEPENDENT AUDIT SUMMARY', accent:'#f6a51d', rows:[['报告年度','2024 年度'],['全年收到捐赠','¥ 1,286,400'],['全年公益支出','¥ 1,030,000'],['管理费用占比','3.8%（＜10% 上限）'],['审计意见','标准无保留意见'],['出具机构','XX 会计师事务所']], sealLabel:'会计师事务所', note:'本件为教学演示样本'})},
+];
+function renderDocs(){
+  document.getElementById('docGrid').innerHTML=DOCS.map((d,i)=>`
+    <div class="doc" role="button" tabindex="0" aria-label="${d.cap}，点击放大" onclick="openDoc(${i})" onkeydown="if(event.key==='Enter')openDoc(${i})">
+      ${d.svg()}
+      <div class="doccap">${d.cap}<small>${d.sub} · 点击放大</small></div>
+    </div>`).join('');
+}
+function openDoc(i){ document.getElementById('docTitle').textContent=DOCS[i].cap; document.getElementById('docBig').innerHTML=DOCS[i].svg(); document.getElementById('docOverlay').classList.add('show'); }
+document.getElementById('closeDocBtn').onclick=()=>document.getElementById('docOverlay').classList.remove('show');
+document.getElementById('docOverlay').onclick=e=>{ if(e.target.id==='docOverlay')e.currentTarget.classList.remove('show'); };
 
 /* ===================== 视图切换 ===================== */
 document.querySelectorAll('#nav button').forEach(btn=>{
@@ -923,7 +1020,7 @@ function setupSubscription(){
 
 /* ===================== 初始示例 ===================== */
 (function seed(){
-  renderPayGrid(); fillCats(); fillPuTypes(); renderProjects(); fillProjectTags(); setupSubscription();
+  renderPayGrid(); fillCats(); fillPuTypes(); renderProjects(); renderDocs(); fillProjectTags(); setupSubscription();
   document.getElementById('puDate').valueAsDate=new Date(Date.now()+86400000);
   chain.addTxBlock([{id:txid(),type:'donation',from:'爱心企业·绿源科技',amount:50000,purpose:'山区留守儿童救助',method:'wechat',methodName:'微信支付',orderNo:'SP100000001',receipt:receiptNo(),subProject:true,subAll:false,contact:'green@corp.com'}]);
   chain.addTxBlock([{id:txid(),type:'donation',from:'匿名爱心人士',amount:12000,purpose:'孤寡老人慰问',method:'alipay',methodName:'支付宝',orderNo:'SP100000002',receipt:receiptNo(),subAll:true,subProject:false,contact:'anon@mail.com'}]);
