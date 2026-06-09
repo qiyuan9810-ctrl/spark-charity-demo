@@ -159,6 +159,11 @@
   .doc .doccap small{display:block;color:var(--muted);font-weight:500;font-size:12px;margin-top:2px}
   #docBig{max-height:74vh;overflow:auto;border-radius:10px}
   #docBig svg{width:100%;height:auto}
+  /* 语言切换 */
+  .langsw{display:flex;gap:3px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+  .langsw button{border:none;background:transparent;color:var(--muted);font-weight:700;font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer;transition:.15s}
+  .langsw button:hover{color:var(--brand)}
+  .langsw button.on{background:linear-gradient(135deg,var(--brand),var(--rose));color:#fff}
 </style>
 </head>
 <body>
@@ -166,250 +171,246 @@
   <div class="brandmark">
     <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2c1 3-1 4-1 6a3 3 0 1 0 6 0c0-1 0-2-1-3 3 2 4 5 4 8a8 8 0 0 1-16 0c0-4 3-6 4-9 1 2 2 2 4 1-1-1-1-2-1-2z" fill="#fff"/></svg>
   </div>
-  <div class="logo">星火慈善基金<small>SPARK CHARITY FOUNDATION · 链上透明</small></div>
-  <div class="tagline">🤍 让每一份爱心都被看见</div>
-  <div class="wallet"><span class="dot"></span> 模拟链已连接 · 区块 <b id="walletHeight" style="color:var(--ink);margin-left:4px">0</b></div>
+  <div class="logo"><span data-i18n="brand.name">星火慈善基金</span><small data-i18n="brand.tag2">SPARK CHARITY FOUNDATION · 链上透明</small></div>
+  <div class="tagline" data-i18n="tagline">🤍 让每一份爱心都被看见</div>
+  <div class="wallet"><span class="dot"></span> <span data-i18n="wallet.connected">模拟链已连接 · 区块</span> <b id="walletHeight" style="color:var(--ink);margin-left:4px">0</b></div>
+  <div class="langsw" id="langsw">
+    <button data-lang="zh">普通话</button><button data-lang="yue">粵語</button><button data-lang="en">EN</button>
+  </div>
 </header>
 
 <nav id="nav">
-  <button class="active" data-view="dashboard" title="募集/拨付/物资的实时链上总览" aria-label="透明仪表盘">📊 透明仪表盘</button>
-  <button data-view="projects" title="了解每个救助项目的故事与用途" aria-label="捐赠用途详情">💝 捐赠用途详情</button>
-  <button data-view="trust" title="查看基金会登记证照与合作证明" aria-label="资质与证照">🛡️ 资质与证照</button>
-  <button data-view="donate" title="多渠道扫码捐款，自动上链" aria-label="现金捐款">🧡 现金捐款</button>
-  <button data-view="inkind" title="登记捐赠物资或申请上门取件" aria-label="物资捐赠">📦 物资捐赠</button>
-  <button data-view="disburse" title="多签审批拨款并推送通知" aria-label="拨款审批">🏦 拨款审批</button>
-  <button data-view="explorer" title="查看完整链上账本与防篡改演示" aria-label="区块链浏览器">🔗 区块链浏览器</button>
-  <button data-view="about" title="平台用到的区块链原理与实时数据" aria-label="原理说明">ℹ️ 原理说明</button>
+  <button class="active" data-view="dashboard" data-i18n="nav.dashboard" data-i18n-title="nav.dashboard.t">📊 透明仪表盘</button>
+  <button data-view="projects" data-i18n="nav.projects" data-i18n-title="nav.projects.t">💝 捐赠用途详情</button>
+  <button data-view="trust" data-i18n="nav.trust" data-i18n-title="nav.trust.t">🛡️ 资质与证照</button>
+  <button data-view="donate" data-i18n="nav.donate" data-i18n-title="nav.donate.t">🧡 现金捐款</button>
+  <button data-view="inkind" data-i18n="nav.inkind" data-i18n-title="nav.inkind.t">📦 物资捐赠</button>
+  <button data-view="disburse" data-i18n="nav.disburse" data-i18n-title="nav.disburse.t">🏦 拨款审批</button>
+  <button data-view="explorer" data-i18n="nav.explorer" data-i18n-title="nav.explorer.t">🔗 区块链浏览器</button>
+  <button data-view="about" data-i18n="nav.about" data-i18n-title="nav.about.t">ℹ️ 原理说明</button>
 </nav>
 
 <main>
   <!-- DASHBOARD -->
   <section class="view active" id="view-dashboard">
-    <h2>公开透明仪表盘</h2>
-    <p class="sub">任何人无需登录即可查看每一分善款与每一件物资的去向。数据全部来自下方不可篡改的链上账本。</p>
+    <h2 data-i18n="dash.h">公开透明仪表盘</h2>
+    <p class="sub" data-i18n="dash.sub">任何人无需登录即可查看每一分善款与每一件物资的去向。数据全部来自下方不可篡改的链上账本。</p>
     <div class="empty-cta" id="emptyCta" style="display:none" role="button" tabindex="0" onclick="goView('donate')" onkeydown="if(event.key==='Enter')goView('donate')">
-      <span>🧡 还没有捐赠记录，成为第一笔善款的主人吧</span><span class="go">立即捐赠 →</span>
+      <span data-i18n="dash.empty">🧡 还没有捐赠记录，成为第一笔善款的主人吧</span><span class="go" data-i18n="dash.empty.go">立即捐赠 →</span>
     </div>
     <div class="grid cards">
-      <div class="card kpi c1 clickable" role="button" tabindex="0" aria-label="现金募集，点击查看区块链浏览器" onclick="goView('explorer')" onkeydown="if(event.key==='Enter')goView('explorer')"><div class="label">现金募集 (链上) ›</div><div class="num" id="kRaised">¥0</div><div class="sub2" id="kRaisedCnt">0 笔</div></div>
-      <div class="card kpi c2 clickable" role="button" tabindex="0" aria-label="已拨付，点击查看拨款审批" onclick="goView('disburse')" onkeydown="if(event.key==='Enter')goView('disburse')"><div class="label">已拨付 ›</div><div class="num" id="kDisbursed">¥0</div></div>
-      <div class="card kpi c3"><div class="label">资金池余额</div><div class="num" id="kBalance">¥0</div></div>
-      <div class="card kpi c4 clickable" role="button" tabindex="0" aria-label="物资捐赠，点击查看物资台账" onclick="goView('inkind')" onkeydown="if(event.key==='Enter')goView('inkind')"><div class="label">物资捐赠 (参考估值) ›</div><div class="num" id="kInkind">¥0</div><div class="sub2" id="kInkindCnt">0 件</div></div>
-      <div class="card kpi c5"><div class="label">链上交易总数</div><div class="num" id="kTx">0</div></div>
+      <div class="card kpi c1 clickable" role="button" tabindex="0" onclick="goView('explorer')" onkeydown="if(event.key==='Enter')goView('explorer')"><div class="label" data-i18n="kpi.raised">现金募集 (链上) ›</div><div class="num" id="kRaised">¥0</div><div class="sub2" id="kRaisedCnt">0 笔</div></div>
+      <div class="card kpi c2 clickable" role="button" tabindex="0" onclick="goView('disburse')" onkeydown="if(event.key==='Enter')goView('disburse')"><div class="label" data-i18n="kpi.disbursed">已拨付 ›</div><div class="num" id="kDisbursed">¥0</div></div>
+      <div class="card kpi c3"><div class="label" data-i18n="kpi.balance">资金池余额</div><div class="num" id="kBalance">¥0</div></div>
+      <div class="card kpi c4 clickable" role="button" tabindex="0" onclick="goView('inkind')" onkeydown="if(event.key==='Enter')goView('inkind')"><div class="label" data-i18n="kpi.inkind">物资捐赠 (参考估值) ›</div><div class="num" id="kInkind">¥0</div><div class="sub2" id="kInkindCnt">0 件</div></div>
+      <div class="card kpi c5"><div class="label" data-i18n="kpi.tx">链上交易总数</div><div class="num" id="kTx">0</div></div>
     </div>
     <div class="row3" style="margin-top:16px">
-      <div class="card"><h2 style="font-size:15px;color:var(--ink)">资金流向 (按救助项目)</h2><canvas id="pie" height="200"></canvas></div>
-      <div class="card"><h2 style="font-size:15px;color:var(--ink)">捐款渠道分布</h2><canvas id="chan" height="200"></canvas></div>
-      <div class="card"><h2 style="font-size:15px;color:var(--ink)">募集 vs 拨付</h2><canvas id="bar" height="200"></canvas></div>
+      <div class="card"><h2 style="font-size:15px;color:var(--ink)" data-i18n="chart.flow">资金流向 (按救助项目)</h2><canvas id="pie" height="200"></canvas></div>
+      <div class="card"><h2 style="font-size:15px;color:var(--ink)" data-i18n="chart.chan">捐款渠道分布</h2><canvas id="chan" height="200"></canvas></div>
+      <div class="card"><h2 style="font-size:15px;color:var(--ink)" data-i18n="chart.vs">募集 vs 拨付</h2><canvas id="bar" height="200"></canvas></div>
     </div>
     <div class="card" style="margin-top:16px">
-      <h2 style="font-size:15px;color:var(--ink)">最新链上动态</h2>
+      <h2 style="font-size:15px;color:var(--ink)" data-i18n="dash.feed">最新链上动态</h2>
       <div class="feed"><table id="feedTable"><tbody></tbody></table></div>
     </div>
   </section>
 
   <!-- PROJECTS -->
   <section class="view" id="view-projects">
-    <h2>捐赠用途详情 · 你的爱心去了哪里</h2>
-    <p class="sub">点击每个项目的名字，看看这份善意背后的故事。每一个项目，都是一群人正在等待的光。</p>
+    <h2 data-i18n="proj.h">捐赠用途详情 · 你的爱心去了哪里</h2>
+    <p class="sub" data-i18n="proj.sub">点击每个项目的名字，看看这份善意背后的故事。每一个项目，都是一群人正在等待的光。</p>
     <div class="projects" id="projectGrid"></div>
   </section>
 
   <!-- TRUST / 资质与证照 -->
   <section class="view" id="view-trust">
-    <h2>资质与证照 · 我们是谁 🛡️</h2>
-    <p class="sub">星火慈善基金依法登记、合规运作，并与多家机构建立长期合作。以下为基金会的登记证照与合作证明，点击任意一张可放大查看。
+    <h2 data-i18n="trust.h">资质与证照 · 我们是谁 🛡️</h2>
+    <p class="sub" data-i18n-html="trust.sub">星火慈善基金依法登记、合规运作，并与多家机构建立长期合作。以下为基金会的登记证照与合作证明，点击任意一张可放大查看。
       <b style="color:var(--brand2)">（注：本页所有证件均为教学演示用样本，非真实证件，仅用于展示栏目效果）</b></p>
     <div class="docgrid" id="docGrid"></div>
   </section>
 
   <!-- DONATE -->
   <section class="view" id="view-donate">
-    <h2>现金捐款 · 多渠道支付</h2>
-    <p class="sub">选择你习惯的支付方式，扫码完成支付后，系统会在收到支付平台「回调」的瞬间自动把这笔捐款写入区块链——无需人工补登，不会漏款。</p>
+    <h2 data-i18n="don.h">现金捐款 · 多渠道支付</h2>
+    <p class="sub" data-i18n="don.sub">选择你习惯的支付方式，扫码完成支付后，系统会在收到支付平台「回调」的瞬间自动把这笔捐款写入区块链——无需人工补登，不会漏款。</p>
     <div class="row">
       <div class="card">
-        <label>捐款人 / 昵称</label>
-        <input id="dName" placeholder="例如：匿名爱心人士" value="爱心市民小星">
-        <label>捐款金额 (¥)</label>
+        <label data-i18n="don.name">捐款人 / 昵称</label>
+        <input id="dName" data-i18n-ph="don.name.ph" placeholder="例如：匿名爱心人士" value="爱心市民小星">
+        <label data-i18n="don.amount">捐款金额 (¥)</label>
         <input id="dAmount" type="number" min="1" value="500">
-        <label>指定用途（可选，详情见「捐赠用途详情」）</label>
-        <select id="dPurpose">
-          <option value="不指定，由基金会统筹">不指定，由基金会统筹</option>
-          <option value="山区留守儿童救助">山区留守儿童救助</option>
-          <option value="事实孤儿救助">事实孤儿救助</option>
-          <option value="孤寡老人慰问">孤寡老人慰问</option>
-          <option value="乡村应急备灾">乡村应急备灾</option>
-          <option value="生命救援助力">生命救援助力</option>
-        </select>
+        <label data-i18n="don.purpose">指定用途（可选，详情见「捐赠用途详情」）</label>
+        <select id="dPurpose"></select>
         <div style="margin-top:14px;background:#fff7ee;border:1.5px dashed #ffd9bf;border-radius:12px;padding:12px 14px">
-          <div style="font-weight:800;color:var(--ink);font-size:13.5px">📢 拨款动态通知（可选）</div>
+          <div style="font-weight:800;color:var(--ink);font-size:13.5px" data-i18n="sub.title">📢 拨款动态通知（可选）</div>
           <label style="display:flex;align-items:center;gap:8px;margin:10px 0 0;cursor:pointer;color:#6b5644;font-weight:500">
-            <input type="checkbox" id="subAll" style="width:auto"> 订阅基金<b style="margin:0 2px">所有</b>拨款动态通知
+            <input type="checkbox" id="subAll" style="width:auto"> <span data-i18n="sub.all">订阅基金所有拨款动态通知</span>
           </label>
           <label id="subProjWrap" style="display:none;align-items:center;gap:8px;margin:9px 0 0;cursor:pointer;color:#6b5644;font-weight:500">
-            <input type="checkbox" id="subProject" style="width:auto"> 仅订阅<b id="subProjName" style="color:var(--brand2)"></b>的拨款动态
+            <input type="checkbox" id="subProject" style="width:auto"> <span data-i18n="sub.proj">仅订阅</span><b id="subProjName" style="color:var(--brand2)"></b><span data-i18n="sub.proj2">的拨款动态</span>
           </label>
-          <input id="subContact" placeholder="接收通知的邮箱 / 手机（可选）" style="margin-top:10px;display:none">
+          <input id="subContact" data-i18n-ph="sub.contact" placeholder="接收通知的邮箱 / 手机（可选）" style="margin-top:10px;display:none">
         </div>
-        <label>选择支付方式（点击生成付款二维码）</label>
+        <label data-i18n="don.method">选择支付方式（点击生成付款二维码）</label>
         <div class="pays" id="payGrid"></div>
         <div class="mintip" id="mineTip"></div>
       </div>
       <div class="card">
-        <h2 style="font-size:15px;color:var(--ink)">为什么不会漏款？ 🧾</h2>
-        <p style="font-size:13.5px;color:#6b5644">不同支付平台（微信、支付宝、AlipayHK、银联、Amex、PayMe/转数快…）的款项最终都进入基金会的受监管账户。系统的对接逻辑是：</p>
+        <h2 style="font-size:15px;color:var(--ink)" data-i18n="don.why.h">为什么不会漏款？ 🧾</h2>
+        <p style="font-size:13.5px;color:#6b5644" data-i18n="don.why.p">不同支付平台（微信、支付宝、AlipayHK、银联、Amex、PayMe/转数快…）的款项最终都进入基金会的受监管账户。系统的对接逻辑是：</p>
         <ol style="font-size:13.5px;color:#6b5644;padding-left:18px">
-          <li>捐款人扫码 → 在所选平台完成付款</li>
-          <li>支付平台向系统发送<b>支付成功回调</b></li>
-          <li>系统<b>自动</b>把该笔捐款（金额、渠道、收据号）写入区块链</li>
+          <li data-i18n="don.why.1">捐款人扫码 → 在所选平台完成付款</li>
+          <li data-i18n-html="don.why.2">支付平台向系统发送<b>支付成功回调</b></li>
+          <li data-i18n-html="don.why.3">系统<b>自动</b>把该笔捐款（金额、渠道、收据号）写入区块链</li>
         </ol>
-        <div class="note">本 Demo 的「我已完成支付」按钮就是在<b>模拟这一步回调</b>。真实系统里由支付平台触发，没有人工环节，因此每一笔都不会遗漏。</div>
+        <div class="note" data-i18n-html="don.why.note">本 Demo 的「我已完成支付」按钮就是在<b>模拟这一步回调</b>。真实系统里由支付平台触发，没有人工环节，因此每一笔都不会遗漏。</div>
       </div>
     </div>
   </section>
 
   <!-- IN-KIND -->
   <section class="view" id="view-inkind">
-    <h2>物资捐赠 📦</h2>
-    <p class="sub">实物捐赠（衣物、毛毯、食品等）由收货点登记上链；如果是旧衣旧物，也可以申请<b>快递上门取件</b>。每件物资的去向全程可追溯。</p>
+    <h2 data-i18n="ink.h">物资捐赠 📦</h2>
+    <p class="sub" data-i18n-html="ink.sub">实物捐赠（衣物、毛毯、食品等）由收货点登记上链；如果是旧衣旧物，也可以申请<b>快递上门取件</b>。每件物资的去向全程可追溯。</p>
     <div class="seg" id="inkindSeg">
-      <button class="on" data-tab="dropoff">🏠 送达 / 收货点登记</button>
-      <button data-tab="pickup">🚚 申请上门取件（旧物）</button>
+      <button class="on" data-tab="dropoff" data-i18n="ink.tab.drop">🏠 送达 / 收货点登记</button>
+      <button data-tab="pickup" data-i18n="ink.tab.pick">🚚 申请上门取件（旧物）</button>
     </div>
 
     <!-- dropoff -->
     <div class="row" id="tab-dropoff">
       <div class="card">
-        <h2 style="font-size:15px;color:var(--ink)">登记一笔物资捐赠</h2>
-        <label>捐赠人 / 机构</label>
-        <input id="kDonor" placeholder="例如：某连锁超市" value="阳光食品公司">
-        <label>物资名称</label>
-        <input id="kItem" placeholder="例如：保暖毛毯" value="保暖毛毯">
-        <label>类别</label>
+        <h2 style="font-size:15px;color:var(--ink)" data-i18n="ink.reg.h">登记一笔物资捐赠</h2>
+        <label data-i18n="ink.donor">捐赠人 / 机构</label>
+        <input id="kDonor" data-i18n-ph="ink.donor.ph" placeholder="例如：某连锁超市" value="阳光食品公司">
+        <label data-i18n="ink.item">物资名称</label>
+        <input id="kItem" data-i18n-ph="ink.item.ph" placeholder="例如：保暖毛毯" value="保暖毛毯">
+        <label data-i18n="ink.cat">类别</label>
         <select id="kCat"></select>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div><label>数量</label><input id="kQty" type="number" min="1" value="200"></div>
-          <div><label>单位</label><input id="kUnit" value="张"></div>
+          <div><label data-i18n="ink.qty">数量</label><input id="kQty" type="number" min="1" value="200"></div>
+          <div><label data-i18n="ink.unit">单位</label><input id="kUnit" value="张"></div>
         </div>
-        <label>参考估值 (¥，可选)</label>
+        <label data-i18n="ink.val">参考估值 (¥，可选)</label>
         <input id="kVal" type="number" min="0" value="20000">
-        <label>备注 (可选)</label>
-        <input id="kNote" placeholder="例如：全新、含运送">
-        <button class="btn purple" id="inkindBtn">📦 登记并上链</button>
+        <label data-i18n="ink.note">备注 (可选)</label>
+        <input id="kNote" data-i18n-ph="ink.note.ph" placeholder="例如：全新、含运送">
+        <button class="btn purple" id="inkindBtn" data-i18n="ink.reg.btn">📦 登记并上链</button>
         <div class="mintip" id="inkindTip"></div>
       </div>
       <div class="card">
-        <h2 style="font-size:15px;color:var(--ink)">物资台账（链上）</h2>
+        <h2 style="font-size:15px;color:var(--ink)" data-i18n="ink.ledger.h">物资台账（链上）</h2>
         <div class="feed"><table id="inkindTable"><tbody></tbody></table></div>
-        <div class="note">物资按<b>件数和参考估值</b>单独统计，<b>不计入现金资金池</b>。点台账里的按钮推进状态，每次状态变更都会生成一条新的链上记录。</div>
+        <div class="note" data-i18n-html="ink.ledger.note">物资按<b>件数和参考估值</b>单独统计，<b>不计入现金资金池</b>。点台账里的按钮推进状态，每次状态变更都会生成一条新的链上记录。</div>
       </div>
     </div>
 
     <!-- pickup -->
     <div class="row" id="tab-pickup" style="display:none">
       <div class="card">
-        <h2 style="font-size:15px;color:var(--ink)">申请快递上门取件 🚚</h2>
-        <p style="font-size:13px;color:var(--muted);margin-top:0">家里的旧衣旧鞋旧家具，也许正是山里孩子、独居老人需要的温暖。填写申请，审核通过后我们安排快递上门。</p>
-        <label>联系人</label>
+        <h2 style="font-size:15px;color:var(--ink)" data-i18n="pick.h">申请快递上门取件 🚚</h2>
+        <p style="font-size:13px;color:var(--muted);margin-top:0" data-i18n="pick.sub">家里的旧衣旧鞋旧家具，也许正是山里孩子、独居老人需要的温暖。填写申请，审核通过后我们安排快递上门。</p>
+        <label data-i18n="pick.name">联系人</label>
         <input id="puName" value="捐赠人小李">
-        <label>联系电话</label>
-        <input id="puPhone" placeholder="11 位手机号" value="138****6688">
-        <label>物资类型</label>
+        <label data-i18n="pick.phone">联系电话</label>
+        <input id="puPhone" data-i18n-ph="pick.phone.ph" placeholder="11 位手机号" value="138****6688">
+        <label data-i18n="pick.type">物资类型</label>
         <select id="puType"></select>
-        <label>数量 / 描述</label>
-        <input id="puDesc" placeholder="例如：8成新冬季外套约15件" value="8成新冬季外套约15件">
-        <label>物资照片（供审核人员评估是否适用）</label>
+        <label data-i18n="pick.desc">数量 / 描述</label>
+        <input id="puDesc" data-i18n-ph="pick.desc.ph" placeholder="例如：8成新冬季外套约15件" value="8成新冬季外套约15件">
+        <label data-i18n="pick.photo">物资照片（供审核人员评估是否适用）</label>
         <input type="file" id="puImg" accept="image/*">
         <div id="puPreview"></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div><label>预约取件日期</label><input id="puDate" type="date"></div>
-          <div><label>时间段</label><select id="puSlot"><option>上午 9:00-12:00</option><option>下午 13:00-17:00</option><option>晚间 18:00-20:00</option></select></div>
+          <div><label data-i18n="pick.date">预约取件日期</label><input id="puDate" type="date"></div>
+          <div><label data-i18n="pick.slot">时间段</label><select id="puSlot"></select></div>
         </div>
-        <label>取件地址</label>
-        <input id="puAddr" placeholder="详细地址" value="XX市XX区阳光花园3栋2单元">
+        <label data-i18n="pick.addr">取件地址</label>
+        <input id="puAddr" data-i18n-ph="pick.addr.ph" placeholder="详细地址" value="XX市XX区阳光花园3栋2单元">
         <label style="display:flex;align-items:center;gap:8px;margin-top:14px;cursor:pointer">
-          <input type="checkbox" id="puFee" style="width:auto" checked> 我已知悉并同意<b style="color:var(--brand2)">运费由捐赠人自付</b>
+          <input type="checkbox" id="puFee" style="width:auto" checked> <span data-i18n-html="pick.fee">我已知悉并同意<b style="color:var(--brand2)">运费由捐赠人自付</b></span>
         </label>
-        <button class="btn rose" id="pickupBtn">🚚 提交上门取件申请</button>
+        <button class="btn rose" id="pickupBtn" data-i18n="pick.btn">🚚 提交上门取件申请</button>
         <div class="mintip" id="pickupTip"></div>
       </div>
       <div class="card">
-        <h2 style="font-size:15px;color:var(--ink)">取件申请审核台</h2>
-        <div id="pickupList" class="feed"><p class="sub" style="margin:0">暂无取件申请。</p></div>
-        <div class="note">流程：捐赠人提交 → 审核人员看照片评估 →<b>审核通过并安排快递</b> →快递取件后<b>确认入库并上链</b>，正式进入物资台账，全程可追溯。</div>
+        <h2 style="font-size:15px;color:var(--ink)" data-i18n="pick.review.h">取件申请审核台</h2>
+        <div id="pickupList" class="feed"><p class="sub" style="margin:0" data-i18n="pick.none">暂无取件申请。</p></div>
+        <div class="note" data-i18n-html="pick.flow">流程：捐赠人提交 → 审核人员看照片评估 →<b>审核通过并安排快递</b> →快递取件后<b>确认入库并上链</b>，正式进入物资台账，全程可追溯。</div>
       </div>
     </div>
   </section>
 
   <!-- DISBURSE -->
   <section class="view" id="view-disburse">
-    <h2>拨款审批 (多签机制)</h2>
-    <p class="sub">基金会发起拨款后，必须由 3 位理事中至少 2 位审批签名，资金才会真正拨出并上链——模拟智能合约的 multi-sig 规则，防止一个人独自动用善款。</p>
+    <h2 data-i18n="dis.h">拨款审批 (多签机制)</h2>
+    <p class="sub" data-i18n="dis.sub">基金会发起拨款后，必须由 3 位理事中至少 2 位审批签名，资金才会真正拨出并上链——模拟智能合约的 multi-sig 规则，防止一个人独自动用善款。</p>
     <div class="row">
       <div class="card">
-        <h2 style="font-size:15px;color:var(--ink)">发起一笔拨款申请</h2>
-        <label>受款项目 / 机构</label>
-        <input id="pProject" placeholder="例如：XX小学" value="星光乡村小学">
-        <label>金额 (¥)</label>
+        <h2 style="font-size:15px;color:var(--ink)" data-i18n="dis.new.h">发起一笔拨款申请</h2>
+        <label data-i18n="dis.project">受款项目 / 机构</label>
+        <input id="pProject" data-i18n-ph="dis.project.ph" placeholder="例如：XX小学" value="星光乡村小学">
+        <label data-i18n="dis.amount">金额 (¥)</label>
         <input id="pAmount" type="number" min="1" value="8000">
-        <label>此笔拨款服务于哪个救助项目</label>
+        <label data-i18n="dis.tag">此笔拨款服务于哪个救助项目</label>
         <select id="pProjectTag"></select>
-        <label>用途说明</label>
-        <input id="pReason" placeholder="例如：采购冬季校服" value="为留守儿童采购冬季校服">
-        <button class="btn blue" id="proposeBtn">📝 发起拨款申请</button>
+        <label data-i18n="dis.reason">用途说明</label>
+        <input id="pReason" data-i18n-ph="dis.reason.ph" placeholder="例如：采购冬季校服" value="为留守儿童采购冬季校服">
+        <button class="btn blue" id="proposeBtn" data-i18n="dis.new.btn">📝 发起拨款申请</button>
         <div class="mintip" id="proposeTip"></div>
       </div>
       <div class="card">
-        <h2 style="font-size:15px;color:var(--ink)">待审批申请</h2>
-        <div id="pendingList" class="feed"><p class="sub" style="margin:0">暂无待审批申请。</p></div>
+        <h2 style="font-size:15px;color:var(--ink)" data-i18n="dis.pending.h">待审批申请</h2>
+        <div id="pendingList" class="feed"><p class="sub" style="margin:0" data-i18n="dis.pending.none">暂无待审批申请。</p></div>
       </div>
     </div>
     <div class="card" style="margin-top:16px">
-      <h2 style="font-size:15px;color:var(--ink)">📢 拨款通知推送记录</h2>
-      <div id="notifyLog" class="feed"><p class="sub" style="margin:0">暂无通知记录。</p></div>
+      <h2 style="font-size:15px;color:var(--ink)" data-i18n="dis.notify.h">📢 拨款通知推送记录</h2>
+      <div id="notifyLog" class="feed"><p class="sub" style="margin:0" data-i18n="dis.notify.none">暂无通知记录。</p></div>
     </div>
-    <div class="note">分级审批门槛：拨款 <b>&lt; ¥10,000</b> 需 2 理事 + 1 代表；<b>≥ ¥10,000</b> 需 3 理事 + 1 代表；<b>超过基金池总额 10%</b> 需 3 理事 + 3 代表（全体同意）。可用余额 = 现金募集 − 已拨付，拨款不能超过余额。</div>
+    <div class="note" data-i18n-html="dis.tiernote">分级审批门槛：拨款 <b>&lt; ¥10,000</b> 需 2 理事 + 1 代表；<b>≥ ¥10,000</b> 需 3 理事 + 1 代表；<b>超过基金池总额 10%</b> 需 3 理事 + 3 代表（全体同意）。可用余额 = 现金募集 − 已拨付，拨款不能超过余额。</div>
   </section>
 
   <!-- EXPLORER -->
   <section class="view" id="view-explorer">
-    <h2>区块链浏览器 & 防篡改演示</h2>
-    <p class="sub">完整链上账本。每个区块都存着自己和「前一个区块」的哈希，环环相扣。试着篡改任意一笔金额，再点验证，整条链会立刻报错。</p>
+    <h2 data-i18n="exp.h">区块链浏览器 & 防篡改演示</h2>
+    <p class="sub" data-i18n="exp.sub">完整链上账本。每个区块都存着自己和「前一个区块」的哈希，环环相扣。试着篡改任意一笔金额，再点验证，整条链会立刻报错。</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
-      <button class="btn sm" id="validateBtn">🔍 验证整条链完整性</button>
-      <button class="btn sm amber" id="tamperBtn">😈 一键篡改一笔金额(搞破坏)</button>
-      <button class="btn sm ghost" id="resetBtn">♻️ 重新挖矿修复</button>
-      <span id="chainStatus" class="pill ok" style="align-self:center">链状态：未验证</span>
+      <button class="btn sm" id="validateBtn" data-i18n="exp.validate">🔍 验证整条链完整性</button>
+      <button class="btn sm amber" id="tamperBtn" data-i18n="exp.tamper">😈 一键篡改一笔金额(搞破坏)</button>
+      <button class="btn sm ghost" id="resetBtn" data-i18n="exp.reset">♻️ 重新挖矿修复</button>
+      <span id="chainStatus" class="pill ok" style="align-self:center" data-i18n="exp.status0">链状态：未验证</span>
     </div>
     <div id="chainView"></div>
   </section>
 
   <!-- ABOUT -->
   <section class="view" id="view-about">
-    <h2>这个平台用到了哪些区块链知识？</h2>
-    <p class="sub">可直接写进白皮书 / 答辩。下方是本平台<b>此刻的真实运行数据</b>——它是一个活的系统，不只是静态说明。</p>
+    <h2 data-i18n="ab.h">这个平台用到了哪些区块链知识？</h2>
+    <p class="sub" data-i18n-html="ab.sub">可直接写进白皮书 / 答辩。下方是本平台<b>此刻的真实运行数据</b>——它是一个活的系统，不只是静态说明。</p>
     <div class="card" style="margin-bottom:16px;background:linear-gradient(120deg,#fff3e0,#ffe3ec)">
       <div id="aboutStats" style="display:flex;gap:28px;flex-wrap:wrap;text-align:center"></div>
     </div>
     <div class="card">
       <table>
-        <tr><th>概念</th><th>在本平台中的体现</th></tr>
-        <tr><td><b>区块 Block</b></td><td>每个区块含：序号、时间戳、交易列表、前块哈希、nonce、本块哈希。</td></tr>
-        <tr><td><b>哈希 SHA-256</b></td><td>用真实 SHA-256 算法对区块内容计算指纹；数据变一个字，哈希全变。</td></tr>
-        <tr><td><b>链式结构</b></td><td>每块保存前一块的哈希，首尾相连，这是「不可篡改」的根本来源。</td></tr>
-        <tr><td><b>工作量证明 PoW</b></td><td>挖矿时不断改 nonce，直到哈希以 "00" 开头，模拟比特币挖矿。</td></tr>
-        <tr><td><b>智能合约逻辑</b></td><td>「2/3 多签才放款」「金额不超余额」即合约规则的模拟。</td></tr>
-        <tr><td><b>支付回调自动上链</b></td><td>多渠道支付成功后由网关回调触发，系统自动记账，无人工补登、零漏款。</td></tr>
-        <tr><td><b>链下资产上链 (Oracle 思想)</b></td><td>物资是链下实物，由可信收货点 / 上门取件审核后登记并上链，全生命周期可追溯。</td></tr>
-        <tr><td><b>去中心化应用 Dapp</b></td><td>本页 = 合约逻辑 + 前端界面 + 钱包/支付状态，即一个 Dapp 的结构。</td></tr>
+        <tr><th data-i18n="ab.t.concept">概念</th><th data-i18n="ab.t.how">在本平台中的体现</th></tr>
+        <tr><td data-i18n-html="ab.r1k"><b>区块 Block</b></td><td data-i18n="ab.r1v">每个区块含：序号、时间戳、交易列表、前块哈希、nonce、本块哈希。</td></tr>
+        <tr><td data-i18n-html="ab.r2k"><b>哈希 SHA-256</b></td><td data-i18n="ab.r2v">用真实 SHA-256 算法对区块内容计算指纹；数据变一个字，哈希全变。</td></tr>
+        <tr><td data-i18n-html="ab.r3k"><b>链式结构</b></td><td data-i18n="ab.r3v">每块保存前一块的哈希，首尾相连，这是「不可篡改」的根本来源。</td></tr>
+        <tr><td data-i18n-html="ab.r4k"><b>工作量证明 PoW</b></td><td data-i18n="ab.r4v">挖矿时不断改 nonce，直到哈希以 "00" 开头，模拟比特币挖矿。</td></tr>
+        <tr><td data-i18n-html="ab.r5k"><b>智能合约逻辑</b></td><td data-i18n="ab.r5v">「2/3 多签才放款」「金额不超余额」即合约规则的模拟。</td></tr>
+        <tr><td data-i18n-html="ab.r6k"><b>支付回调自动上链</b></td><td data-i18n="ab.r6v">多渠道支付成功后由网关回调触发，系统自动记账，无人工补登、零漏款。</td></tr>
+        <tr><td data-i18n-html="ab.r7k"><b>链下资产上链 (Oracle 思想)</b></td><td data-i18n="ab.r7v">物资是链下实物，由可信收货点 / 上门取件审核后登记并上链，全生命周期可追溯。</td></tr>
+        <tr><td data-i18n-html="ab.r8k"><b>去中心化应用 Dapp</b></td><td data-i18n="ab.r8v">本页 = 合约逻辑 + 前端界面 + 钱包/支付状态，即一个 Dapp 的结构。</td></tr>
       </table>
-      <div class="note" style="margin-top:16px"><b>真实部署路径：</b>把这里的 JS 合约逻辑改写成 Solidity 智能合约，部署到以太坊测试网 (Sepolia)，前端用 ethers.js + MetaMask 连接；支付侧对接微信/支付宝/Stripe(Amex) 等网关回调，由后端把确认后的捐款写入合约。本 Demo 在本地模拟了相同行为，便于课堂讲解。</div>
+      <div class="note" style="margin-top:16px" data-i18n-html="ab.deploy"><b>真实部署路径：</b>把这里的 JS 合约逻辑改写成 Solidity 智能合约，部署到以太坊测试网 (Sepolia)，前端用 ethers.js + MetaMask 连接；支付侧对接微信/支付宝/Stripe(Amex) 等网关回调，由后端把确认后的捐款写入合约。本 Demo 在本地模拟了相同行为，便于课堂讲解。</div>
     </div>
   </section>
 </main>
 
-<footer>星火慈善基金 ChariChain Demo · 教学演示用模拟区块链 · 数据保存在浏览器内存中，刷新即重置 · 🤍</footer>
+<footer data-i18n="footer">星火慈善基金 ChariChain Demo · 教学演示用模拟区块链 · 数据保存在浏览器内存中，刷新即重置 · 🤍</footer>
 
 <!-- 支付二维码弹窗 -->
 <div class="overlay" id="payOverlay">
@@ -419,9 +420,9 @@
     <div id="payAmt" style="font-size:22px;font-weight:900;color:var(--brand)"></div>
     <div class="ordno" id="payOrder"></div>
     <div id="payLimit" style="font-size:11px;color:var(--muted);margin-top:4px"></div>
-    <p style="font-size:12px;color:var(--muted);margin:10px 0">请用对应 App 扫码完成支付（演示二维码，扫描不会真实扣款）</p>
-    <button class="btn" id="confirmPayBtn" style="width:100%">✅ 我已完成支付（模拟支付回调）</button>
-    <button class="btn ghost sm" id="cancelPayBtn" style="width:100%;margin-top:8px">← 返回修改金额 / 支付方式</button>
+    <p style="font-size:12px;color:var(--muted);margin:10px 0" data-i18n="pay.scan">请用对应 App 扫码完成支付（演示二维码，扫描不会真实扣款）</p>
+    <button class="btn" id="confirmPayBtn" style="width:100%" data-i18n="pay.confirm">✅ 我已完成支付（模拟支付回调）</button>
+    <button class="btn ghost sm" id="cancelPayBtn" style="width:100%;margin-top:8px" data-i18n="pay.back">← 返回修改金额 / 支付方式</button>
   </div>
 </div>
 
@@ -429,11 +430,11 @@
 <div class="overlay" id="successOverlay">
   <div class="modal success-modal" id="successCard">
     <div class="succ-emoji">🎉</div>
-    <div style="font-weight:900;font-size:19px;color:var(--brand2);margin-top:6px">感谢你的爱心！</div>
-    <div style="font-size:13px;color:var(--muted);margin:4px 0 14px">这份善意已永久记录在链上 💛 截图发个朋友圈，让更多人加入吧</div>
+    <div style="font-weight:900;font-size:19px;color:var(--brand2);margin-top:6px" data-i18n="succ.thanks">感谢你的爱心！</div>
+    <div style="font-size:13px;color:var(--muted);margin:4px 0 14px" data-i18n="succ.sub">这份善意已永久记录在链上 💛 截图发个朋友圈，让更多人加入吧</div>
     <div id="certBody" style="text-align:left"></div>
-    <button class="btn" id="dlCertBtn" style="width:100%;margin-top:16px">📥 下载捐赠证书</button>
-    <button class="btn ghost sm" id="closeSuccBtn" style="width:100%;margin-top:8px">完成</button>
+    <button class="btn" id="dlCertBtn" style="width:100%;margin-top:16px" data-i18n="succ.dl">📥 下载捐赠证书</button>
+    <button class="btn ghost sm" id="closeSuccBtn" style="width:100%;margin-top:8px" data-i18n="succ.done">完成</button>
   </div>
 </div>
 
@@ -442,14 +443,322 @@
   <div class="modal" style="max-width:540px">
     <div id="docTitle" style="font-weight:900;font-size:16px;color:var(--ink);margin-bottom:12px"></div>
     <div id="docBig"></div>
-    <div style="font-size:11px;color:var(--muted);margin-top:10px">本证件为教学演示样本，非真实证件。</div>
-    <button class="btn ghost sm" id="closeDocBtn" style="width:100%;margin-top:10px">关闭</button>
+    <div style="font-size:11px;color:var(--muted);margin-top:10px" data-i18n="doc.sample">本证件为教学演示样本，非真实证件。</div>
+    <button class="btn ghost sm" id="closeDocBtn" style="width:100%;margin-top:10px" data-i18n="doc.close">关闭</button>
   </div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
+/* ===================== 多语言 i18n ===================== */
+let LANG='zh';
+try{ const s=localStorage.getItem('spark_lang'); if(s)LANG=s; }catch(e){}
+const I18N={
+  'brand.name':{zh:'星火慈善基金',yue:'星火慈善基金',en:'Spark Charity Foundation'},
+  'brand.tag2':{zh:'SPARK CHARITY FOUNDATION · 链上透明',yue:'SPARK CHARITY FOUNDATION · 鏈上透明',en:'SPARK CHARITY FOUNDATION · On-Chain Transparency'},
+  'tagline':{zh:'🤍 让每一份爱心都被看见',yue:'🤍 讓每一份愛心都被看見',en:'🤍 Let every act of kindness be seen'},
+  'wallet.connected':{zh:'模拟链已连接 · 区块',yue:'模擬鏈已連接 · 區塊',en:'Mock chain connected · Block'},
+  'nav.dashboard':{zh:'📊 透明仪表盘',yue:'📊 透明儀表盤',en:'📊 Dashboard'},
+  'nav.dashboard.t':{zh:'募集/拨付/物资的实时链上总览',yue:'募集/撥付/物資的即時鏈上總覽',en:'Live on-chain overview of funds & items'},
+  'nav.projects':{zh:'💝 捐赠用途详情',yue:'💝 捐贈用途詳情',en:'💝 Causes'},
+  'nav.projects.t':{zh:'了解每个救助项目的故事与用途',yue:'了解每個救助項目的故事與用途',en:'The story behind each cause'},
+  'nav.trust':{zh:'🛡️ 资质与证照',yue:'🛡️ 資質與證照',en:'🛡️ Credentials'},
+  'nav.trust.t':{zh:'查看基金会登记证照与合作证明',yue:'查看基金會登記證照與合作證明',en:'Registration & partnership documents'},
+  'nav.donate':{zh:'🧡 现金捐款',yue:'🧡 現金捐款',en:'🧡 Donate'},
+  'nav.donate.t':{zh:'多渠道扫码捐款，自动上链',yue:'多渠道掃碼捐款，自動上鏈',en:'Multi-channel donation, auto on-chain'},
+  'nav.inkind':{zh:'📦 物资捐赠',yue:'📦 物資捐贈',en:'📦 In-Kind'},
+  'nav.inkind.t':{zh:'登记捐赠物资或申请上门取件',yue:'登記捐贈物資或申請上門取件',en:'Register goods or request pickup'},
+  'nav.disburse':{zh:'🏦 拨款审批',yue:'🏦 撥款審批',en:'🏦 Disbursement'},
+  'nav.disburse.t':{zh:'多签审批拨款并推送通知',yue:'多簽審批撥款並推送通知',en:'Multi-sig approval & notifications'},
+  'nav.explorer':{zh:'🔗 区块链浏览器',yue:'🔗 區塊鏈瀏覽器',en:'🔗 Explorer'},
+  'nav.explorer.t':{zh:'查看完整链上账本与防篡改演示',yue:'查看完整鏈上賬本與防篡改演示',en:'Full ledger & tamper-proof demo'},
+  'nav.about':{zh:'ℹ️ 原理说明',yue:'ℹ️ 原理說明',en:'ℹ️ How it works'},
+  'nav.about.t':{zh:'平台用到的区块链原理与实时数据',yue:'平台用到的區塊鏈原理與即時數據',en:'Blockchain concepts & live data'},
+  'dash.h':{zh:'公开透明仪表盘',yue:'公開透明儀表盤',en:'Public Transparency Dashboard'},
+  'dash.sub':{zh:'任何人无需登录即可查看每一分善款与每一件物资的去向。数据全部来自下方不可篡改的链上账本。',yue:'任何人無需登入即可查看每一分善款與每一件物資的去向。數據全部來自下方不可篡改的鏈上賬本。',en:'Anyone can see where every dollar and every item goes — no login required. All data comes from the tamper-proof ledger below.'},
+  'dash.empty':{zh:'🧡 还没有捐赠记录，成为第一笔善款的主人吧',yue:'🧡 還沒有捐贈記錄，成為第一筆善款的主人吧',en:'🧡 No donations yet — be the very first to give'},
+  'dash.empty.go':{zh:'立即捐赠 →',yue:'立即捐贈 →',en:'Donate now →'},
+  'kpi.raised':{zh:'现金募集 (链上) ›',yue:'現金募集 (鏈上) ›',en:'Cash raised (on-chain) ›'},
+  'kpi.disbursed':{zh:'已拨付 ›',yue:'已撥付 ›',en:'Disbursed ›'},
+  'kpi.balance':{zh:'资金池余额',yue:'資金池餘額',en:'Pool balance'},
+  'kpi.inkind':{zh:'物资捐赠 (参考估值) ›',yue:'物資捐贈 (參考估值) ›',en:'In-kind (est. value) ›'},
+  'kpi.tx':{zh:'链上交易总数',yue:'鏈上交易總數',en:'Total on-chain tx'},
+  'chart.flow':{zh:'资金流向 (按救助项目)',yue:'資金流向 (按救助項目)',en:'Fund flow (by cause)'},
+  'chart.chan':{zh:'捐款渠道分布',yue:'捐款渠道分佈',en:'Donations by channel'},
+  'chart.vs':{zh:'募集 vs 拨付',yue:'募集 vs 撥付',en:'Raised vs disbursed'},
+  'bar.raised':{zh:'现金募集',yue:'現金募集',en:'Raised'},
+  'bar.disbursed':{zh:'已拨付',yue:'已撥付',en:'Disbursed'},
+  'bar.balance':{zh:'资金池余额',yue:'資金池餘額',en:'Balance'},
+  'chart.fallback':{zh:'图表库未能加载（可能离线），数据仍可在「最新链上动态」与区块链浏览器中查看。',yue:'圖表庫未能載入（可能離線），數據仍可在「最新鏈上動態」與區塊鏈瀏覽器中查看。',en:'Chart library failed to load (offline?). Data is still visible in the activity feed and explorer.'},
+  'dash.feed':{zh:'最新链上动态',yue:'最新鏈上動態',en:'Latest on-chain activity'},
+  'feed.none':{zh:'暂无交易，去捐一笔吧。',yue:'暫無交易，去捐一筆吧。',en:'No transactions yet — make one!'},
+  'proj.h':{zh:'捐赠用途详情 · 你的爱心去了哪里',yue:'捐贈用途詳情 · 你的愛心去了哪裏',en:'Causes · Where Your Kindness Goes'},
+  'proj.sub':{zh:'点击每个项目的名字，看看这份善意背后的故事。每一个项目，都是一群人正在等待的光。',yue:'點擊每個項目的名字，看看這份善意背後的故事。每一個項目，都是一群人正在等待的光。',en:'Click a cause to read the story behind it. Each one is a light a group of people is waiting for.'},
+  'proj.support':{zh:'🧡 我要支持这个项目',yue:'🧡 我要支持這個項目',en:'🧡 Support this cause'},
+  'trust.h':{zh:'资质与证照 · 我们是谁 🛡️',yue:'資質與證照 · 我們是誰 🛡️',en:'Credentials · Who We Are 🛡️'},
+  'trust.sub':{zh:'星火慈善基金依法登记、合规运作，并与多家机构建立长期合作。以下为基金会的登记证照与合作证明，点击任意一张可放大查看。<b style="color:var(--brand2)">（注：本页所有证件均为教学演示用样本，非真实证件，仅用于展示栏目效果）</b>',yue:'星火慈善基金依法登記、合規運作，並與多家機構建立長期合作。以下為基金會的登記證照與合作證明，點擊任意一張可放大查看。<b style="color:var(--brand2)">（註：本頁所有證件均為教學演示用樣本，非真實證件，僅用於展示欄目效果）</b>',en:'Spark Charity Foundation is duly registered and compliant, with long-term partnerships. Below are its registration and partnership documents — click any to enlarge. <b style="color:var(--brand2)">(Note: all documents here are demo samples, not real certificates, shown only to illustrate the section.)</b>'},
+  'don.h':{zh:'现金捐款 · 多渠道支付',yue:'現金捐款 · 多渠道支付',en:'Cash Donation · Multi-Channel'},
+  'don.sub':{zh:'选择你习惯的支付方式，扫码完成支付后，系统会在收到支付平台「回调」的瞬间自动把这笔捐款写入区块链——无需人工补登，不会漏款。',yue:'選擇你習慣的支付方式，掃碼完成支付後，系統會在收到支付平台「回調」的瞬間自動把這筆捐款寫入區塊鏈——無需人工補登，不會漏款。',en:'Pick your preferred payment method. Once paid, the system writes the donation to the blockchain the moment the payment gateway calls back — no manual entry, nothing missed.'},
+  'don.name':{zh:'捐款人 / 昵称',yue:'捐款人 / 暱稱',en:'Donor / nickname'},
+  'don.name.ph':{zh:'例如：匿名爱心人士',yue:'例如：匿名愛心人士',en:'e.g. Anonymous donor'},
+  'don.amount':{zh:'捐款金额 (¥)',yue:'捐款金額 (¥)',en:'Amount (¥)'},
+  'don.purpose':{zh:'指定用途（可选，详情见「捐赠用途详情」）',yue:'指定用途（可選，詳情見「捐贈用途詳情」）',en:'Earmark (optional — see Causes)'},
+  'sub.title':{zh:'📢 拨款动态通知（可选）',yue:'📢 撥款動態通知（可選）',en:'📢 Disbursement updates (optional)'},
+  'sub.all':{zh:'订阅基金所有拨款动态通知',yue:'訂閱基金所有撥款動態通知',en:'Subscribe to all fund disbursement updates'},
+  'sub.proj':{zh:'仅订阅',yue:'僅訂閱',en:'Only follow'},
+  'sub.proj2':{zh:'的拨款动态',yue:'的撥款動態',en:'updates'},
+  'sub.contact':{zh:'接收通知的邮箱 / 手机（可选）',yue:'接收通知的電郵 / 手機（可選）',en:'Email / phone for notifications (optional)'},
+  'don.method':{zh:'选择支付方式（点击生成付款二维码）',yue:'選擇支付方式（點擊生成付款二維碼）',en:'Choose a payment method (tap to get QR)'},
+  'don.why.h':{zh:'为什么不会漏款？ 🧾',yue:'為甚麼不會漏款？ 🧾',en:'Why nothing gets missed 🧾'},
+  'don.why.p':{zh:'不同支付平台（微信、支付宝、AlipayHK、银联、Amex、PayMe/转数快…）的款项最终都进入基金会的受监管账户。系统的对接逻辑是：',yue:'不同支付平台（微信、支付寶、AlipayHK、銀聯、Amex、PayMe/轉數快…）的款項最終都進入基金會的受監管賬戶。系統的對接邏輯是：',en:'Funds from every channel (WeChat, Alipay, AlipayHK, UnionPay, Amex, PayMe/FPS…) land in the foundation\'s regulated account. The integration works like this:'},
+  'don.why.1':{zh:'捐款人扫码 → 在所选平台完成付款',yue:'捐款人掃碼 → 在所選平台完成付款',en:'Donor scans the QR → pays on the chosen platform'},
+  'don.why.2':{zh:'支付平台向系统发送<b>支付成功回调</b>',yue:'支付平台向系統發送<b>支付成功回調</b>',en:'The platform sends a <b>payment-success callback</b>'},
+  'don.why.3':{zh:'系统<b>自动</b>把该笔捐款（金额、渠道、收据号）写入区块链',yue:'系統<b>自動</b>把該筆捐款（金額、渠道、收據號）寫入區塊鏈',en:'The system <b>automatically</b> writes the donation (amount, channel, receipt) to the blockchain'},
+  'don.why.note':{zh:'本 Demo 的「我已完成支付」按钮就是在<b>模拟这一步回调</b>。真实系统里由支付平台触发，没有人工环节，因此每一笔都不会遗漏。',yue:'本 Demo 的「我已完成支付」按鈕就是在<b>模擬這一步回調</b>。真實系統裏由支付平台觸發，沒有人工環節，因此每一筆都不會遺漏。',en:'In this demo, the "I\'ve paid" button <b>simulates that callback</b>. In a real system the gateway triggers it — no human step, so nothing is ever missed.'},
+  'ink.h':{zh:'物资捐赠 📦',yue:'物資捐贈 📦',en:'In-Kind Donation 📦'},
+  'ink.sub':{zh:'实物捐赠（衣物、毛毯、食品等）由收货点登记上链；如果是旧衣旧物，也可以申请<b>快递上门取件</b>。每件物资的去向全程可追溯。',yue:'實物捐贈（衣物、毛毯、食品等）由收貨點登記上鏈；如果是舊衣舊物，亦可申請<b>快遞上門取件</b>。每件物資的去向全程可追溯。',en:'Physical gifts (clothes, blankets, food…) are registered on-chain at a drop-off point; for used items you can also request <b>courier pickup</b>. Every item is fully traceable.'},
+  'ink.tab.drop':{zh:'🏠 送达 / 收货点登记',yue:'🏠 送達 / 收貨點登記',en:'🏠 Drop-off / register'},
+  'ink.tab.pick':{zh:'🚚 申请上门取件（旧物）',yue:'🚚 申請上門取件（舊物）',en:'🚚 Request pickup (used)'},
+  'ink.reg.h':{zh:'登记一笔物资捐赠',yue:'登記一筆物資捐贈',en:'Register an in-kind donation'},
+  'ink.donor':{zh:'捐赠人 / 机构',yue:'捐贈人 / 機構',en:'Donor / organization'},
+  'ink.donor.ph':{zh:'例如：某连锁超市',yue:'例如：某連鎖超市',en:'e.g. A supermarket chain'},
+  'ink.item':{zh:'物资名称',yue:'物資名稱',en:'Item name'},
+  'ink.item.ph':{zh:'例如：保暖毛毯',yue:'例如：保暖毛毯',en:'e.g. Warm blankets'},
+  'ink.cat':{zh:'类别',yue:'類別',en:'Category'},
+  'ink.qty':{zh:'数量',yue:'數量',en:'Quantity'},
+  'ink.unit':{zh:'单位',yue:'單位',en:'Unit'},
+  'ink.val':{zh:'参考估值 (¥，可选)',yue:'參考估值 (¥，可選)',en:'Est. value (¥, optional)'},
+  'ink.note':{zh:'备注 (可选)',yue:'備註 (可選)',en:'Note (optional)'},
+  'ink.note.ph':{zh:'例如：全新、含运送',yue:'例如：全新、含運送',en:'e.g. Brand new, delivery included'},
+  'ink.reg.btn':{zh:'📦 登记并上链',yue:'📦 登記並上鏈',en:'📦 Register & on-chain'},
+  'ink.ledger.h':{zh:'物资台账（链上）',yue:'物資台賬（鏈上）',en:'Item ledger (on-chain)'},
+  'ink.ledger.note':{zh:'物资按<b>件数和参考估值</b>单独统计，<b>不计入现金资金池</b>。点台账里的按钮推进状态，每次状态变更都会生成一条新的链上记录。',yue:'物資按<b>件數和參考估值</b>單獨統計，<b>不計入現金資金池</b>。點台賬裏的按鈕推進狀態，每次狀態變更都會生成一條新的鏈上記錄。',en:'Items are counted by <b>quantity and est. value</b> and are <b>not added to the cash pool</b>. Use the buttons to advance status; each change creates a new on-chain record.'},
+  'pick.h':{zh:'申请快递上门取件 🚚',yue:'申請快遞上門取件 🚚',en:'Request Courier Pickup 🚚'},
+  'pick.sub':{zh:'家里的旧衣旧鞋旧家具，也许正是山里孩子、独居老人需要的温暖。填写申请，审核通过后我们安排快递上门。',yue:'家裏的舊衣舊鞋舊傢俬，也許正是山區孩子、獨居老人需要的溫暖。填寫申請，審核通過後我們安排快遞上門。',en:'Your used clothes, shoes and furniture may be exactly the warmth a mountain child or a lonely elder needs. Submit a request; once approved we arrange a courier.'},
+  'pick.name':{zh:'联系人',yue:'聯絡人',en:'Contact name'},
+  'pick.phone':{zh:'联系电话',yue:'聯絡電話',en:'Phone'},
+  'pick.phone.ph':{zh:'11 位手机号',yue:'手機號碼',en:'Mobile number'},
+  'pick.type':{zh:'物资类型',yue:'物資類型',en:'Item type'},
+  'pick.desc':{zh:'数量 / 描述',yue:'數量 / 描述',en:'Quantity / description'},
+  'pick.desc.ph':{zh:'例如：8成新冬季外套约15件',yue:'例如：八成新冬季外套約15件',en:'e.g. ~15 winter coats, lightly used'},
+  'pick.photo':{zh:'物资照片（供审核人员评估是否适用）',yue:'物資照片（供審核人員評估是否適用）',en:'Photo (for reviewers to assess suitability)'},
+  'pick.date':{zh:'预约取件日期',yue:'預約取件日期',en:'Pickup date'},
+  'pick.slot':{zh:'时间段',yue:'時間段',en:'Time slot'},
+  'pick.addr':{zh:'取件地址',yue:'取件地址',en:'Pickup address'},
+  'pick.addr.ph':{zh:'详细地址',yue:'詳細地址',en:'Full address'},
+  'pick.fee':{zh:'我已知悉并同意<b style="color:var(--brand2)">运费由捐赠人自付</b>',yue:'本人已知悉並同意<b style="color:var(--brand2)">運費由捐贈人自付</b>',en:'I understand and agree that <b style="color:var(--brand2)">shipping is paid by the donor</b>'},
+  'pick.btn':{zh:'🚚 提交上门取件申请',yue:'🚚 提交上門取件申請',en:'🚚 Submit pickup request'},
+  'pick.review.h':{zh:'取件申请审核台',yue:'取件申請審核台',en:'Pickup review desk'},
+  'pick.none':{zh:'暂无取件申请。',yue:'暫無取件申請。',en:'No pickup requests yet.'},
+  'pick.flow':{zh:'流程：捐赠人提交 → 审核人员看照片评估 →<b>审核通过并安排快递</b> →快递取件后<b>确认入库并上链</b>，正式进入物资台账，全程可追溯。',yue:'流程：捐贈人提交 → 審核人員看照片評估 →<b>審核通過並安排快遞</b> →快遞取件後<b>確認入庫並上鏈</b>，正式進入物資台賬，全程可追溯。',en:'Flow: donor submits → reviewer assesses the photo → <b>approve & arrange courier</b> → after pickup, <b>confirm & put on-chain</b>, entering the ledger — fully traceable.'},
+  'dis.h':{zh:'拨款审批 (多签机制)',yue:'撥款審批 (多簽機制)',en:'Disbursement Approval (Multi-Sig)'},
+  'dis.sub':{zh:'基金会发起拨款后，必须由理事会与捐赠人代表共同审批签名，资金才会真正拨出并上链——模拟智能合约的 multi-sig 规则，防止一个人独自动用善款。',yue:'基金會發起撥款後，必須由理事會與捐贈人代表共同審批簽名，資金才會真正撥出並上鏈——模擬智能合約的 multi-sig 規則，防止一個人獨自動用善款。',en:'Once a disbursement is proposed, it must be co-signed by the board and donor reps before funds are released on-chain — simulating a smart-contract multi-sig rule so no single person can move the money.'},
+  'dis.new.h':{zh:'发起一笔拨款申请',yue:'發起一筆撥款申請',en:'Propose a disbursement'},
+  'dis.project':{zh:'受款项目 / 机构',yue:'受款項目 / 機構',en:'Recipient project / org'},
+  'dis.project.ph':{zh:'例如：XX小学',yue:'例如：XX小學',en:'e.g. XX Primary School'},
+  'dis.amount':{zh:'金额 (¥)',yue:'金額 (¥)',en:'Amount (¥)'},
+  'dis.tag':{zh:'此笔拨款服务于哪个救助项目',yue:'此筆撥款服務於哪個救助項目',en:'Which cause does this serve?'},
+  'dis.reason':{zh:'用途说明',yue:'用途說明',en:'Purpose'},
+  'dis.reason.ph':{zh:'例如：采购冬季校服',yue:'例如：採購冬季校服',en:'e.g. Buy winter uniforms'},
+  'dis.new.btn':{zh:'📝 发起拨款申请',yue:'📝 發起撥款申請',en:'📝 Propose disbursement'},
+  'dis.pending.h':{zh:'待审批申请',yue:'待審批申請',en:'Pending approvals'},
+  'dis.pending.none':{zh:'暂无待审批申请。',yue:'暫無待審批申請。',en:'No pending requests.'},
+  'dis.notify.h':{zh:'📢 拨款通知推送记录',yue:'📢 撥款通知推送記錄',en:'📢 Notification log'},
+  'dis.notify.none':{zh:'暂无通知记录。',yue:'暫無通知記錄。',en:'No notifications yet.'},
+  'dis.tiernote':{zh:'分级审批门槛：拨款 <b>&lt; ¥10,000</b> 需 2 理事 + 1 代表；<b>≥ ¥10,000</b> 需 3 理事 + 1 代表；<b>超过基金池总额 10%</b> 需 3 理事 + 3 代表（全体同意）。可用余额 = 现金募集 − 已拨付，拨款不能超过余额。',yue:'分級審批門檻：撥款 <b>&lt; ¥10,000</b> 需 2 理事 + 1 代表；<b>≥ ¥10,000</b> 需 3 理事 + 1 代表；<b>超過基金池總額 10%</b> 需 3 理事 + 3 代表（全體同意）。可用餘額 = 現金募集 − 已撥付，撥款不能超過餘額。',en:'Tiered thresholds: <b>&lt; ¥10,000</b> needs 2 directors + 1 rep; <b>≥ ¥10,000</b> needs 3 directors + 1 rep; <b>over 10% of the pool</b> needs 3 directors + 3 reps (all). Available = raised − disbursed; you can\'t exceed it.'},
+  'exp.h':{zh:'区块链浏览器 & 防篡改演示',yue:'區塊鏈瀏覽器 & 防篡改演示',en:'Blockchain Explorer & Tamper-Proof Demo'},
+  'exp.sub':{zh:'完整链上账本。每个区块都存着自己和「前一个区块」的哈希，环环相扣。试着篡改任意一笔金额，再点验证，整条链会立刻报错。',yue:'完整鏈上賬本。每個區塊都存著自己和「前一個區塊」的哈希，環環相扣。試著篡改任意一筆金額，再點驗證，整條鏈會立刻報錯。',en:'The full ledger. Each block stores its own hash and the previous block\'s hash, all linked. Tamper with any amount, then verify — the whole chain breaks instantly.'},
+  'exp.validate':{zh:'🔍 验证整条链完整性',yue:'🔍 驗證整條鏈完整性',en:'🔍 Verify chain integrity'},
+  'exp.tamper':{zh:'😈 一键篡改一笔金额(搞破坏)',yue:'😈 一鍵篡改一筆金額(搞破壞)',en:'😈 Tamper an amount (break it)'},
+  'exp.reset':{zh:'♻️ 重新挖矿修复',yue:'♻️ 重新挖礦修復',en:'♻️ Re-mine to fix'},
+  'exp.status0':{zh:'链状态：未验证',yue:'鏈狀態：未驗證',en:'Chain: not verified'},
+  'ab.h':{zh:'这个平台用到了哪些区块链知识？',yue:'這個平台用到了哪些區塊鏈知識？',en:'Which blockchain concepts power this platform?'},
+  'ab.sub':{zh:'可直接写进白皮书 / 答辩。下方是本平台<b>此刻的真实运行数据</b>——它是一个活的系统，不只是静态说明。',yue:'可直接寫進白皮書 / 答辯。下方是本平台<b>此刻的真實運行數據</b>——它是一個活的系統，不只是靜態說明。',en:'Ready for your white paper / defense. Below is the platform\'s <b>real-time running data</b> — a live system, not a static page.'},
+  'ab.t.concept':{zh:'概念',yue:'概念',en:'Concept'},
+  'ab.t.how':{zh:'在本平台中的体现',yue:'在本平台中的體現',en:'How it shows up here'},
+  'ab.r1k':{zh:'<b>区块 Block</b>',yue:'<b>區塊 Block</b>',en:'<b>Block</b>'},
+  'ab.r1v':{zh:'每个区块含：序号、时间戳、交易列表、前块哈希、nonce、本块哈希。',yue:'每個區塊含：序號、時間戳、交易列表、前塊哈希、nonce、本塊哈希。',en:'Each block holds: index, timestamp, transactions, previous hash, nonce, own hash.'},
+  'ab.r2k':{zh:'<b>哈希 SHA-256</b>',yue:'<b>哈希 SHA-256</b>',en:'<b>SHA-256 hash</b>'},
+  'ab.r2v':{zh:'用真实 SHA-256 算法对区块内容计算指纹；数据变一个字，哈希全变。',yue:'用真實 SHA-256 算法對區塊內容計算指紋；數據變一個字，哈希全變。',en:'A real SHA-256 fingerprint of block contents; change one character and the whole hash changes.'},
+  'ab.r3k':{zh:'<b>链式结构</b>',yue:'<b>鏈式結構</b>',en:'<b>Chained structure</b>'},
+  'ab.r3v':{zh:'每块保存前一块的哈希，首尾相连，这是「不可篡改」的根本来源。',yue:'每塊保存前一塊的哈希，首尾相連，這是「不可篡改」的根本來源。',en:'Each block stores the previous hash, linking them end to end — the root of immutability.'},
+  'ab.r4k':{zh:'<b>工作量证明 PoW</b>',yue:'<b>工作量證明 PoW</b>',en:'<b>Proof of Work</b>'},
+  'ab.r4v':{zh:'挖矿时不断改 nonce，直到哈希以 "00" 开头，模拟比特币挖矿。',yue:'挖礦時不斷改 nonce，直到哈希以 "00" 開頭，模擬比特幣挖礦。',en:'Mining tweaks the nonce until the hash starts with "00" — simulating Bitcoin mining.'},
+  'ab.r5k':{zh:'<b>智能合约逻辑</b>',yue:'<b>智能合約邏輯</b>',en:'<b>Smart-contract logic</b>'},
+  'ab.r5v':{zh:'「2/3 多签才放款」「金额不超余额」即合约规则的模拟。',yue:'「2/3 多簽才放款」「金額不超餘額」即合約規則的模擬。',en:'Rules like "2-of-3 multi-sig" and "can\'t exceed balance" simulate contract logic.'},
+  'ab.r6k':{zh:'<b>支付回调自动上链</b>',yue:'<b>支付回調自動上鏈</b>',en:'<b>Auto on-chain via callback</b>'},
+  'ab.r6v':{zh:'多渠道支付成功后由网关回调触发，系统自动记账，无人工补登、零漏款。',yue:'多渠道支付成功後由網關回調觸發，系統自動記賬，無人工補登、零漏款。',en:'After payment succeeds, the gateway callback triggers automatic recording — no manual entry, nothing missed.'},
+  'ab.r7k':{zh:'<b>链下资产上链 (Oracle 思想)</b>',yue:'<b>鏈下資產上鏈 (Oracle 思想)</b>',en:'<b>Off-chain assets on-chain (oracle idea)</b>'},
+  'ab.r7v':{zh:'物资是链下实物，由可信收货点 / 上门取件审核后登记并上链，全生命周期可追溯。',yue:'物資是鏈下實物，由可信收貨點 / 上門取件審核後登記並上鏈，全生命週期可追溯。',en:'Physical goods are off-chain; trusted drop-off / pickup review registers them on-chain, traceable across their whole lifecycle.'},
+  'ab.r8k':{zh:'<b>去中心化应用 Dapp</b>',yue:'<b>去中心化應用 Dapp</b>',en:'<b>Decentralized app (Dapp)</b>'},
+  'ab.r8v':{zh:'本页 = 合约逻辑 + 前端界面 + 钱包/支付状态，即一个 Dapp 的结构。',yue:'本頁 = 合約邏輯 + 前端界面 + 錢包/支付狀態，即一個 Dapp 的結構。',en:'This page = contract logic + front-end + wallet/payment state — the structure of a Dapp.'},
+  'ab.deploy':{zh:'<b>真实部署路径：</b>把这里的 JS 合约逻辑改写成 Solidity 智能合约，部署到以太坊测试网 (Sepolia)，前端用 ethers.js + MetaMask 连接；支付侧对接微信/支付宝/Stripe(Amex) 等网关回调，由后端把确认后的捐款写入合约。本 Demo 在本地模拟了相同行为，便于课堂讲解。',yue:'<b>真實部署路徑：</b>把這裏的 JS 合約邏輯改寫成 Solidity 智能合約，部署到以太坊測試網 (Sepolia)，前端用 ethers.js + MetaMask 連接；支付側對接微信/支付寶/Stripe(Amex) 等網關回調，由後端把確認後的捐款寫入合約。本 Demo 在本地模擬了相同行為，便於課堂講解。',en:'<b>Real deployment path:</b> rewrite this JS logic as a Solidity smart contract, deploy to an Ethereum testnet (Sepolia), connect the front-end via ethers.js + MetaMask; on the payment side, hook WeChat/Alipay/Stripe(Amex) gateway callbacks so the backend writes confirmed donations to the contract. This demo simulates the same behavior locally for class.'},
+  'footer':{zh:'星火慈善基金 ChariChain Demo · 教学演示用模拟区块链 · 数据保存在浏览器内存中，刷新即重置 · 🤍',yue:'星火慈善基金 ChariChain Demo · 教學演示用模擬區塊鏈 · 數據保存在瀏覽器記憶體中，刷新即重置 · 🤍',en:'Spark Charity Foundation · ChariChain Demo · educational mock blockchain · data lives in browser memory, resets on refresh · 🤍'},
+  'pay.scan':{zh:'请用对应 App 扫码完成支付（演示二维码，扫描不会真实扣款）',yue:'請用對應 App 掃碼完成支付（演示二維碼，掃描不會真實扣款）',en:'Scan with the matching app to pay (demo QR — no real charge)'},
+  'pay.confirm':{zh:'✅ 我已完成支付（模拟支付回调）',yue:'✅ 我已完成支付（模擬支付回調）',en:'✅ I\'ve paid (simulate callback)'},
+  'pay.back':{zh:'← 返回修改金额 / 支付方式',yue:'← 返回修改金額 / 支付方式',en:'← Back to edit amount / method'},
+  'pay.title':{zh:'{m} 付款',yue:'{m} 付款',en:'Pay with {m}'},
+  'pay.order':{zh:'订单号 {o}',yue:'訂單號 {o}',en:'Order {o}'},
+  'pay.limit':{zh:'单笔限额提示（示意）：{l}',yue:'單筆限額提示（示意）：{l}',en:'Per-transaction limit (illustrative): {l}'},
+  'succ.thanks':{zh:'感谢你的爱心！',yue:'感謝你的愛心！',en:'Thank you for your kindness!'},
+  'succ.sub':{zh:'这份善意已永久记录在链上 💛 截图发个朋友圈，让更多人加入吧',yue:'這份善意已永久記錄在鏈上 💛 截圖分享出去，讓更多人加入吧',en:'Your gift is now permanently on-chain 💛 Screenshot & share to invite others'},
+  'succ.dl':{zh:'📥 下载捐赠证书',yue:'📥 下載捐贈證書',en:'📥 Download certificate'},
+  'succ.done':{zh:'完成',yue:'完成',en:'Done'},
+  'cert.receipt':{zh:'收据编号',yue:'收據編號',en:'Receipt no.'},
+  'cert.donor':{zh:'捐赠人',yue:'捐贈人',en:'Donor'},
+  'cert.amount':{zh:'金额',yue:'金額',en:'Amount'},
+  'cert.purpose':{zh:'指定用途',yue:'指定用途',en:'Earmark'},
+  'cert.method':{zh:'支付渠道',yue:'支付渠道',en:'Channel'},
+  'cert.block':{zh:'上链区块',yue:'上鏈區塊',en:'Block'},
+  'doc.sample':{zh:'本证件为教学演示样本，非真实证件。',yue:'本證件為教學演示樣本，非真實證件。',en:'This document is a demo sample, not a real certificate.'},
+  'doc.close':{zh:'关闭',yue:'關閉',en:'Close'},
+  'doc.zoom':{zh:'点击放大',yue:'點擊放大',en:'Tap to enlarge'},
+  /* 动态/render 用 */
+  'pill.donation':{zh:'捐款',yue:'捐款',en:'Donation'},
+  'pill.disbursement':{zh:'拨款',yue:'撥款',en:'Disburse'},
+  'pill.inkind':{zh:'物资',yue:'物資',en:'In-kind'},
+  'pill.inkindStatus':{zh:'物资状态',yue:'物資狀態',en:'Item status'},
+  'unit.cnt':{zh:'笔',yue:'筆',en:'tx'},
+  'unit.pcs':{zh:'件',yue:'件',en:'items'},
+  'exp.verb.donate':{zh:'捐',yue:'捐',en:'gave'},
+  'exp.via':{zh:'经',yue:'經',en:'via'},
+  'exp.purpose':{zh:'用途',yue:'用途',en:'purpose'},
+  'exp.receipt':{zh:'收据',yue:'收據',en:'receipt'},
+  'exp.serve':{zh:'服务项目',yue:'服務項目',en:'serves'},
+  'exp.sign':{zh:'签名',yue:'簽名',en:'signed by'},
+  'exp.est':{zh:'估值',yue:'估值',en:'est.'},
+  'exp.genesis':{zh:' · 创世区块',yue:' · 創世區塊',en:' · Genesis'},
+  'exp.blockword':{zh:'区块',yue:'區塊',en:'Block'},
+  'exp.thishash':{zh:'本块 hash',yue:'本塊 hash',en:'This hash'},
+  'exp.tamperlabel':{zh:'✏️ 篡改这笔捐款金额（试试看，然后去验证）',yue:'✏️ 篡改這筆捐款金額（試試看，然後去驗證）',en:'✏️ Tamper this donation amount (then verify)'},
+  'exp.rewrite':{zh:'改写数据',yue:'改寫數據',en:'Rewrite'},
+  'exp.systx':{zh:'系统交易',yue:'系統交易',en:'System tx'},
+  'exp.statusOk':{zh:'✅ 链状态：完整有效，未被篡改',yue:'✅ 鏈狀態：完整有效，未被篡改',en:'✅ Chain: intact, not tampered'},
+  'exp.statusBad':{zh:'❌ 链已损坏！从区块 #{n} 起全部失效',yue:'❌ 鏈已損壞！從區塊 #{n} 起全部失效',en:'❌ Chain broken! Invalid from block #{n}'},
+  'exp.statusFixed':{zh:'链状态：已重新挖矿修复',yue:'鏈狀態：已重新挖礦修復',en:'Chain: re-mined & fixed'},
+  'tier.pool':{zh:'> 基金池10%（约{n}），需全体审批',yue:'> 基金池10%（約{n}），需全體審批',en:'> 10% of pool (≈{n}) — all must approve'},
+  'tier.high':{zh:'≥ ¥10,000，需 3 理事 + 1 代表',yue:'≥ ¥10,000，需 3 理事 + 1 代表',en:'≥ ¥10,000 — 3 directors + 1 rep'},
+  'tier.low':{zh:'< ¥10,000，需 2 理事 + 1 代表',yue:'< ¥10,000，需 2 理事 + 1 代表',en:'< ¥10,000 — 2 directors + 1 rep'},
+  'pend.need':{zh:'需 {d}理事 + {r}代表',yue:'需 {d}理事 + {r}代表',en:'Needs {d} dir + {r} rep'},
+  'pend.amount':{zh:'金额',yue:'金額',en:'Amount'},
+  'pend.purpose':{zh:'用途',yue:'用途',en:'Purpose'},
+  'pend.serve':{zh:'服务项目',yue:'服務項目',en:'Serves'},
+  'pend.threshold':{zh:'审批门槛',yue:'審批門檻',en:'Threshold'},
+  'pend.board':{zh:'理事会',yue:'理事會',en:'Board'},
+  'pend.reps':{zh:'捐赠人代表',yue:'捐贈人代表',en:'Donor reps'},
+  'notify.line':{zh:'📢 「{tag}」拨款 ¥{amt} 给 {proj} → 已通知 {cnt} 位订阅者 · {time}',yue:'📢 「{tag}」撥款 ¥{amt} 給 {proj} → 已通知 {cnt} 位訂閱者 · {time}',en:'📢 {tag}: disbursed ¥{amt} to {proj} → notified {cnt} subscriber(s) · {time}'},
+  'stat.blocks':{zh:'当前区块数',yue:'當前區塊數',en:'Blocks'},
+  'stat.tx':{zh:'链上交易数',yue:'鏈上交易數',en:'On-chain tx'},
+  'stat.hash':{zh:'累计哈希运算次数',yue:'累計哈希運算次數',en:'Total hash ops'},
+  'stat.algo':{zh:'哈希算法',yue:'哈希演算法',en:'Hash algorithm'},
+  'stat.diff':{zh:'挖矿难度(前导0位数)',yue:'挖礦難度(前導0位數)',en:'Difficulty (leading 0s)'},
+  'ink.advance':{zh:'推进 ▶',yue:'推進 ▶',en:'Advance ▶'},
+  'ink.setto':{zh:'设为…',yue:'設為…',en:'Set to…'},
+  'ink.none':{zh:'暂无物资登记。',yue:'暫無物資登記。',en:'No items registered yet.'},
+  'pick.approveBtn':{zh:'✔ 审核通过·安排快递',yue:'✔ 審核通過·安排快遞',en:'✔ Approve & arrange courier'},
+  'pick.rejectBtn':{zh:'婉拒',yue:'婉拒',en:'Decline'},
+  'pick.receiveBtn':{zh:'📦 确认取件入库并上链',yue:'📦 確認取件入庫並上鏈',en:'📦 Confirm pickup & on-chain'},
+  'pick.feeself':{zh:'运费自付',yue:'運費自付',en:'donor-paid shipping'},
+  'pick.noimg':{zh:'（未上传照片）',yue:'（未上傳照片）',en:'(no photo)'},
+  /* toast / tips */
+  't.purposeSel':{zh:'已为你选好用途：{p}，填金额选支付方式即可',yue:'已為你選好用途：{p}，填金額選支付方式即可',en:'Earmark set to: {p}. Enter amount & pick a method'},
+  't.needAmt':{zh:'请先输入有效金额',yue:'請先輸入有效金額',en:'Please enter a valid amount'},
+  't.paid':{zh:'{m} 捐款 ¥{n} 已自动上链 🧡',yue:'{m} 捐款 ¥{n} 已自動上鏈 🧡',en:'{m} donation of ¥{n} is on-chain 🧡'},
+  't.mineTip':{zh:'✅ 支付回调已确认并上链! 区块 #{b} · 渠道 {m} · 收据号 {r} · 挖矿 {n} 次{s}',yue:'✅ 支付回調已確認並上鏈! 區塊 #{b} · 渠道 {m} · 收據號 {r} · 挖礦 {n} 次{s}',en:'✅ Callback confirmed & on-chain! Block #{b} · {m} · receipt {r} · {n} mining tries{s}'},
+  't.subAllMsg':{zh:' · 已订阅全基金拨款通知',yue:' · 已訂閱全基金撥款通知',en:' · subscribed to all updates'},
+  't.subProjMsg':{zh:' · 已订阅「{p}」拨款通知',yue:' · 已訂閱「{p}」撥款通知',en:' · subscribed to {p} updates'},
+  't.certDl':{zh:'捐赠证书已下载 📥',yue:'捐贈證書已下載 📥',en:'Certificate downloaded 📥'},
+  't.inkindReg':{zh:'物资「{i} ×{q}{u}」已登记上链',yue:'物資「{i} ×{q}{u}」已登記上鏈',en:'Item "{i} ×{q}{u}" registered on-chain'},
+  't.inkindNeed':{zh:'❌ 请填写捐赠人、物资名称与数量',yue:'❌ 請填寫捐贈人、物資名稱與數量',en:'❌ Fill in donor, item name and quantity'},
+  't.inkindRegOk':{zh:'✅ 已登记上链! 物资编号 {id} · 区块 #{b}',yue:'✅ 已登記上鏈! 物資編號 {id} · 區塊 #{b}',en:'✅ Registered! Item {id} · block #{b}'},
+  't.stDone':{zh:'该物资已发放，流程结束',yue:'該物資已發放，流程結束',en:'Item already distributed — flow complete'},
+  't.stUpd':{zh:'物资 {id} 状态更新为「{s}」并上链',yue:'物資 {id} 狀態更新為「{s}」並上鏈',en:'Item {id} → "{s}" (on-chain)'},
+  't.stNoChange':{zh:'状态未变化',yue:'狀態未變化',en:'No status change'},
+  't.stSet':{zh:'物资 {id} 状态已设为「{s}」并上链',yue:'物資 {id} 狀態已設為「{s}」並上鏈',en:'Item {id} set to "{s}" (on-chain)'},
+  't.puNeed':{zh:'❌ 请填写联系人、电话、描述与地址',yue:'❌ 請填寫聯絡人、電話、描述與地址',en:'❌ Fill in contact, phone, description and address'},
+  't.puFee':{zh:'❌ 需勾选同意「运费由捐赠人自付」',yue:'❌ 需勾選同意「運費由捐贈人自付」',en:'❌ Please agree shipping is donor-paid'},
+  't.puOk':{zh:'✅ 申请已提交 (编号 {id})，等待审核人员评估物资照片。',yue:'✅ 申請已提交 (編號 {id})，等待審核人員評估物資照片。',en:'✅ Request submitted ({id}); awaiting photo review.'},
+  't.puSubmitted':{zh:'上门取件申请已提交，待审核 🚚',yue:'上門取件申請已提交，待審核 🚚',en:'Pickup request submitted, pending review 🚚'},
+  't.puApproved':{zh:'已审核通过，安排快递于 {d} {s} 上门取件',yue:'已審核通過，安排快遞於 {d} {s} 上門取件',en:'Approved — courier scheduled for {d} {s}'},
+  't.puReject':{zh:'已婉拒该申请',yue:'已婉拒該申請',en:'Request declined'},
+  't.puReceived':{zh:'快递已取件入库，物资 {id} 上链 📦',yue:'快遞已取件入庫，物資 {id} 上鏈 📦',en:'Picked up & stored; item {id} on-chain 📦'},
+  't.proposeNeed':{zh:'请填写受款项目与用途',yue:'請填寫受款項目與用途',en:'Fill in recipient and purpose'},
+  't.proposeAmt':{zh:'请输入有效金额',yue:'請輸入有效金額',en:'Enter a valid amount'},
+  't.proposeOver':{zh:'❌ 超出资金池余额 (¥{b})，合约拒绝。',yue:'❌ 超出資金池餘額 (¥{b})，合約拒絕。',en:'❌ Exceeds pool balance (¥{b}); contract rejects.'},
+  't.proposeOk':{zh:'📝 已发起。门槛：{t}。',yue:'📝 已發起。門檻：{t}。',en:'📝 Proposed. Threshold: {t}.'},
+  't.proposeToast':{zh:'拨款申请已提交，待审批',yue:'撥款申請已提交，待審批',en:'Disbursement proposed, pending approval'},
+  't.signed':{zh:'{a} 已签名（理事 {dd}/{dr} · 代表 {rr}/{rq}）',yue:'{a} 已簽名（理事 {dd}/{dr} · 代表 {rr}/{rq}）',en:'{a} signed (directors {dd}/{dr} · reps {rr}/{rq})'},
+  't.approved':{zh:'✅ 审批通过！拨款 ¥{n} 已上链 (区块 #{b})',yue:'✅ 審批通過！撥款 ¥{n} 已上鏈 (區塊 #{b})',en:'✅ Approved! ¥{n} disbursed on-chain (block #{b})'},
+  't.notified':{zh:'📢 已向 {n} 位订阅者推送本次拨款通知',yue:'📢 已向 {n} 位訂閱者推送本次撥款通知',en:'📢 Notified {n} subscriber(s) of this disbursement'},
+  't.tamper':{zh:'已偷偷把区块 #{i} 金额改成 {v}（但没重算哈希）',yue:'已偷偷把區塊 #{i} 金額改成 {v}（但沒重算哈希）',en:'Secretly changed block #{i} amount to {v} (hash not recomputed)'},
+  't.tamperBig':{zh:'😈 已把区块 #{i} 金额偷偷改大',yue:'😈 已把區塊 #{i} 金額偷偷改大',en:'😈 Secretly inflated block #{i} amount'},
+  't.noDon':{zh:'链上还没有捐款记录',yue:'鏈上還沒有捐款記錄',en:'No donations on chain yet'},
+  't.validateOk':{zh:'✅ 全链校验通过',yue:'✅ 全鏈校驗通過',en:'✅ Whole chain verified'},
+  't.validateBad':{zh:'❌ 检测到篡改：区块 #{n} 哈希对不上',yue:'❌ 檢測到篡改：區塊 #{n} 哈希對不上',en:'❌ Tampering found: block #{n} hash mismatch'},
+  't.reset':{zh:'♻️ 已重新挖矿，链恢复有效',yue:'♻️ 已重新挖礦，鏈恢復有效',en:'♻️ Re-mined — chain valid again'},
+};
+/* 内部规范值（保持不变）→ 各语言显示文本 */
+const LBL={
+  '不指定，由基金会统筹':{zh:'不指定，由基金会统筹',yue:'不指定，由基金會統籌',en:'Unrestricted (foundation decides)'},
+  '统筹 / 不指定':{zh:'统筹 / 不指定',yue:'統籌 / 不指定',en:'Unrestricted'},
+  '统筹':{zh:'统筹',yue:'統籌',en:'Unrestricted'},
+  '统筹/未指定':{zh:'统筹/未指定',yue:'統籌/未指定',en:'Unrestricted'},
+  '未拨付(资金池)':{zh:'未拨付(资金池)',yue:'未撥付(資金池)',en:'Undisbursed (pool)'},
+  '已登记':{zh:'已登记',yue:'已登記',en:'Registered'},
+  '已入库':{zh:'已入库',yue:'已入庫',en:'Warehoused'},
+  '已发放':{zh:'已发放',yue:'已發放',en:'Distributed'},
+  '待审核':{zh:'待审核',yue:'待審核',en:'Pending review'},
+  '审核通过·已安排快递':{zh:'审核通过·已安排快递',yue:'審核通過·已安排快遞',en:'Approved · courier arranged'},
+  '食品/饮用水':{zh:'食品/饮用水',yue:'食品/飲用水',en:'Food / water'},
+  '衣物':{zh:'衣物',yue:'衣物',en:'Clothing'},
+  '床上用品/毛毯':{zh:'床上用品/毛毯',yue:'床上用品/毛毯',en:'Bedding / blankets'},
+  '婴幼儿用品':{zh:'婴幼儿用品',yue:'嬰幼兒用品',en:'Baby supplies'},
+  '医疗/卫生用品':{zh:'医疗/卫生用品',yue:'醫療/衛生用品',en:'Medical / hygiene'},
+  '学习用品':{zh:'学习用品',yue:'學習用品',en:'School supplies'},
+  '其他':{zh:'其他',yue:'其他',en:'Other'},
+  '旧衣物':{zh:'旧衣物',yue:'舊衣物',en:'Used clothing'},
+  '旧鞋子':{zh:'旧鞋子',yue:'舊鞋子',en:'Used shoes'},
+  '旧家具':{zh:'旧家具',yue:'舊傢俬',en:'Used furniture'},
+  '旧书籍':{zh:'旧书籍',yue:'舊書籍',en:'Used books'},
+  '旧家电':{zh:'旧家电',yue:'舊家電',en:'Used appliances'},
+  '母婴旧物':{zh:'母婴旧物',yue:'母嬰舊物',en:'Used baby/maternity'},
+  '上午 9:00-12:00':{zh:'上午 9:00-12:00',yue:'上午 9:00-12:00',en:'Morning 9:00–12:00'},
+  '下午 13:00-17:00':{zh:'下午 13:00-17:00',yue:'下午 13:00-17:00',en:'Afternoon 13:00–17:00'},
+  '晚间 18:00-20:00':{zh:'晚间 18:00-20:00',yue:'晚間 18:00-20:00',en:'Evening 18:00–20:00'},
+  '零钱单笔约 ¥5万':{zh:'零钱单笔约 ¥5万',yue:'零錢單筆約 ¥5萬',en:'Balance ≈ ¥50k/tx'},
+  '余额单笔约 ¥5万':{zh:'余额单笔约 ¥5万',yue:'餘額單筆約 ¥5萬',en:'Balance ≈ ¥50k/tx'},
+  '单笔约 HK$5万':{zh:'单笔约 HK$5万',yue:'單筆約 HK$5萬',en:'≈ HK$50k/tx'},
+  '按银行卡限额':{zh:'按银行卡限额',yue:'按銀行卡限額',en:'Per bank-card limit'},
+  '按信用卡额度':{zh:'按信用卡额度',yue:'按信用卡額度',en:'Per credit limit'},
+  '转数快基本不限额':{zh:'转数快基本不限额',yue:'轉數快基本不限額',en:'FPS: virtually unlimited'},
+  '大额不限·到账较慢':{zh:'大额不限·到账较慢',yue:'大額不限·到賬較慢',en:'No cap · slower to clear'},
+  '支付宝香港':{zh:'支付宝香港',yue:'支付寶香港',en:'AlipayHK'},
+  '运通卡':{zh:'运通卡',yue:'運通卡',en:'Amex card'},
+  '信用卡':{zh:'信用卡',yue:'信用卡',en:'Credit card'},
+  '香港本地':{zh:'香港本地',yue:'香港本地',en:'Hong Kong local'},
+};
+function t(k,vars){ const e=I18N[k]; let s=e?(e[LANG]||e.zh):k; if(vars){ for(const p in vars) s=s.split('{'+p+'}').join(vars[p]); } return s; }
+function tr(s){ const p=(typeof PROJECTS!=='undefined')&&PROJECTS.find(x=>x.id===s); if(p) return p.name[LANG]||p.name.zh; const e=LBL[s]; return e?(e[LANG]||e.zh):s; }
+function applyI18n(){
+  document.documentElement.lang = LANG==='en'?'en':(LANG==='yue'?'zh-HK':'zh-CN');
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent=t(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ el.innerHTML=t(el.getAttribute('data-i18n-html')); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{ el.placeholder=t(el.getAttribute('data-i18n-ph')); });
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>{ el.title=t(el.getAttribute('data-i18n-title')); });
+}
+function updateLangButtons(){ document.querySelectorAll('#langsw button').forEach(b=>b.classList.toggle('on',b.dataset.lang===LANG)); }
+function refreshDynamic(){
+  try{
+    fillPurposes(); fillProjectTags(); fillCats(); fillPuTypes(); fillSlots();
+    renderPayGrid(); renderProjects(); renderDocs(); updateSubProjName();
+    renderInkind(); renderPickups(); renderPending(); renderNotifications();
+    renderDashboard(); renderAboutStats(); renderChain();
+  }catch(e){ console.warn(e); }
+}
+function setLang(l){ LANG=l; try{localStorage.setItem('spark_lang',l)}catch(e){}; applyI18n(); refreshDynamic(); updateLangButtons(); }
+document.getElementById('langsw').addEventListener('click',e=>{ const b=e.target.closest('button'); if(b)setLang(b.dataset.lang); });
+
 /* ===================== 真实 SHA-256 ===================== */
 function sha256(ascii){
   function rr(v,a){return (v>>>a)|(v<<(32-a));}
@@ -507,9 +816,14 @@ const APPROVERS_REP=['捐赠人代表·赵爱心','捐赠人代表·钱明德','
 // 分级多签门槛：<1万→2理事+1代表；≥1万→3理事+1代表；>基金池10%→3理事+3代表（全员）
 function approvalReq(amount){
   const pool=totalRaised();
-  if(pool>0 && amount > pool*0.10) return {dir:3,rep:3,tier:`> 基金池10%（约¥${Math.ceil(pool*0.1).toLocaleString()}），需全体审批`};
-  if(amount >= 10000) return {dir:3,rep:1,tier:'≥ ¥10,000，需 3 理事 + 1 代表'};
-  return {dir:2,rep:1,tier:'< ¥10,000，需 2 理事 + 1 代表'};
+  if(pool>0 && amount > pool*0.10) return {dir:3,rep:3,kind:'pool',thr:Math.ceil(pool*0.1)};
+  if(amount >= 10000) return {dir:3,rep:1,kind:'high'};
+  return {dir:2,rep:1,kind:'low'};
+}
+function tierText(req){
+  if(req.kind==='pool') return t('tier.pool',{n:'¥'+req.thr.toLocaleString()});
+  if(req.kind==='high') return t('tier.high');
+  return t('tier.low');
 }
 const INKIND_STATES=['已登记','已入库','已发放'];
 const PAY_METHODS=[
@@ -532,31 +846,46 @@ function svgDisaster(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="htt
 function svgRescue(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6d2"/><stop offset="1" stop-color="#ffe7cf"/></linearGradient></defs><rect width="400" height="200" fill="url(#rg)"/><path d="M200 70 c-22 -30 -74 -22 -74 18 c0 30 46 56 74 74 c28 -18 74 -44 74 -74 c0 -40 -52 -48 -74 -18 z" fill="#ef5350"/><path d="M120 132 h44 l14 -30 l20 56 l16 -34 h66" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="80" cy="56" r="8" fill="#fff" opacity=".7"/><circle cx="330" cy="150" r="6" fill="#fff" opacity=".7"/></svg>`;}
 
 const PROJECTS=[
-  {key:'山区留守儿童救助',color:'var(--brand)',svg:svgChildren,
-   tease:'让每个山里的孩子，每年都有新衣裳。',
-   detail:'在大山深处，有一群孩子的父母常年在外打工，他们一年也见不到爸爸妈妈几次。每到换季，别的孩子有新衣裳，他们却还穿着洗得发白、袖口磨破的旧衣。<br><br>星火想做的，是让每一个山里的孩子，每年都能收到一份属于自己的新衣——合身的棉袄、暖和的鞋子，还有一句「有人记得你」。我们相信，一件新衣服暖的不只是身子，更是一颗盼望被爱的、小小的心。'},
-  {key:'事实孤儿救助',color:'var(--purple)',svg:svgOrphan,
-   tease:'就算命运给了缺口，也总有人为你补上。',
-   detail:'他们的父母也许还在世，却因重病、服刑或失联，无法再给他们一个家。这些「事实孤儿」，常常被政策和人群同时遗忘。<br><br>星火为他们提供每月的生活与助学金，确保他们有饭吃、有学上，还有志愿者定期上门，看看他们过得好不好。我们想让这些孩子知道：就算命运给了你一个缺口，也总会有人，愿意为你补上一角。'},
-  {key:'孤寡老人慰问',color:'var(--teal)',svg:svgElder,
-   tease:'愿走到暮年的他们，依然被温柔记挂。',
-   detail:'村口那间老屋里，住着一位无儿无女的老人。一日三餐冷锅冷灶，生了病也没人知道。<br><br>星火的志愿者会定期上门，为他们送去米油、药品和一顿热乎乎的饭，陪他们说说话，听听那些被岁月尘封的故事。我们做的不只是物质慰问，更想让走到人生暮年的他们，依然被这个世界，温柔地记挂着。'},
-  {key:'乡村应急备灾',color:'var(--amber)',svg:svgDisaster,
-   tease:'灾难来临时，多一分准备，多一线生机。',
-   detail:'洪水、地震、山火……灾难来临时，最先受伤的往往是偏远的乡村。<br><br>星火在易灾地区提前储备应急物资——饮用水、棉被、手电、急救包，并培训村民应对突发灾害。我们没法阻止灾难发生，但可以让它来临时，乡亲们多一分准备、多一线生机。每一份备灾，都是与时间赛跑的守护。'},
-  {key:'生命救援助力',color:'var(--red)',svg:svgRescue,
-   tease:'不该有人因为没钱，被迫放弃活下去。',
-   detail:'有些家庭，被一场突如其来的重病或意外推到了悬崖边——高昂的医药费，让本就拮据的他们走投无路。<br><br>星火设立生命救援专项，为这些与命运抗争的人提供紧急医疗资助，帮他们抓住那根「救命稻草」。我们坚信：不该有人，因为没钱，就被迫放弃活下去的希望。'},
+  {id:'山区留守儿童救助',color:'var(--brand)',svg:svgChildren,
+   name:{zh:'山区留守儿童救助',yue:'山區留守兒童救助',en:'Aid for Left-Behind Children'},
+   tease:{zh:'让每个山里的孩子，每年都有新衣裳。',yue:'讓每個山區的孩子，每年都有新衣裳。',en:'New clothes every year for every child in the mountains.'},
+   detail:{zh:'在大山深处，有一群孩子的父母常年在外打工，他们一年也见不到爸爸妈妈几次。每到换季，别的孩子有新衣裳，他们却还穿着洗得发白、袖口磨破的旧衣。<br><br>星火想做的，是让每一个山里的孩子，每年都能收到一份属于自己的新衣——合身的棉袄、暖和的鞋子，还有一句「有人记得你」。我们相信，一件新衣服暖的不只是身子，更是一颗盼望被爱的、小小的心。',
+     yue:'在大山深處，有一群孩子的父母常年在外打工，他們一年也見不到爸爸媽媽幾次。每到換季，別的孩子有新衣裳，他們卻還穿著洗得發白、袖口磨破的舊衣。<br><br>星火想做的，是讓每一個山裏的孩子，每年都能收到一份屬於自己的新衣——合身的棉襖、暖和的鞋子，還有一句「有人記得你」。我們相信，一件新衣服暖的不只是身子，更是一顆盼望被愛的、小小的心。',
+     en:'Deep in the mountains, there are children whose parents work far away all year — they see mom and dad only a few times a year. When the seasons change and other kids get new clothes, they still wear faded, worn-out hand-me-downs.<br><br>What Spark wants is for every mountain child to receive a set of new clothes of their own each year — a well-fitting padded coat, warm shoes, and the words "someone remembers you." A new outfit warms not just the body, but a small heart longing to be loved.'}},
+  {id:'事实孤儿救助',color:'var(--purple)',svg:svgOrphan,
+   name:{zh:'事实孤儿救助',yue:'事實孤兒救助',en:'Support for De Facto Orphans'},
+   tease:{zh:'就算命运给了缺口，也总有人为你补上。',yue:'就算命運給了缺口，也總有人為你補上。',en:'Even when fate leaves a gap, someone will fill it.'},
+   detail:{zh:'他们的父母也许还在世，却因重病、服刑或失联，无法再给他们一个家。这些「事实孤儿」，常常被政策和人群同时遗忘。<br><br>星火为他们提供每月的生活与助学金，确保他们有饭吃、有学上，还有志愿者定期上门，看看他们过得好不好。我们想让这些孩子知道：就算命运给了你一个缺口，也总会有人，愿意为你补上一角。',
+     yue:'他們的父母也許還在世，卻因重病、服刑或失聯，無法再給他們一個家。這些「事實孤兒」，常常被政策和人群同時遺忘。<br><br>星火為他們提供每月的生活與助學金，確保他們有飯吃、有學上，還有志願者定期上門，看看他們過得好不好。我們想讓這些孩子知道：就算命運給了你一個缺口，也總會有人，願意為你補上一角。',
+     en:'Their parents may still be alive, but illness, prison or going missing means they can no longer offer a home. These "de facto orphans" are often forgotten by both policy and people.<br><br>Spark gives them monthly living and study stipends so they have food and schooling, with volunteers visiting regularly to see how they are. We want them to know: even when fate leaves a gap, someone will always be willing to fill it.'}},
+  {id:'孤寡老人慰问',color:'var(--teal)',svg:svgElder,
+   name:{zh:'孤寡老人慰问',yue:'孤寡老人慰問',en:'Comfort for Lonely Elders'},
+   tease:{zh:'愿走到暮年的他们，依然被温柔记挂。',yue:'願走到暮年的他們，依然被溫柔記掛。',en:'May those in their twilight years still be gently remembered.'},
+   detail:{zh:'村口那间老屋里，住着一位无儿无女的老人。一日三餐冷锅冷灶，生了病也没人知道。<br><br>星火的志愿者会定期上门，为他们送去米油、药品和一顿热乎乎的饭，陪他们说说话，听听那些被岁月尘封的故事。我们做的不只是物质慰问，更想让走到人生暮年的他们，依然被这个世界，温柔地记挂着。',
+     yue:'村口那間老屋裏，住著一位無兒無女的老人。一日三餐冷鍋冷灶，生了病也沒人知道。<br><br>星火的志願者會定期上門，為他們送去米油、藥品和一頓熱乎乎的飯，陪他們說說話，聽聽那些被歲月塵封的故事。我們做的不只是物質慰問，更想讓走到人生暮年的他們，依然被這個世界，溫柔地記掛著。',
+     en:'In an old house at the edge of the village lives an elder with no children. Cold stove at every meal, and no one knows when they fall ill.<br><br>Spark volunteers visit regularly with rice, oil, medicine and a hot meal, sitting to chat and listen to stories sealed by the years. More than material comfort, we want those in their final years to still be gently remembered by this world.'}},
+  {id:'乡村应急备灾',color:'var(--amber)',svg:svgDisaster,
+   name:{zh:'乡村应急备灾',yue:'鄉村應急備災',en:'Rural Disaster Preparedness'},
+   tease:{zh:'灾难来临时，多一分准备，多一线生机。',yue:'災難來臨時，多一分準備，多一線生機。',en:'When disaster strikes, a little readiness means a better chance.'},
+   detail:{zh:'洪水、地震、山火……灾难来临时，最先受伤的往往是偏远的乡村。<br><br>星火在易灾地区提前储备应急物资——饮用水、棉被、手电、急救包，并培训村民应对突发灾害。我们没法阻止灾难发生，但可以让它来临时，乡亲们多一分准备、多一线生机。每一份备灾，都是与时间赛跑的守护。',
+     yue:'洪水、地震、山火……災難來臨時，最先受傷的往往是偏遠的鄉村。<br><br>星火在易災地區提前儲備應急物資——飲用水、棉被、手電、急救包，並培訓村民應對突發災害。我們沒法阻止災難發生，但可以讓它來臨時，鄉親們多一分準備、多一線生機。每一份備災，都是與時間賽跑的守護。',
+     en:'Floods, earthquakes, wildfires — when disaster strikes, remote villages are often hit first.<br><br>Spark pre-positions emergency supplies in disaster-prone areas — water, quilts, flashlights, first-aid kits — and trains villagers to respond. We can\'t stop disasters, but we can make sure that when they come, villagers have a little more readiness and a better chance. Every bit of preparation is a guardianship racing against time.'}},
+  {id:'生命救援助力',color:'var(--red)',svg:svgRescue,
+   name:{zh:'生命救援助力',yue:'生命救援助力',en:'Life Rescue Support'},
+   tease:{zh:'不该有人因为没钱，被迫放弃活下去。',yue:'不該有人因為沒錢，被迫放棄活下去。',en:'No one should give up on living for lack of money.'},
+   detail:{zh:'有些家庭，被一场突如其来的重病或意外推到了悬崖边——高昂的医药费，让本就拮据的他们走投无路。<br><br>星火设立生命救援专项，为这些与命运抗争的人提供紧急医疗资助，帮他们抓住那根「救命稻草」。我们坚信：不该有人，因为没钱，就被迫放弃活下去的希望。',
+     yue:'有些家庭，被一場突如其來的重病或意外推到了懸崖邊——高昂的醫藥費，讓本就拮据的他們走投無路。<br><br>星火設立生命救援專項，為這些與命運抗爭的人提供緊急醫療資助，幫他們抓住那根「救命稻草」。我們堅信：不該有人，因為沒錢，就被迫放棄活下去的希望。',
+     en:'Some families are pushed to the cliff\'s edge by a sudden illness or accident — sky-high medical bills leave the already-struggling with nowhere to turn.<br><br>Spark runs a Life Rescue fund, giving emergency medical aid to those fighting fate, helping them grab the lifeline. We firmly believe no one should be forced to give up the hope of living simply for lack of money.'}},
 ];
 function renderProjects(){
   document.getElementById('projectGrid').innerHTML=PROJECTS.map((p,i)=>`
     <div class="proj" id="proj-${i}">
       ${p.svg()}
       <div class="pbody">
-        <div class="pname" onclick="toggleProj(${i})"><span style="border-left:5px solid ${p.color};padding-left:10px">${p.key}</span><span class="chev">▼</span></div>
-        <div class="ptease">${p.tease}</div>
-        <div class="detail"><p>${p.detail}</p>
-          <button class="btn sm dbtn" onclick="donateTo('${p.key}')">🧡 我要支持这个项目</button>
+        <div class="pname" onclick="toggleProj(${i})"><span style="border-left:5px solid ${p.color};padding-left:10px">${p.name[LANG]||p.name.zh}</span><span class="chev">▼</span></div>
+        <div class="ptease">${p.tease[LANG]||p.tease.zh}</div>
+        <div class="detail"><p>${p.detail[LANG]||p.detail.zh}</p>
+          <button class="btn sm dbtn" onclick="donateTo('${p.id}')">${t('proj.support')}</button>
         </div>
       </div>
     </div>`).join('');
@@ -568,8 +897,8 @@ function toggleProj(i){
 }
 function donateTo(key){
   document.querySelector('[data-view="donate"]').click();
-  const sel=document.getElementById('dPurpose'); sel.value=key;
-  toast('已为你选好用途：'+key+'，填金额选支付方式即可');
+  const sel=document.getElementById('dPurpose'); sel.value=key; updateSubProjName();
+  toast(t('t.purposeSel',{p:tr(key)}));
 }
 
 /* ===================== 资质与证照（原创样本，带DEMO水印） ===================== */
@@ -622,21 +951,22 @@ function makePartner(o){
   </svg>`;
 }
 const DOCS=[
-  {cap:'基金会法人登记证书', sub:'民政部门登记', svg:()=>makeCert({title:'登 记 证 书', subtitle:'CERTIFICATE OF REGISTRATION', accent:'#e8542a', rows:[['证书编号','基金登记字第 0571 号'],['法定代表人','李星火'],['业务主管单位','省民政厅'],['原始基金','人民币 200 万元'],['成立日期','2021 年 3 月 15 日'],['住所','XX市XX区爱心路 1 号']], sealLabel:'登记专用章', note:'有效期：长期 · 本件为教学演示样本'})},
-  {cap:'公开募捐资格证书', sub:'依法可面向公众募捐', svg:()=>makeCert({title:'公开募捐资格', subtitle:'PUBLIC FUNDRAISING QUALIFICATION', accent:'#27b97a', rows:[['证书编号','募捐资字第 2021-088 号'],['募捐方式','互联网公开募捐'],['募捐区域','全国'],['指定平台','星火链上透明平台'],['发证日期','2021 年 6 月 1 日'],['有效状态','正常有效']], sealLabel:'民政登记章', note:'本件为教学演示样本'})},
-  {cap:'统一社会信用代码证', sub:'相当于"营业执照"', svg:()=>makeCert({title:'登 记 证', subtitle:'UNIFIED SOCIAL CREDIT CODE', accent:'#a273ff', rows:[['统一社会信用代码','5310 0000 5XXXX XX1A'],['名称','星火慈善基金'],['类型','慈善基金会（非营利法人）'],['法定代表人','李星火'],['登记机关','省民政厅'],['登记日期','2021 年 3 月 15 日']], sealLabel:'法人登记章', note:'本件为教学演示样本'})},
-  {cap:'合作证明 · 星光乡村小学（希望小学）', sub:'结对帮扶', svg:()=>makePartner({partner:'星光乡村小学（希望小学）', kind:'希望小学结对帮扶', items:['每年为全校学生提供过冬棉衣与鞋子','资助校舍图书室与冬季取暖设备','建立留守儿童一对一关爱档案'], date:'2022 年 9 月 1 日'})},
-  {cap:'合作证明 · 暖阳敬老院', sub:'孤寡老人慰问', svg:()=>makePartner({partner:'暖阳敬老院', kind:'孤寡老人定期慰问', items:['每月上门送米油、药品与热餐','节假日组织志愿者陪伴探访','为失能老人提供应急救助金'], date:'2023 年 1 月 10 日'})},
-  {cap:'第三方年度审计报告', sub:'财务公开透明', svg:()=>makeCert({title:'年度审计报告', subtitle:'INDEPENDENT AUDIT SUMMARY', accent:'#f6a51d', rows:[['报告年度','2024 年度'],['全年收到捐赠','¥ 1,286,400'],['全年公益支出','¥ 1,030,000'],['管理费用占比','3.8%（＜10% 上限）'],['审计意见','标准无保留意见'],['出具机构','XX 会计师事务所']], sealLabel:'会计师事务所', note:'本件为教学演示样本'})},
+  {cap:{zh:'基金会法人登记证书',yue:'基金會法人登記證書',en:'Foundation Registration Certificate'}, sub:{zh:'民政部门登记',yue:'民政部門登記',en:'Civil-affairs registration'}, svg:()=>makeCert({title:'登 记 证 书', subtitle:'CERTIFICATE OF REGISTRATION', accent:'#e8542a', rows:[['证书编号','基金登记字第 0571 号'],['法定代表人','李星火'],['业务主管单位','省民政厅'],['原始基金','人民币 200 万元'],['成立日期','2021 年 3 月 15 日'],['住所','XX市XX区爱心路 1 号']], sealLabel:'登记专用章', note:'有效期：长期 · 本件为教学演示样本'})},
+  {cap:{zh:'公开募捐资格证书',yue:'公開募捐資格證書',en:'Public Fundraising Qualification'}, sub:{zh:'依法可面向公众募捐',yue:'依法可面向公眾募捐',en:'Legally allowed to fundraise publicly'}, svg:()=>makeCert({title:'公开募捐资格', subtitle:'PUBLIC FUNDRAISING QUALIFICATION', accent:'#27b97a', rows:[['证书编号','募捐资字第 2021-088 号'],['募捐方式','互联网公开募捐'],['募捐区域','全国'],['指定平台','星火链上透明平台'],['发证日期','2021 年 6 月 1 日'],['有效状态','正常有效']], sealLabel:'民政登记章', note:'本件为教学演示样本'})},
+  {cap:{zh:'统一社会信用代码证',yue:'統一社會信用代碼證',en:'Unified Social Credit Code'}, sub:{zh:'相当于"营业执照"',yue:'相當於「營業執照」',en:'Equivalent to a business license'}, svg:()=>makeCert({title:'登 记 证', subtitle:'UNIFIED SOCIAL CREDIT CODE', accent:'#a273ff', rows:[['统一社会信用代码','5310 0000 5XXXX XX1A'],['名称','星火慈善基金'],['类型','慈善基金会（非营利法人）'],['法定代表人','李星火'],['登记机关','省民政厅'],['登记日期','2021 年 3 月 15 日']], sealLabel:'法人登记章', note:'本件为教学演示样本'})},
+  {cap:{zh:'合作证明 · 星光乡村小学（希望小学）',yue:'合作證明 · 星光鄉村小學（希望小學）',en:'Partnership · Starlight Village School (Hope School)'}, sub:{zh:'结对帮扶',yue:'結對幫扶',en:'Paired support'}, svg:()=>makePartner({partner:'星光乡村小学（希望小学）', kind:'希望小学结对帮扶', items:['每年为全校学生提供过冬棉衣与鞋子','资助校舍图书室与冬季取暖设备','建立留守儿童一对一关爱档案'], date:'2022 年 9 月 1 日'})},
+  {cap:{zh:'合作证明 · 暖阳敬老院',yue:'合作證明 · 暖陽敬老院',en:'Partnership · Warm Sun Elder Home'}, sub:{zh:'孤寡老人慰问',yue:'孤寡老人慰問',en:'Comfort for lonely elders'}, svg:()=>makePartner({partner:'暖阳敬老院', kind:'孤寡老人定期慰问', items:['每月上门送米油、药品与热餐','节假日组织志愿者陪伴探访','为失能老人提供应急救助金'], date:'2023 年 1 月 10 日'})},
+  {cap:{zh:'第三方年度审计报告',yue:'第三方年度審計報告',en:'Third-Party Annual Audit'}, sub:{zh:'财务公开透明',yue:'財務公開透明',en:'Transparent finances'}, svg:()=>makeCert({title:'年度审计报告', subtitle:'INDEPENDENT AUDIT SUMMARY', accent:'#f6a51d', rows:[['报告年度','2024 年度'],['全年收到捐赠','¥ 1,286,400'],['全年公益支出','¥ 1,030,000'],['管理费用占比','3.8%（＜10% 上限）'],['审计意见','标准无保留意见'],['出具机构','XX 会计师事务所']], sealLabel:'会计师事务所', note:'本件为教学演示样本'})},
 ];
+function dl(o){ return o[LANG]||o.zh; }
 function renderDocs(){
   document.getElementById('docGrid').innerHTML=DOCS.map((d,i)=>`
-    <div class="doc" role="button" tabindex="0" aria-label="${d.cap}，点击放大" onclick="openDoc(${i})" onkeydown="if(event.key==='Enter')openDoc(${i})">
+    <div class="doc" role="button" tabindex="0" aria-label="${dl(d.cap)}" onclick="openDoc(${i})" onkeydown="if(event.key==='Enter')openDoc(${i})">
       ${d.svg()}
-      <div class="doccap">${d.cap}<small>${d.sub} · 点击放大</small></div>
+      <div class="doccap">${dl(d.cap)}<small>${dl(d.sub)} · ${t('doc.zoom')}</small></div>
     </div>`).join('');
 }
-function openDoc(i){ document.getElementById('docTitle').textContent=DOCS[i].cap; document.getElementById('docBig').innerHTML=DOCS[i].svg(); document.getElementById('docOverlay').classList.add('show'); }
+function openDoc(i){ document.getElementById('docTitle').textContent=dl(DOCS[i].cap); document.getElementById('docBig').innerHTML=DOCS[i].svg(); document.getElementById('docOverlay').classList.add('show'); }
 document.getElementById('closeDocBtn').onclick=()=>document.getElementById('docOverlay').classList.remove('show');
 document.getElementById('docOverlay').onclick=e=>{ if(e.target.id==='docOverlay')e.currentTarget.classList.remove('show'); };
 
@@ -666,21 +996,21 @@ function toast(msg){ const t=document.getElementById('toast');t.textContent=msg;
 /* ===================== 支付 + 二维码 ===================== */
 function renderPayGrid(){
   document.getElementById('payGrid').innerHTML=PAY_METHODS.map(m=>`
-    <div class="pay" role="button" tabindex="0" aria-label="使用${m.name}付款" onclick="openPay('${m.id}')" onkeydown="if(event.key==='Enter')openPay('${m.id}')"><div class="ic" style="background:${m.color}">${m.ic}</div>
-    <div class="nm">${m.name}<small>${m.sub}</small><small style="color:#c2724a">${m.lim}</small></div></div>`).join('');
+    <div class="pay" role="button" tabindex="0" aria-label="${m.name}" onclick="openPay('${m.id}')" onkeydown="if(event.key==='Enter')openPay('${m.id}')"><div class="ic" style="background:${m.color}">${m.ic}</div>
+    <div class="nm">${m.name}<small>${tr(m.sub)}</small><small style="color:#c2724a">${tr(m.lim)}</small></div></div>`).join('');
 }
 let payCtx=null, lastCert=null;
 function openPay(methodId){
   const name=document.getElementById('dName').value.trim()||'匿名';
   const amount=Math.floor(+document.getElementById('dAmount').value);
   const purpose=document.getElementById('dPurpose').value;
-  if(!amount||amount<=0){ toast('请先输入有效金额'); return; }
+  if(!amount||amount<=0){ toast(t('t.needAmt')); return; }
   const m=methodById(methodId), orderNo='SP'+Date.now().toString().slice(-9);
   payCtx={name,amount,purpose,method:m,orderNo};
-  document.getElementById('payTitle').textContent=`${m.name} 付款`;
+  document.getElementById('payTitle').textContent=t('pay.title',{m:m.name});
   document.getElementById('payAmt').textContent='¥'+amount.toLocaleString();
-  document.getElementById('payOrder').textContent='订单号 '+orderNo;
-  document.getElementById('payLimit').textContent='单笔限额提示（示意）：'+m.lim;
+  document.getElementById('payOrder').textContent=t('pay.order',{o:orderNo});
+  document.getElementById('payLimit').textContent=t('pay.limit',{l:tr(m.lim)});
   const payload=`SPARKCHARITY|${m.name}|¥${amount}|order:${orderNo}|用途:${purpose}|星火慈善基金`;
   const box=document.getElementById('qrbox'); box.innerHTML='';
   try{ if(typeof QRCode!=='undefined'){ new QRCode(box,{text:payload,width:184,height:184,colorDark:'#4a3528',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M}); } else throw 0; }
@@ -699,21 +1029,22 @@ document.getElementById('confirmPayBtn').onclick=()=>{
   const {block,nonce}=chain.addTxBlock([tx]);
   document.getElementById('payOverlay').classList.remove('show');
   let subMsg='';
-  if(subAll) subMsg=' · 已订阅全基金拨款通知';
-  else if(subProject) subMsg=` · 已订阅「${payCtx.purpose}」拨款通知`;
-  document.getElementById('mineTip').textContent=`✅ 支付回调已确认并上链! 区块 #${block.index} · 渠道 ${payCtx.method.name} · 收据号 ${rc} · 挖矿 ${nonce} 次${subMsg}`;
-  lastCert={receipt:rc,from:payCtx.name,amount:payCtx.amount,purpose:payCtx.purpose,method:payCtx.method.name,orderNo:payCtx.orderNo,block:block.index,date:new Date().toLocaleString('zh-CN')};
+  if(subAll) subMsg=t('t.subAllMsg');
+  else if(subProject) subMsg=t('t.subProjMsg',{p:tr(payCtx.purpose)});
+  document.getElementById('mineTip').textContent=t('t.mineTip',{b:block.index,m:payCtx.method.name,r:rc,n:nonce,s:subMsg});
+  lastCert={receipt:rc,from:payCtx.name,amount:payCtx.amount,purpose:payCtx.purpose,method:payCtx.method.name,orderNo:payCtx.orderNo,block:block.index,date:new Date().toLocaleString()};
   showSuccess(lastCert);
+  toast(t('t.paid',{m:payCtx.method.name,n:payCtx.amount.toLocaleString()}));
   payCtx=null; updateHeight(); renderDashboard();
 };
 function showSuccess(c){
   document.getElementById('certBody').innerHTML=`
-    <div class="cert-row"><span>收据编号</span><b>${c.receipt}</b></div>
-    <div class="cert-row"><span>捐赠人</span><b>${escapeHtml(c.from)}</b></div>
-    <div class="cert-row"><span>金额</span><b>¥${c.amount.toLocaleString()}</b></div>
-    <div class="cert-row"><span>指定用途</span><b>${escapeHtml(c.purpose)}</b></div>
-    <div class="cert-row"><span>支付渠道</span><b>${escapeHtml(c.method)}</b></div>
-    <div class="cert-row"><span>上链区块</span><b>#${c.block}</b></div>`;
+    <div class="cert-row"><span>${t('cert.receipt')}</span><b>${c.receipt}</b></div>
+    <div class="cert-row"><span>${t('cert.donor')}</span><b>${escapeHtml(c.from)}</b></div>
+    <div class="cert-row"><span>${t('cert.amount')}</span><b>¥${c.amount.toLocaleString()}</b></div>
+    <div class="cert-row"><span>${t('cert.purpose')}</span><b>${escapeHtml(tr(c.purpose))}</b></div>
+    <div class="cert-row"><span>${t('cert.method')}</span><b>${escapeHtml(c.method)}</b></div>
+    <div class="cert-row"><span>${t('cert.block')}</span><b>#${c.block}</b></div>`;
   document.getElementById('successOverlay').classList.add('show');
   launchConfetti(document.getElementById('successCard'));
 }
@@ -749,49 +1080,55 @@ td{padding:11px 8px;border-bottom:1px dashed #f1e1d0;text-align:left;color:#5a46
 </div></body></html>`;
   const blob=new Blob([html],{type:'text/html;charset=utf-8'}); const url=URL.createObjectURL(blob);
   const a=document.createElement('a'); a.href=url; a.download=`捐赠证书_${c.receipt}.html`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-  toast('捐赠证书已下载 📥');
+  toast(t('t.certDl'));
 }
 document.getElementById('dlCertBtn').onclick=downloadCert;
 document.getElementById('closeSuccBtn').onclick=()=>document.getElementById('successOverlay').classList.remove('show');
 document.getElementById('successOverlay').onclick=e=>{ if(e.target.id==='successOverlay')e.currentTarget.classList.remove('show'); };
 
 /* ===================== 物资 - 送达登记 ===================== */
-function fillCats(){ document.getElementById('kCat').innerHTML=['食品/饮用水','衣物','床上用品/毛毯','婴幼儿用品','医疗/卫生用品','学习用品','其他'].map(c=>`<option>${c}</option>`).join(''); }
-function fillPuTypes(){ document.getElementById('puType').innerHTML=['旧衣物','旧鞋子','旧家具','旧书籍','旧家电','母婴旧物','其他'].map(c=>`<option>${c}</option>`).join(''); }
+const CATS=['食品/饮用水','衣物','床上用品/毛毯','婴幼儿用品','医疗/卫生用品','学习用品','其他'];
+const PUTYPES=['旧衣物','旧鞋子','旧家具','旧书籍','旧家电','母婴旧物','其他'];
+const SLOTS=['上午 9:00-12:00','下午 13:00-17:00','晚间 18:00-20:00'];
+const PURPOSES=['不指定，由基金会统筹','山区留守儿童救助','事实孤儿救助','孤寡老人慰问','乡村应急备灾','生命救援助力'];
+function optsKeep(sel,list){ const cur=sel.value; sel.innerHTML=list.map(v=>`<option value="${v}">${tr(v)}</option>`).join(''); if(cur)sel.value=cur; }
+function fillCats(){ optsKeep(document.getElementById('kCat'),CATS); }
+function fillPuTypes(){ optsKeep(document.getElementById('puType'),PUTYPES); }
+function fillSlots(){ optsKeep(document.getElementById('puSlot'),SLOTS); }
+function fillPurposes(){ optsKeep(document.getElementById('dPurpose'),PURPOSES); }
 document.getElementById('inkindBtn').onclick=()=>{
   const donor=document.getElementById('kDonor').value.trim(), item=document.getElementById('kItem').value.trim();
   const cat=document.getElementById('kCat').value, qty=Math.floor(+document.getElementById('kQty').value);
   const unit=document.getElementById('kUnit').value.trim()||'件', estValue=Math.floor(+document.getElementById('kVal').value)||0;
   const note=document.getElementById('kNote').value.trim(), tip=document.getElementById('inkindTip');
-  if(!donor||!item||!qty){ tip.style.color='var(--red)'; tip.textContent='❌ 请填写捐赠人、物资名称与数量'; return; }
+  if(!donor||!item||!qty){ tip.style.color='var(--red)'; tip.textContent=t('t.inkindNeed'); return; }
   const id=txid('IK');
   const {block}=chain.addTxBlock([{id,type:'inkind',donor,item,category:cat,qty,unit,estValue,note,source:'收货点登记'}]);
-  tip.style.color='var(--green)'; tip.textContent=`✅ 已登记上链! 物资编号 ${id} · 区块 #${block.index}`;
-  toast(`物资「${item} ×${qty}${unit}」已登记上链`); updateHeight(); renderInkind(); renderDashboard();
+  tip.style.color='var(--green)'; tip.textContent=t('t.inkindRegOk',{id,b:block.index});
+  toast(t('t.inkindReg',{i:item,q:qty,u:unit})); updateHeight(); renderInkind(); renderDashboard();
 };
 function advanceInkind(refId){
   const cur=inkindStatus(refId), idx=INKIND_STATES.indexOf(cur);
-  if(idx>=INKIND_STATES.length-1){ toast('该物资已发放，流程结束'); return; }
+  if(idx>=INKIND_STATES.length-1){ toast(t('t.stDone')); return; }
   const next=INKIND_STATES[idx+1];
   chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId,status:next}]);
-  toast(`物资 ${refId} 状态更新为「${next}」并上链`); updateHeight(); renderInkind(); renderDashboard();
+  toast(t('t.stUpd',{id:refId,s:tr(next)})); updateHeight(); renderInkind(); renderDashboard();
 }
-// 直接设为任意目标状态（支持退回 / 跳过），同样上链可追溯
 function setInkindStatus(refId,status){
   if(!status)return;
-  if(inkindStatus(refId)===status){ toast('状态未变化'); return; }
+  if(inkindStatus(refId)===status){ toast(t('t.stNoChange')); return; }
   chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId,status}]);
-  toast(`物资 ${refId} 状态已设为「${status}」并上链`); updateHeight(); renderInkind(); renderDashboard();
+  toast(t('t.stSet',{id:refId,s:tr(status)})); updateHeight(); renderInkind(); renderDashboard();
 }
 function renderInkind(){
   const tb=document.querySelector('#inkindTable tbody'), items=inkindItems();
-  if(!items.length){ tb.innerHTML='<tr><td class="sub">暂无物资登记。</td></tr>'; return; }
-  tb.innerHTML=items.slice().reverse().map(t=>{ const st=inkindStatus(t.id), done=st===INKIND_STATES[2];
-    const opts=INKIND_STATES.map(s=>`<option ${s===st?'selected':''}>${s}</option>`).join('');
-    return `<tr><td><b>${escapeHtml(t.item)}</b> ×${t.qty}${escapeHtml(t.unit)}<div class="kv">${escapeHtml(t.category)} · ${escapeHtml(t.donor)} · 估值¥${(t.estValue||0).toLocaleString()} · ${escapeHtml(t.source||'')} · ${t.id}</div></td>
-      <td><span class="pill ${done?'ok':'pend'}">${st}</span></td>
-      <td>${done?'':`<button class="btn sm purple" onclick="advanceInkind('${t.id}')">推进 ▶</button>`}
-        <select class="stsel" aria-label="设置物资状态" onchange="setInkindStatus('${t.id}',this.value)"><option value="">设为…</option>${opts}</select></td></tr>`;
+  if(!items.length){ tb.innerHTML=`<tr><td class="sub">${t('ink.none')}</td></tr>`; return; }
+  tb.innerHTML=items.slice().reverse().map(it=>{ const st=inkindStatus(it.id), done=st===INKIND_STATES[2];
+    const opts=INKIND_STATES.map(s=>`<option value="${s}" ${s===st?'selected':''}>${tr(s)}</option>`).join('');
+    return `<tr><td><b>${escapeHtml(it.item)}</b> ×${it.qty}${escapeHtml(it.unit)}<div class="kv">${escapeHtml(tr(it.category))} · ${escapeHtml(it.donor)} · ${t('exp.est')}¥${(it.estValue||0).toLocaleString()} · ${it.id}</div></td>
+      <td><span class="pill ${done?'ok':'pend'}">${tr(st)}</span></td>
+      <td>${done?'':`<button class="btn sm purple" onclick="advanceInkind('${it.id}')">${t('ink.advance')}</button>`}
+        <select class="stsel" onchange="setInkindStatus('${it.id}',this.value)"><option value="">${t('ink.setto')}</option>${opts}</select></td></tr>`;
   }).join('');
 }
 
@@ -813,40 +1150,40 @@ document.getElementById('pickupBtn').onclick=()=>{
   const date=document.getElementById('puDate').value, slot=document.getElementById('puSlot').value;
   const addr=document.getElementById('puAddr').value.trim(), fee=document.getElementById('puFee').checked;
   const tip=document.getElementById('pickupTip');
-  if(!name||!phone||!desc||!addr){ tip.style.color='var(--red)'; tip.textContent='❌ 请填写联系人、电话、描述与地址'; return; }
-  if(!fee){ tip.style.color='var(--red)'; tip.textContent='❌ 需勾选同意「运费由捐赠人自付」'; return; }
+  if(!name||!phone||!desc||!addr){ tip.style.color='var(--red)'; tip.textContent=t('t.puNeed'); return; }
+  if(!fee){ tip.style.color='var(--red)'; tip.textContent=t('t.puFee'); return; }
   const id=txid('PU');
   pendingPickups.push({id,name,phone,type,desc,img:puImgData,date:date||'待定',slot,addr,status:'待审核'});
-  tip.style.color='var(--green)'; tip.textContent=`✅ 申请已提交 (编号 ${id})，等待审核人员评估物资照片。`;
-  toast('上门取件申请已提交，待审核 🚚');
+  tip.style.color='var(--green)'; tip.textContent=t('t.puOk',{id});
+  toast(t('t.puSubmitted'));
   puImgData=null; document.getElementById('puPreview').innerHTML=''; document.getElementById('puImg').value='';
   renderPickups();
 };
 function approvePickup(id){
   const p=pendingPickups.find(x=>x.id===id); if(!p)return;
-  p.status='审核通过·已安排快递'; toast(`已审核通过，安排快递于 ${p.date} ${p.slot} 上门取件`); renderPickups();
+  p.status='审核通过·已安排快递'; toast(t('t.puApproved',{d:p.date,s:tr(p.slot)})); renderPickups();
 }
-function rejectPickup(id){ pendingPickups=pendingPickups.filter(x=>x.id!==id); toast('已婉拒该申请'); renderPickups(); }
+function rejectPickup(id){ pendingPickups=pendingPickups.filter(x=>x.id!==id); toast(t('t.puReject')); renderPickups(); }
 function receivePickup(id){
   const p=pendingPickups.find(x=>x.id===id); if(!p)return;
   const ikid=txid('IK');
-  chain.addTxBlock([{id:ikid,type:'inkind',donor:p.name,item:p.type+'（'+p.desc+'）',category:p.type,qty:1,unit:'批',estValue:0,note:'上门取件·运费自付',source:'上门取件 '+p.id}]);
+  chain.addTxBlock([{id:ikid,type:'inkind',donor:p.name,item:tr(p.type)+'（'+p.desc+'）',category:p.type,qty:1,unit:'批',estValue:0,note:'上门取件·运费自付',source:'上门取件 '+p.id}]);
   pendingPickups=pendingPickups.filter(x=>x.id!==id);
-  toast(`快递已取件入库，物资 ${ikid} 上链 📦`); updateHeight(); renderPickups(); renderInkind(); renderDashboard();
+  toast(t('t.puReceived',{id:ikid})); updateHeight(); renderPickups(); renderInkind(); renderDashboard();
 }
 function renderPickups(){
   const box=document.getElementById('pickupList');
-  if(!pendingPickups.length){ box.innerHTML='<p class="sub" style="margin:0">暂无取件申请。</p>'; return; }
+  if(!pendingPickups.length){ box.innerHTML=`<p class="sub" style="margin:0">${t('pick.none')}</p>`; return; }
   box.innerHTML=pendingPickups.map(p=>{
     let actions='';
-    if(p.status==='待审核') actions=`<button class="btn sm green" onclick="approvePickup('${p.id}')">✔ 审核通过·安排快递</button> <button class="btn sm ghost" onclick="rejectPickup('${p.id}')">婉拒</button>`;
-    else actions=`<button class="btn sm purple" onclick="receivePickup('${p.id}')">📦 确认取件入库并上链</button>`;
+    if(p.status==='待审核') actions=`<button class="btn sm green" onclick="approvePickup('${p.id}')">${t('pick.approveBtn')}</button> <button class="btn sm ghost" onclick="rejectPickup('${p.id}')">${t('pick.rejectBtn')}</button>`;
+    else actions=`<button class="btn sm purple" onclick="receivePickup('${p.id}')">${t('pick.receiveBtn')}</button>`;
     return `<div class="card" style="margin-bottom:10px;padding:14px">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>${escapeHtml(p.type)} · ${p.id}</b><span class="pill ${p.status==='待审核'?'pend':'ok'}">${p.status}</span></div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>${escapeHtml(tr(p.type))} · ${p.id}</b><span class="pill ${p.status==='待审核'?'pend':'ok'}">${tr(p.status)}</span></div>
       <div class="kv">${escapeHtml(p.desc)}</div>
-      <div class="kv">${escapeHtml(p.name)} · ${escapeHtml(p.phone)} · ${escapeHtml(p.date)} ${escapeHtml(p.slot)}</div>
-      <div class="kv">📍 ${escapeHtml(p.addr)} · 运费自付</div>
-      ${p.img?`<img class="puimg" src="${p.img}">`:'<div class="kv">（未上传照片）</div>'}
+      <div class="kv">${escapeHtml(p.name)} · ${escapeHtml(p.phone)} · ${escapeHtml(p.date)} ${escapeHtml(tr(p.slot))}</div>
+      <div class="kv">📍 ${escapeHtml(p.addr)} · ${t('pick.feeself')}</div>
+      ${p.img?`<img class="puimg" src="${p.img}">`:`<div class="kv">${t('pick.noimg')}</div>`}
       <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">${actions}</div>
     </div>`;
   }).join('');
@@ -856,13 +1193,13 @@ function renderPickups(){
 document.getElementById('proposeBtn').onclick=()=>{
   const project=document.getElementById('pProject').value.trim(), amount=Math.floor(+document.getElementById('pAmount').value);
   const reason=document.getElementById('pReason').value.trim(), projectTag=document.getElementById('pProjectTag').value, tip=document.getElementById('proposeTip');
-  if(!project||!reason){ toast('请填写受款项目与用途'); return; }
-  if(!amount||amount<=0){ toast('请输入有效金额'); return; }
-  if(amount>balance()){ tip.style.color='var(--red)'; tip.textContent=`❌ 超出资金池余额 (¥${balance().toLocaleString()})，合约拒绝。`; return; }
+  if(!project||!reason){ toast(t('t.proposeNeed')); return; }
+  if(!amount||amount<=0){ toast(t('t.proposeAmt')); return; }
+  if(amount>balance()){ tip.style.color='var(--red)'; tip.textContent=t('t.proposeOver',{b:balance().toLocaleString()}); return; }
   const req=approvalReq(amount);
   pendingProposals.push({id:txid(),project,amount,reason,projectTag,signersDir:[],signersRep:[]});
   tip.style.color='var(--green)';
-  tip.textContent=`📝 已发起。门槛：${req.tier}。`; toast('拨款申请已提交，待审批'); renderPending();
+  tip.textContent=t('t.proposeOk',{t:tierText(req)}); toast(t('t.proposeToast')); renderPending();
 };
 function sign(propId,person,group){
   const p=pendingProposals.find(x=>x.id===propId); if(!p)return;
@@ -873,41 +1210,41 @@ function sign(propId,person,group){
   if(p.signersDir.length>=req.dir && p.signersRep.length>=req.rep){
     const {block}=chain.addTxBlock([{id:p.id,type:'disbursement',project:p.project,amount:p.amount,reason:p.reason,projectTag:p.projectTag,approvedBy:[...p.signersDir,...p.signersRep]}]);
     pendingProposals=pendingProposals.filter(x=>x.id!==p.id);
-    toast(`✅ 审批通过！拨款 ¥${p.amount.toLocaleString()} 已上链 (区块 #${block.index})`);
+    toast(t('t.approved',{n:p.amount.toLocaleString(),b:block.index}));
     notifySubscribers(p.projectTag,p.amount,p.project);
     updateHeight(); renderDashboard();
-  } else toast(`${person} 已签名（理事 ${p.signersDir.length}/${req.dir} · 代表 ${p.signersRep.length}/${req.rep}）`);
+  } else toast(t('t.signed',{a:person,dd:p.signersDir.length,dr:req.dir,rr:p.signersRep.length,rq:req.rep}));
   renderPending();
 }
 function renderPending(){
   const box=document.getElementById('pendingList');
-  if(!pendingProposals.length){ box.innerHTML='<p class="sub" style="margin:0">暂无待审批申请。</p>'; return; }
+  if(!pendingProposals.length){ box.innerHTML=`<p class="sub" style="margin:0">${t('dis.pending.none')}</p>`; return; }
   box.innerHTML=pendingProposals.map(p=>{
     const req=approvalReq(p.amount);
     const dirChips=APPROVERS_DIR.map(a=>{const s=p.signersDir.includes(a);return `<span class="ap ${s?'signed':''}" ${s?'':`onclick="sign('${p.id}','${a}','dir')"`}>${s?'✔ ':''}${a}</span>`;}).join('');
     const repChips=APPROVERS_REP.map(a=>{const s=p.signersRep.includes(a);return `<span class="ap ${s?'signed':''}" ${s?'':`onclick="sign('${p.id}','${a}','rep')"`}>${s?'✔ ':''}${a}</span>`;}).join('');
     return `<div class="card" style="margin-bottom:10px;padding:14px">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>${escapeHtml(p.project)}</b><span class="pill pend">需 ${req.dir}理事 + ${req.rep}代表</span></div>
-      <div class="kv">金额 ¥${p.amount.toLocaleString()} · 用途：${escapeHtml(p.reason)} · 服务项目：${escapeHtml(p.projectTag||'统筹')}</div>
-      <div class="kv" style="color:var(--brand2);margin-top:6px">审批门槛：${req.tier}</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:9px;font-weight:700">理事会（${p.signersDir.length}/${req.dir}）</div>
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b>${escapeHtml(p.project)}</b><span class="pill pend">${t('pend.need',{d:req.dir,r:req.rep})}</span></div>
+      <div class="kv">${t('pend.amount')} ¥${p.amount.toLocaleString()} · ${t('pend.purpose')}：${escapeHtml(p.reason)} · ${t('pend.serve')}：${escapeHtml(tr(p.projectTag||'统筹'))}</div>
+      <div class="kv" style="color:var(--brand2);margin-top:6px">${t('pend.threshold')}：${tierText(req)}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:9px;font-weight:700">${t('pend.board')}（${p.signersDir.length}/${req.dir}）</div>
       <div class="approvers">${dirChips}</div>
-      <div style="font-size:12px;color:var(--muted);margin-top:9px;font-weight:700">捐赠人代表（${p.signersRep.length}/${req.rep}）</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:9px;font-weight:700">${t('pend.reps')}（${p.signersRep.length}/${req.rep}）</div>
       <div class="approvers">${repChips}</div>
     </div>`;
   }).join('');
 }
 function notifySubscribers(projectTag,amount,project){
-  const dons=allTx().filter(t=>t.type==='donation');
+  const dons=allTx().filter(x=>x.type==='donation');
   const recip=dons.filter(d=> d.subAll || (d.subProject && d.purpose===projectTag));
   const count=new Set(recip.map(d=>d.contact||d.from)).size;
   notifications.unshift({time:new Date().toISOString().replace('T',' ').slice(0,19),projectTag:projectTag||'统筹',amount,project,count});
-  if(count>0) toast(`📢 已向 ${count} 位订阅者推送本次拨款通知`);
+  if(count>0) toast(t('t.notified',{n:count}));
   renderNotifications();
 }
 function renderNotifications(){
   const box=document.getElementById('notifyLog'); if(!box)return;
-  box.innerHTML=notifications.length?notifications.map(n=>`<div class="kv" style="padding:9px 0;border-bottom:1px solid var(--line)">📢 「<b>${escapeHtml(n.projectTag)}</b>」拨款 ¥${n.amount.toLocaleString()} 给 ${escapeHtml(n.project)} → 已通知 <b style="color:var(--brand2)">${n.count}</b> 位订阅者 <span style="color:var(--muted)">· ${n.time}</span></div>`).join(''):'<p class="sub" style="margin:0">暂无通知记录。</p>';
+  box.innerHTML=notifications.length?notifications.map(n=>`<div class="kv" style="padding:9px 0;border-bottom:1px solid var(--line)">${t('notify.line',{tag:escapeHtml(tr(n.projectTag)),amt:n.amount.toLocaleString(),proj:escapeHtml(n.project),cnt:n.count,time:n.time})}</div>`).join(''):`<p class="sub" style="margin:0">${t('dis.notify.none')}</p>`;
 }
 
 /* ===================== 派生统计 ===================== */
@@ -926,35 +1263,35 @@ function renderDashboard(){
   const ec=document.getElementById('emptyCta');
   if(ec) ec.style.display = allTx().filter(t=>t.type!=='inkind_status').length ? 'none' : 'flex';
   document.getElementById('kRaised').textContent=yuan(totalRaised());
-  document.getElementById('kRaisedCnt').textContent=allTx().filter(t=>t.type==='donation').length+' 笔';
+  document.getElementById('kRaisedCnt').textContent=allTx().filter(x=>x.type==='donation').length+' '+t('unit.cnt');
   document.getElementById('kDisbursed').textContent=yuan(totalDisbursed());
   document.getElementById('kBalance').textContent=yuan(balance());
   document.getElementById('kInkind').textContent=yuan(inkindValue());
-  document.getElementById('kInkindCnt').textContent=inkindItems().length+' 件';
+  document.getElementById('kInkindCnt').textContent=inkindItems().length+' '+t('unit.pcs');
   document.getElementById('kTx').textContent=allTx().length;
   const tb=document.querySelector('#feedTable tbody');
-  const tx=allTx().filter(t=>t.type!=='inkind_status').slice().reverse();
-  tb.innerHTML=tx.length?tx.map(t=>{
-    if(t.type==='donation')return `<tr><td><span class="pill don">捐款</span></td><td>${escapeHtml(t.from)}<div class="kv">${escapeHtml(t.methodName||'')} · ${t.receipt||''}</div></td><td style="font-weight:800;color:var(--green)">+${yuan(t.amount)}</td><td class="kv">区块 #${t.blockIndex} · ${t.timestamp}</td></tr>`;
-    if(t.type==='disbursement')return `<tr><td><span class="pill dis">拨款</span></td><td>${escapeHtml(t.project)}</td><td style="font-weight:800;color:#2563eb">−${yuan(t.amount)}</td><td class="kv">区块 #${t.blockIndex} · ${t.timestamp}</td></tr>`;
-    if(t.type==='inkind')return `<tr><td><span class="pill ink">物资</span></td><td>${escapeHtml(t.item)} ×${t.qty}${escapeHtml(t.unit)}<div class="kv">${escapeHtml(t.donor)}</div></td><td style="font-weight:800;color:var(--purple)">≈${yuan(t.estValue)}</td><td class="kv">区块 #${t.blockIndex} · ${t.timestamp}</td></tr>`;
+  const tx=allTx().filter(x=>x.type!=='inkind_status').slice().reverse();
+  tb.innerHTML=tx.length?tx.map(x=>{
+    if(x.type==='donation')return `<tr><td><span class="pill don">${t('pill.donation')}</span></td><td>${escapeHtml(x.from)}<div class="kv">${escapeHtml(x.methodName||'')} · ${x.receipt||''}</div></td><td style="font-weight:800;color:var(--green)">+${yuan(x.amount)}</td><td class="kv">${t('exp.blockword')} #${x.blockIndex} · ${x.timestamp}</td></tr>`;
+    if(x.type==='disbursement')return `<tr><td><span class="pill dis">${t('pill.disbursement')}</span></td><td>${escapeHtml(x.project)}</td><td style="font-weight:800;color:#2563eb">−${yuan(x.amount)}</td><td class="kv">${t('exp.blockword')} #${x.blockIndex} · ${x.timestamp}</td></tr>`;
+    if(x.type==='inkind')return `<tr><td><span class="pill ink">${t('pill.inkind')}</span></td><td>${escapeHtml(x.item)} ×${x.qty}${escapeHtml(x.unit)}<div class="kv">${escapeHtml(x.donor)}</div></td><td style="font-weight:800;color:var(--purple)">≈${yuan(x.estValue)}</td><td class="kv">${t('exp.blockword')} #${x.blockIndex} · ${x.timestamp}</td></tr>`;
     return '';
-  }).join(''):'<tr><td class="sub">暂无交易，去捐一笔吧。</td></tr>';
-  const byProj={}; allTx().filter(t=>t.type==='disbursement').forEach(t=>{const k=t.projectTag||'统筹/未指定';byProj[k]=(byProj[k]||0)+t.amount;});
-  const undis=balance(); const pl=Object.keys(byProj).concat(undis>0?['未拨付(资金池)']:[]); const pd=Object.values(byProj).concat(undis>0?[undis]:[]);
-  drawDoughnut('pie',pieChart,pl.length?pl:['暂无'],pd.length?pd:[1],['#3b82f6','#27b97a','#f6a51d','#ff7a45','#a273ff','#ff6f9c','#22bdbf'],c=>pieChart=c);
-  const byChan={}; allTx().filter(t=>t.type==='donation').forEach(t=>{ const n=t.methodName||'其他'; byChan[n]=(byChan[n]||0)+t.amount; });
+  }).join(''):`<tr><td class="sub">${t('feed.none')}</td></tr>`;
+  const byProj={}; allTx().filter(x=>x.type==='disbursement').forEach(x=>{const k=x.projectTag||'统筹/未指定';byProj[k]=(byProj[k]||0)+x.amount;});
+  const undis=balance(); const pl=Object.keys(byProj).map(k=>tr(k)).concat(undis>0?[tr('未拨付(资金池)')]:[]); const pd=Object.values(byProj).concat(undis>0?[undis]:[]);
+  drawDoughnut('pie',pieChart,pl.length?pl:['—'],pd.length?pd:[1],['#3b82f6','#27b97a','#f6a51d','#ff7a45','#a273ff','#ff6f9c','#22bdbf'],c=>pieChart=c);
+  const byChan={}; allTx().filter(x=>x.type==='donation').forEach(x=>{ const n=x.methodName||'其他'; byChan[n]=(byChan[n]||0)+x.amount; });
   const cl=Object.keys(byChan), cd=Object.values(byChan);
-  drawDoughnut('chan',chanChart,cl.length?cl:['暂无'],cd.length?cd:[1],['#1aad19','#1677ff','#e21836','#006fcf','#f59e0b','#d81b60','#64748b','#a273ff'],c=>chanChart=c);
+  drawDoughnut('chan',chanChart,cl.length?cl:['—'],cd.length?cd:[1],['#1aad19','#1677ff','#e21836','#006fcf','#f59e0b','#d81b60','#64748b','#a273ff'],c=>chanChart=c);
   if(typeof Chart==='undefined'){ markNoChart('bar'); }
   else{ if(barChart)barChart.destroy();
-    barChart=new Chart(document.getElementById('bar'),{type:'bar',data:{labels:['现金募集','已拨付','资金池余额'],datasets:[{data:[totalRaised(),totalDisbursed(),balance()],backgroundColor:['#27b97a','#3b82f6','#f6a51d'],borderRadius:8}]},options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#a48c79'},grid:{display:false}},y:{ticks:{color:'#a48c79'},grid:{color:'#f1e1d0'}}}}});
+    barChart=new Chart(document.getElementById('bar'),{type:'bar',data:{labels:[t('bar.raised'),t('bar.disbursed'),t('bar.balance')],datasets:[{data:[totalRaised(),totalDisbursed(),balance()],backgroundColor:['#27b97a','#3b82f6','#f6a51d'],borderRadius:8}]},options:{plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#a48c79'},grid:{display:false}},y:{ticks:{color:'#a48c79'},grid:{color:'#f1e1d0'}}}}});
   }
 }
 function markNoChart(id){
   const cv=document.getElementById(id); if(!cv)return;
   cv.style.display='none';
-  if(!cv.parentNode.querySelector('.chart-fallback')){ const d=document.createElement('div'); d.className='chart-fallback'; d.textContent='图表库未能加载（可能离线），数据仍可在「最新链上动态」与区块链浏览器中查看。'; cv.parentNode.appendChild(d); }
+  if(!cv.parentNode.querySelector('.chart-fallback')){ const d=document.createElement('div'); d.className='chart-fallback'; d.textContent=t('chart.fallback'); cv.parentNode.appendChild(d); }
 }
 function drawDoughnut(id,prev,labels,data,colors,store){
   if(typeof Chart==='undefined'){ markNoChart(id); return; }
@@ -965,34 +1302,34 @@ function drawDoughnut(id,prev,labels,data,colors,store){
 
 /* ===================== 浏览器 + 篡改 ===================== */
 function renderChain(){
-  const wrap=document.getElementById('chainView');
+  const wrap=document.getElementById('chainView'); if(!wrap)return;
   wrap.innerHTML=chain.blocks.map((b,i)=>{
-    const txHtml=b.transactions.map(t=>{
-      if(t.type==='donation')return `<div class="kv"><span class="pill don">捐款</span> ${escapeHtml(t.from)} 捐 ${yuan(t.amount)} 经 ${escapeHtml(t.methodName||'')}（用途：${escapeHtml(t.purpose)}）· 收据 ${t.receipt||''}</div>`;
-      if(t.type==='disbursement')return `<div class="kv"><span class="pill dis">拨款</span> ${yuan(t.amount)} → ${escapeHtml(t.project)}（${escapeHtml(t.reason)}）· 服务项目：${escapeHtml(t.projectTag||'统筹')} · 签名：${(t.approvedBy||[]).join('、')}</div>`;
-      if(t.type==='inkind')return `<div class="kv"><span class="pill ink">物资</span> ${escapeHtml(t.donor)} 捐 ${escapeHtml(t.item)} ×${t.qty}${escapeHtml(t.unit)}（${escapeHtml(t.category)}，估值${yuan(t.estValue)}）· ${escapeHtml(t.source||'')} · ${t.id}</div>`;
-      if(t.type==='inkind_status')return `<div class="kv"><span class="pill ink">物资状态</span> ${t.refId} → ${escapeHtml(t.status)}</div>`;
-      return `<div class="kv">⛓️ ${escapeHtml(t.note||'系统交易')}</div>`;
+    const txHtml=b.transactions.map(x=>{
+      if(x.type==='donation')return `<div class="kv"><span class="pill don">${t('pill.donation')}</span> ${escapeHtml(x.from)} ${t('exp.verb.donate')} ${yuan(x.amount)} ${t('exp.via')} ${escapeHtml(x.methodName||'')}（${t('exp.purpose')}：${escapeHtml(tr(x.purpose))}）· ${t('exp.receipt')} ${x.receipt||''}</div>`;
+      if(x.type==='disbursement')return `<div class="kv"><span class="pill dis">${t('pill.disbursement')}</span> ${yuan(x.amount)} → ${escapeHtml(x.project)}（${escapeHtml(x.reason)}）· ${t('exp.serve')}：${escapeHtml(tr(x.projectTag||'统筹'))} · ${t('exp.sign')}：${(x.approvedBy||[]).join('、')}</div>`;
+      if(x.type==='inkind')return `<div class="kv"><span class="pill ink">${t('pill.inkind')}</span> ${escapeHtml(x.donor)} ${t('exp.verb.donate')} ${escapeHtml(x.item)} ×${x.qty}${escapeHtml(x.unit)}（${escapeHtml(tr(x.category))}，${t('exp.est')}${yuan(x.estValue)}）· ${x.id}</div>`;
+      if(x.type==='inkind_status')return `<div class="kv"><span class="pill ink">${t('pill.inkindStatus')}</span> ${x.refId} → ${escapeHtml(tr(x.status))}</div>`;
+      return `<div class="kv">⛓️ ${escapeHtml(x.note||t('exp.systx'))}</div>`;
     }).join('');
-    const donation=b.transactions.find(t=>t.type==='donation');
-    const editBox=donation?`<div style="margin-top:10px"><label style="margin-top:6px">✏️ 篡改这笔捐款金额（试试看，然后去验证）</label>
-      <div style="display:flex;gap:8px"><input type="number" value="${donation.amount}" id="edit-${i}" style="max-width:160px"><button class="btn sm danger" onclick="tamperBlock(${i})">改写数据</button></div></div>`:'';
+    const donation=b.transactions.find(x=>x.type==='donation');
+    const editBox=donation?`<div style="margin-top:10px"><label style="margin-top:6px">${t('exp.tamperlabel')}</label>
+      <div style="display:flex;gap:8px"><input type="number" value="${donation.amount}" id="edit-${i}" style="max-width:160px"><button class="btn sm danger" onclick="tamperBlock(${i})">${t('exp.rewrite')}</button></div></div>`:'';
     return `${i>0?'<div class="chain-link">🔗</div>':''}
-    <div class="block" id="blk-${i}"><div class="bhead"><span class="bidx">区块 #${b.index}${i===0?' · 创世区块':''}</span><span class="kv">${b.timestamp} · nonce ${b.nonce}</span></div>
-    ${txHtml}<div class="kv" style="margin-top:8px">prevHash：<span class="hash">${b.prevHash}</span></div><div class="kv">本块 hash：<span class="hash">${b.hash}</span></div>${editBox}</div>`;
+    <div class="block" id="blk-${i}"><div class="bhead"><span class="bidx">${t('exp.blockword')} #${b.index}${i===0?t('exp.genesis'):''}</span><span class="kv">${b.timestamp} · nonce ${b.nonce}</span></div>
+    ${txHtml}<div class="kv" style="margin-top:8px">prevHash：<span class="hash">${b.prevHash}</span></div><div class="kv">${t('exp.thishash')}：<span class="hash">${b.hash}</span></div>${editBox}</div>`;
   }).join('');
-  document.getElementById('chainStatus').className='pill ok'; document.getElementById('chainStatus').textContent='链状态：未验证';
+  document.getElementById('chainStatus').className='pill ok'; document.getElementById('chainStatus').textContent=t('exp.status0');
 }
-function tamperBlock(i){ const v=Math.floor(+document.getElementById('edit-'+i).value); const d=chain.blocks[i].transactions.find(t=>t.type==='donation'); if(d){ d.amount=v; toast(`已偷偷把区块 #${i} 金额改成 ${yuan(v)}（但没重算哈希）`); } renderChain(); }
-document.getElementById('tamperBtn').onclick=()=>{ for(let i=1;i<chain.blocks.length;i++){ const d=chain.blocks[i].transactions.find(t=>t.type==='donation'); if(d){ d.amount=d.amount+99999; toast(`😈 已把区块 #${i} 金额偷偷改大`); renderChain(); return; } } toast('链上还没有捐款记录'); };
+function tamperBlock(i){ const v=Math.floor(+document.getElementById('edit-'+i).value); const d=chain.blocks[i].transactions.find(x=>x.type==='donation'); if(d){ d.amount=v; toast(t('t.tamper',{i,v:yuan(v)})); } renderChain(); }
+document.getElementById('tamperBtn').onclick=()=>{ for(let i=1;i<chain.blocks.length;i++){ const d=chain.blocks[i].transactions.find(x=>x.type==='donation'); if(d){ d.amount=d.amount+99999; toast(t('t.tamperBig',{i})); renderChain(); return; } } toast(t('t.noDon')); };
 document.getElementById('validateBtn').onclick=()=>{
   const bad=chain.firstInvalid(), status=document.getElementById('chainStatus');
   document.querySelectorAll('.block').forEach(el=>el.classList.remove('invalid'));
-  if(bad===-1){ status.className='pill ok'; status.textContent='✅ 链状态：完整有效，未被篡改'; toast('✅ 全链校验通过'); }
-  else{ status.className='pill bad'; status.textContent=`❌ 链已损坏！从区块 #${bad} 起全部失效`;
-    for(let i=bad;i<chain.blocks.length;i++){ const el=document.getElementById('blk-'+i); if(el)el.classList.add('invalid'); } toast(`❌ 检测到篡改：区块 #${bad} 哈希对不上`); }
+  if(bad===-1){ status.className='pill ok'; status.textContent=t('exp.statusOk'); toast(t('t.validateOk')); }
+  else{ status.className='pill bad'; status.textContent=t('exp.statusBad',{n:bad});
+    for(let i=bad;i<chain.blocks.length;i++){ const el=document.getElementById('blk-'+i); if(el)el.classList.add('invalid'); } toast(t('t.validateBad',{n:bad})); }
 };
-document.getElementById('resetBtn').onclick=()=>{ for(let i=0;i<chain.blocks.length;i++){ if(i>0)chain.blocks[i].prevHash=chain.blocks[i-1].hash; chain.blocks[i].mine(); } renderChain(); document.getElementById('chainStatus').className='pill ok'; document.getElementById('chainStatus').textContent='链状态：已重新挖矿修复'; toast('♻️ 已重新挖矿，链恢复有效'); };
+document.getElementById('resetBtn').onclick=()=>{ for(let i=0;i<chain.blocks.length;i++){ if(i>0)chain.blocks[i].prevHash=chain.blocks[i-1].hash; chain.blocks[i].mine(); } renderChain(); document.getElementById('chainStatus').className='pill ok'; document.getElementById('chainStatus').textContent=t('exp.statusFixed'); toast(t('t.reset')); };
 
 /* ===================== 工具 ===================== */
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -1000,27 +1337,28 @@ function updateHeight(){ document.getElementById('walletHeight').textContent=cha
 function renderAboutStats(){
   const el=document.getElementById('aboutStats'); if(!el)return;
   const stat=(n,l,c)=>`<div style="flex:1;min-width:120px"><div style="font-size:26px;font-weight:900;color:${c}">${n}</div><div style="font-size:12px;color:#a48c79">${l}</div></div>`;
-  el.innerHTML=stat(chain.blocks.length,'当前区块数','#e8542a')+stat(allTx().length,'链上交易数','#27b97a')+stat(miningAttempts.toLocaleString(),'累计哈希运算次数','#a273ff')+stat('SHA-256','哈希算法','#22bdbf')+stat(DIFFICULTY,'挖矿难度(前导0位数)','#f6a51d');
+  el.innerHTML=stat(chain.blocks.length,t('stat.blocks'),'#e8542a')+stat(allTx().length,t('stat.tx'),'#27b97a')+stat(miningAttempts.toLocaleString(),t('stat.hash'),'#a273ff')+stat('SHA-256',t('stat.algo'),'#22bdbf')+stat(DIFFICULTY,t('stat.diff'),'#f6a51d');
 }
 
 /* ===================== 项目标签 & 订阅设置 ===================== */
-function fillProjectTags(){ document.getElementById('pProjectTag').innerHTML = PROJECTS.map(p=>`<option>${p.key}</option>`).join('')+'<option>统筹 / 不指定</option>'; }
+function fillProjectTags(){ const sel=document.getElementById('pProjectTag'),cur=sel.value; sel.innerHTML=PROJECTS.map(p=>`<option value="${p.id}">${tr(p.id)}</option>`).join('')+`<option value="统筹 / 不指定">${tr('统筹 / 不指定')}</option>`; if(cur)sel.value=cur; }
+function updateSubProjName(){
+  const v=document.getElementById('dPurpose').value, wrap=document.getElementById('subProjWrap'), isProj=PROJECTS.some(p=>p.id===v);
+  if(isProj){ wrap.style.display='flex'; document.getElementById('subProjName').textContent='「'+tr(v)+'」'; }
+  else{ wrap.style.display='none'; document.getElementById('subProject').checked=false; }
+  const show=document.getElementById('subAll').checked||document.getElementById('subProject').checked;
+  document.getElementById('subContact').style.display=show?'block':'none';
+}
 function setupSubscription(){
-  const sel=document.getElementById('dPurpose'), wrap=document.getElementById('subProjWrap');
-  const updateContact=()=>{ const show=document.getElementById('subAll').checked||document.getElementById('subProject').checked; document.getElementById('subContact').style.display=show?'block':'none'; };
-  const updateProj=()=>{ const v=sel.value, isProj=PROJECTS.some(p=>p.key===v);
-    if(isProj){ wrap.style.display='flex'; document.getElementById('subProjName').textContent='「'+v+'」'; }
-    else{ wrap.style.display='none'; document.getElementById('subProject').checked=false; }
-    updateContact(); };
-  sel.addEventListener('change',updateProj);
-  document.getElementById('subAll').addEventListener('change',updateContact);
-  document.getElementById('subProject').addEventListener('change',updateContact);
-  updateProj();
+  document.getElementById('dPurpose').addEventListener('change',updateSubProjName);
+  document.getElementById('subAll').addEventListener('change',updateSubProjName);
+  document.getElementById('subProject').addEventListener('change',updateSubProjName);
+  updateSubProjName();
 }
 
 /* ===================== 初始示例 ===================== */
 (function seed(){
-  renderPayGrid(); fillCats(); fillPuTypes(); renderProjects(); renderDocs(); fillProjectTags(); setupSubscription();
+  renderPayGrid(); fillPurposes(); fillCats(); fillPuTypes(); fillSlots(); renderProjects(); renderDocs(); fillProjectTags(); setupSubscription();
   document.getElementById('puDate').valueAsDate=new Date(Date.now()+86400000);
   chain.addTxBlock([{id:txid(),type:'donation',from:'爱心企业·绿源科技',amount:50000,purpose:'山区留守儿童救助',method:'wechat',methodName:'微信支付',orderNo:'SP100000001',receipt:receiptNo(),subProject:true,subAll:false,contact:'green@corp.com'}]);
   chain.addTxBlock([{id:txid(),type:'donation',from:'匿名爱心人士',amount:12000,purpose:'孤寡老人慰问',method:'alipay',methodName:'支付宝',orderNo:'SP100000002',receipt:receiptNo(),subAll:true,subProject:false,contact:'anon@mail.com'}]);
@@ -1028,6 +1366,8 @@ function setupSubscription(){
   chain.addTxBlock([{id:txid('IK'),type:'inkind',donor:'暖心服装厂',item:'全新儿童棉袄',category:'衣物',qty:300,unit:'件',estValue:30000,note:'捐赠给山区儿童',source:'收货点登记'}]);
   chain.addTxBlock([{id:txid(),type:'disbursement',project:'星光乡村小学',amount:20000,reason:'为留守儿童采购冬季校服',projectTag:'山区留守儿童救助',approvedBy:['理事·林审计','理事·王监理','理事·陈财务','捐赠人代表·赵爱心']}]);
   updateHeight(); renderDashboard(); renderNotifications();
+  applyI18n(); updateLangButtons();
+  if(LANG!=='zh') refreshDynamic();
 })();
 </script>
 </body>
