@@ -164,6 +164,75 @@
   .langsw button{border:none;background:transparent;color:var(--muted);font-weight:700;font-size:12px;padding:6px 11px;border-radius:999px;cursor:pointer;transition:.15s}
   .langsw button:hover{color:var(--brand)}
   .langsw button.on{background:linear-gradient(135deg,var(--brand),var(--rose));color:#fff}
+  /* About Us */
+  .hero{text-align:center;padding:26px 16px 6px}
+  .hero h1{font-size:clamp(26px,5vw,40px);color:#e8542a;margin:6px 0;line-height:1.25;font-weight:900}
+  .hero .lead{max-width:760px;margin:14px auto 22px;font-size:15.5px;color:#6b5644;line-height:1.85}
+  .hero .cta,.final-cta .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .au-section{margin-top:34px}
+  .au-section h2.center{text-align:center}
+  .au-section .center.sub{text-align:center;margin-top:2px}
+  .story-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 26px;box-shadow:var(--shadow);max-width:860px;margin:12px auto 0}
+  .story-card p{font-size:15px;color:#5a4636;line-height:1.95;margin:0 0 14px}
+  .story-card p:last-child{margin-bottom:0}
+  .benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:14px}
+  .benefit{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+  .benefit .bi{font-size:30px}
+  .benefit h3{margin:8px 0 6px;font-size:16px;color:var(--ink)}
+  .benefit p{font-size:13.5px;color:#6b5644;margin:0;line-height:1.7}
+  .promises{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;text-align:center;margin-top:14px}
+  .promise{background:linear-gradient(135deg,#fff3e0,#ffe3ec);border-radius:16px;padding:22px;border:1px solid #ffe0c2}
+  .promise .pv{font-size:34px;font-weight:900;color:#e8542a}
+  .promise .pl{font-size:13px;color:#8a6f59;margin-top:4px}
+  .final-cta{text-align:center;background:linear-gradient(120deg,#ff8a5b,#ff6f9c);color:#fff;border-radius:20px;padding:34px 24px;margin-top:36px;box-shadow:0 10px 28px rgba(255,110,90,.3)}
+  .final-cta h2{color:#fff;font-size:clamp(20px,4vw,26px);margin:0 0 8px}
+  .final-cta p{margin:0 auto 18px;max-width:560px;opacity:.96;font-size:15px}
+  .final-cta .btn.ghost{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.55);color:#fff}
+  .final-cta .btn.ghost:hover{background:rgba(255,255,255,.28)}
+  /* 爱心企业赞助榜（悬浮大榜） */
+  .sp-widget{position:fixed;right:18px;bottom:18px;width:304px;max-width:88vw;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 14px 36px rgba(0,0,0,.2);z-index:75;overflow:hidden}
+  .sp-head{display:flex;align-items:center;gap:6px;padding:10px 12px;background:linear-gradient(135deg,#ff8a5b,#ff6f9c);color:#fff}
+  .sp-title{font-weight:800;font-size:13.5px;flex:1}
+  .sp-mini{background:rgba(255,255,255,.22);border:none;color:#fff;border-radius:8px;width:26px;height:26px;cursor:pointer;font-size:13px;font-weight:700}
+  .sp-mini:hover{background:rgba(255,255,255,.4)}
+  .sp-body{max-height:298px;overflow:auto;padding:6px}
+  .sp-slot{display:flex;align-items:center;gap:9px;padding:8px;border-radius:10px}
+  .sp-slot:hover{background:#fff7ee}
+  .sp-slot.empty{cursor:pointer;opacity:.78}
+  .sp-rank{font-size:15px;width:22px;text-align:center;flex:none}
+  .sp-logo{width:36px;height:36px;border-radius:9px;object-fit:cover;flex:none}
+  .sp-logo.badge{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:13px}
+  .sp-info{min-width:0;flex:1}
+  .sp-name{font-weight:800;font-size:13px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sp-name a{color:var(--ink);text-decoration:none}
+  .sp-name a:hover{color:var(--brand);text-decoration:underline}
+  .sp-slogan{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sp-amt{font-size:11px;color:var(--brand2);font-weight:800}
+  .sp-foot{font-size:10px;color:var(--muted);text-align:center;padding:5px 6px 8px}
+  .sp-reopen{position:fixed;right:18px;bottom:18px;z-index:75;background:linear-gradient(135deg,#ff8a5b,#ff6f9c);color:#fff;border:none;border-radius:999px;padding:11px 16px;font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 10px 26px rgba(255,110,90,.42)}
+  @media(max-width:560px){.sp-widget{width:240px;right:10px;bottom:10px}.sp-logo{width:30px;height:30px}}
+  /* 项目小榜 */
+  .proj-sponsors{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+  .ps-label{font-size:11px;color:var(--muted);font-weight:800;margin-right:2px}
+  .ps-chip{display:inline-flex;align-items:center;gap:5px;background:#fff7ee;border:1px solid var(--line);border-radius:999px;padding:3px 9px 3px 4px;font-size:11px;font-weight:700;color:var(--ink);text-decoration:none}
+  .ps-chip:hover{border-color:var(--brand)}
+  .ps-chip .pl{width:18px;height:18px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:9px;font-weight:800;overflow:hidden;flex:none}
+  .ps-chip .pl img{width:18px;height:18px;object-fit:cover}
+  .ps-chip.empty{color:var(--muted);font-weight:600;opacity:.85;cursor:pointer}
+  /* 赞助榜单（规则弹窗内） */
+  .lb-row{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--line);font-size:13px;text-align:left}
+  .lb-row .lb-amt{margin-left:auto;font-weight:800;color:var(--brand2)}
+  /* 物资多方确认 / 全程追溯 */
+  .conf-row{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--line);border-radius:11px;margin-top:8px;flex-wrap:wrap}
+  .conf-row.done{background:#dcfce7;border-color:#86efac}
+  .conf-row .cr-name{font-weight:800;font-size:13px;flex:1;min-width:90px}
+  .conf-row input[type=file]{font-size:11px}
+  .trace-ev-img{width:50px;height:50px;border-radius:8px;object-fit:cover;border:1px solid var(--line);vertical-align:middle}
+  .trace-step{border-left:3px solid var(--line);padding:0 0 16px 16px;margin-left:8px;position:relative}
+  .trace-step:last-child{padding-bottom:2px}
+  .trace-step::before{content:'';position:absolute;left:-7px;top:3px;width:11px;height:11px;border-radius:50%;background:var(--green)}
+  .trace-step h4{margin:0 0 4px;font-size:14px;color:var(--ink)}
+  .hash-sm{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--brand2);word-break:break-all}
 </style>
 </head>
 <body>
@@ -180,7 +249,8 @@
 </header>
 
 <nav id="nav">
-  <button class="active" data-view="dashboard" data-i18n="nav.dashboard" data-i18n-title="nav.dashboard.t">📊 透明仪表盘</button>
+  <button class="active" data-view="aboutus" data-i18n="nav.aboutus" data-i18n-title="nav.aboutus.t">💗 关于我们</button>
+  <button data-view="dashboard" data-i18n="nav.dashboard" data-i18n-title="nav.dashboard.t">📊 透明仪表盘</button>
   <button data-view="projects" data-i18n="nav.projects" data-i18n-title="nav.projects.t">💝 捐赠用途详情</button>
   <button data-view="trust" data-i18n="nav.trust" data-i18n-title="nav.trust.t">🛡️ 资质与证照</button>
   <button data-view="donate" data-i18n="nav.donate" data-i18n-title="nav.donate.t">🧡 现金捐款</button>
@@ -191,8 +261,66 @@
 </nav>
 
 <main>
+  <!-- ABOUT US / 关于我们（首页） -->
+  <section class="view active" id="view-aboutus">
+    <div class="hero">
+      <h1 data-i18n="au.hero.h">让每一份爱心，都看得见去向</h1>
+      <p class="lead" data-i18n="au.hero.sub">星火慈善基金，是一个把每一笔善款与每一件物资都记录在区块链上的公益平台。</p>
+      <div class="cta">
+        <button class="btn" onclick="goView('donate')" data-i18n="au.cta.donate">🧡 立即捐赠</button>
+        <button class="btn ghost" onclick="goView('explorer')" data-i18n="au.cta.explore">🔗 查看善款去向</button>
+      </div>
+    </div>
+
+    <div class="au-section">
+      <h2 class="center" data-i18n="au.story.h">我们的故事</h2>
+      <div class="story-card">
+        <p data-i18n="au.story.p1"></p>
+        <p data-i18n="au.story.p2"></p>
+        <p data-i18n="au.story.p3"></p>
+      </div>
+    </div>
+
+    <div class="au-section">
+      <h2 class="center" data-i18n="au.do.h">我们在做什么</h2>
+      <div class="story-card" style="text-align:center">
+        <p style="text-align:left" data-i18n="au.do.p"></p>
+        <button class="btn sm" onclick="goView('projects')" data-i18n="au.do.btn">💝 了解各个救助项目 →</button>
+      </div>
+    </div>
+
+    <div class="au-section">
+      <h2 class="center" data-i18n="au.why.h">为什么选择星火</h2>
+      <p class="sub center" data-i18n="au.why.sub">捐得安心，看得明白</p>
+      <div class="benefits">
+        <div class="benefit"><div class="bi">💎</div><h3 data-i18n="au.b1.h"></h3><p data-i18n="au.b1.p"></p></div>
+        <div class="benefit"><div class="bi">📱</div><h3 data-i18n="au.b2.h"></h3><p data-i18n="au.b2.p"></p></div>
+        <div class="benefit"><div class="bi">📦</div><h3 data-i18n="au.b3.h"></h3><p data-i18n="au.b3.p"></p></div>
+        <div class="benefit"><div class="bi">🔐</div><h3 data-i18n="au.b4.h"></h3><p data-i18n="au.b4.p"></p></div>
+      </div>
+    </div>
+
+    <div class="au-section">
+      <h2 class="center" data-i18n="au.promise.h">我们的承诺</h2>
+      <div class="promises">
+        <div class="promise"><div class="pv">100%</div><div class="pl" data-i18n="au.p1l"></div></div>
+        <div class="promise"><div class="pv">2 / 3+</div><div class="pl" data-i18n="au.p2l"></div></div>
+        <div class="promise"><div class="pv">0</div><div class="pl" data-i18n="au.p3l"></div></div>
+      </div>
+    </div>
+
+    <div class="final-cta">
+      <h2 data-i18n="au.final.h">准备好一起点亮星火了吗？</h2>
+      <p data-i18n="au.final.p"></p>
+      <div class="cta">
+        <button class="btn ghost" onclick="goView('donate')" data-i18n="au.cta.donate">🧡 立即捐赠</button>
+        <button class="btn ghost" onclick="goView('projects')" data-i18n="au.do.btn">💝 了解各个救助项目 →</button>
+      </div>
+    </div>
+  </section>
+
   <!-- DASHBOARD -->
-  <section class="view active" id="view-dashboard">
+  <section class="view" id="view-dashboard">
     <h2 data-i18n="dash.h">公开透明仪表盘</h2>
     <p class="sub" data-i18n="dash.sub">任何人无需登录即可查看每一分善款与每一件物资的去向。数据全部来自下方不可篡改的链上账本。</p>
     <div class="empty-cta" id="emptyCta" style="display:none" role="button" tabindex="0" onclick="goView('donate')" onkeydown="if(event.key==='Enter')goView('donate')">
@@ -252,6 +380,21 @@
             <input type="checkbox" id="subProject" style="width:auto"> <span data-i18n="sub.proj">仅订阅</span><b id="subProjName" style="color:var(--brand2)"></b><span data-i18n="sub.proj2">的拨款动态</span>
           </label>
           <input id="subContact" data-i18n-ph="sub.contact" placeholder="接收通知的邮箱 / 手机（可选）" style="margin-top:10px;display:none">
+        </div>
+        <div style="margin-top:12px;background:#fff7ee;border:1.5px dashed #ffd9bf;border-radius:12px;padding:12px 14px">
+          <div style="font-weight:800;color:var(--ink);font-size:13.5px" data-i18n="don.sp.title">🏢 企业赞助（可选）</div>
+          <label style="display:flex;align-items:flex-start;gap:8px;margin:10px 0 0;cursor:pointer;color:#6b5644;font-weight:500;font-size:12.5px">
+            <input type="checkbox" id="spOn" style="width:auto;margin-top:2px"> <span data-i18n="don.sp.opt">以企业名义参与「爱心企业赞助榜」竞选</span>
+          </label>
+          <div id="spFields" style="display:none">
+            <label data-i18n="don.sp.slogan">企业标语（可选）</label>
+            <input id="spSlogan" data-i18n-ph="don.sp.slogan.ph" placeholder="例如：专业宠物营养">
+            <label data-i18n="don.sp.link">官网链接（可选，点击榜位可跳转）</label>
+            <input id="spLink" data-i18n-ph="don.sp.link.ph" placeholder="例如：https://www.yourcompany.com">
+            <label data-i18n="don.sp.logo">企业 Logo（可选，上传图片）</label>
+            <input type="file" id="spLogo" accept="image/*">
+            <div id="spLogoPrev"></div>
+          </div>
         </div>
         <label data-i18n="don.method">选择支付方式（点击生成付款二维码）</label>
         <div class="pays" id="payGrid"></div>
@@ -448,6 +591,51 @@
   </div>
 </div>
 
+<!-- 爱心企业赞助榜（悬浮大榜，常驻可见） -->
+<div class="sp-widget" id="sponsorWidget">
+  <div class="sp-head">
+    <span class="sp-title">🏅 <span data-i18n="sp.title">爱心企业赞助榜</span></span>
+    <button class="sp-mini" id="spRulesBtn" data-i18n-title="sp.rules.title" aria-label="rules">ℹ️</button>
+    <button class="sp-mini" id="spToggle" aria-label="collapse">▾</button>
+  </div>
+  <div class="sp-body" id="sponsorSlots"></div>
+  <div class="sp-foot" data-i18n="sp.disclaimer">⚠️ 示例赞助商，仅供演示</div>
+</div>
+<button class="sp-reopen" id="sponsorReopen" style="display:none">🏅 <span data-i18n="sp.title">爱心企业赞助榜</span></button>
+
+<!-- 竞选规则 & 完整排行榜 -->
+<div class="overlay" id="sponsorOverlay">
+  <div class="modal" style="max-width:460px;text-align:left">
+    <div style="font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px" data-i18n="sp.rules.h">🏅 爱心企业赞助榜 · 竞选规则</div>
+    <div style="font-size:13px;color:#6b5644;line-height:1.85" data-i18n-html="sp.rules.body"></div>
+    <div style="font-weight:800;color:var(--ink);font-size:13.5px;margin:16px 0 4px" data-i18n="sp.rules.lb">当前完整排行榜（按累计捐赠额）</div>
+    <div id="sponsorLeaderboard" style="max-height:200px;overflow:auto"></div>
+    <button class="btn ghost sm" id="spRulesClose" style="width:100%;margin-top:14px" data-i18n="doc.close">关闭</button>
+  </div>
+</div>
+
+<!-- 物资状态：多方确认 -->
+<div class="overlay" id="statusOverlay">
+  <div class="modal" style="max-width:470px;text-align:left">
+    <div id="statusTitle" style="font-weight:900;font-size:15.5px;color:var(--ink);margin-bottom:8px"></div>
+    <div id="statusRule" class="kv" style="margin-bottom:4px"></div>
+    <div id="statusRoles"></div>
+    <div id="statusProgress" style="font-weight:800;margin-top:14px;text-align:center;color:var(--brand2)"></div>
+    <button class="btn" id="statusCommit" style="width:100%;margin-top:10px" disabled></button>
+    <button class="btn ghost sm" id="statusCancel" style="width:100%;margin-top:8px" data-i18n="conf.close">取消</button>
+  </div>
+</div>
+
+<!-- 物资全程追溯 -->
+<div class="overlay" id="traceOverlay">
+  <div class="modal" style="max-width:520px;text-align:left">
+    <div id="traceTitle" style="font-weight:900;font-size:16px;color:var(--ink);margin-bottom:12px"></div>
+    <div id="traceBody" style="max-height:60vh;overflow:auto"></div>
+    <div class="note" data-i18n="trace.tip"></div>
+    <button class="btn ghost sm" id="traceClose" style="width:100%;margin-top:10px" data-i18n="doc.close">关闭</button>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -475,6 +663,76 @@ const I18N={
   'nav.explorer.t':{zh:'查看完整链上账本与防篡改演示',yue:'查看完整鏈上賬本與防篡改演示',en:'Full ledger & tamper-proof demo'},
   'nav.about':{zh:'ℹ️ 原理说明',yue:'ℹ️ 原理說明',en:'ℹ️ How it works'},
   'nav.about.t':{zh:'平台用到的区块链原理与实时数据',yue:'平台用到的區塊鏈原理與即時數據',en:'Blockchain concepts & live data'},
+  'nav.aboutus':{zh:'💗 关于我们',yue:'💗 關於我們',en:'💗 About Us'},
+  'nav.aboutus.t':{zh:'了解星火的故事、使命与你能获得的信任',yue:'了解星火的故事、使命與你能獲得的信任',en:'Our story, mission, and why you can trust us'},
+  'au.hero.h':{zh:'让每一份爱心，都看得见去向',yue:'讓每一份愛心，都看得見去向',en:'Every act of kindness, fully traceable'},
+  'au.hero.sub':{zh:'星火慈善基金，是一个把每一笔善款与每一件物资都记录在区块链上的公益平台。你捐出的每一分，去了哪里、帮了谁，任何人随时可查，永不可篡改。',yue:'星火慈善基金，是一個把每一筆善款與每一件物資都記錄在區塊鏈上的公益平台。你捐出的每一分，去了哪裏、幫了誰，任何人隨時可查，永不可篡改。',en:'Spark Charity Foundation records every donation and every item on the blockchain. Where your money goes and who it helps is open for anyone to verify, anytime — and can never be secretly altered.'},
+  'au.cta.donate':{zh:'🧡 立即捐赠',yue:'🧡 立即捐贈',en:'🧡 Donate now'},
+  'au.cta.explore':{zh:'🔗 查看善款去向',yue:'🔗 查看善款去向',en:'🔗 See where funds go'},
+  'au.story.h':{zh:'我们的故事',yue:'我們的故事',en:'Our Story'},
+  'au.story.p1':{zh:'几年前，我们的创始人也只是一名普通的捐款人。一次大额捐款之后，她很想知道这笔钱最终帮到了谁——可除了一句「感谢您的爱心」，她再也得不到任何回音。钱去了哪里？有没有在层层流转中被消耗？没有人能给她一个答案。',yue:'幾年前，我們的創辦人也只是一名普通的捐款人。一次大額捐款之後，她很想知道這筆錢最終幫到了誰——可除了一句「感謝您的愛心」，她再也得不到任何回音。錢去了哪裏？有沒有在層層流轉中被消耗？沒有人能給她一個答案。',en:'A few years ago, our founder was just an ordinary donor. After making a large gift, she longed to know who it had finally helped — yet beyond a single "thank you for your kindness," she never heard another word. Where had the money gone? Had it been worn away along the way? No one could give her an answer.'},
+  'au.story.p2':{zh:'那种「想做好事，却看不见结果」的无力感，成了星火的起点。我们相信，慈善不该是一个黑箱。于是我们做了一个大胆的决定——把每一笔捐款、每一次拨款、每一件物资，都完整记录在区块链上：任何人无需登录就能查证，而且永远无法被偷偷修改。',yue:'那種「想做好事，卻看不見結果」的無力感，成了星火的起點。我們相信，慈善不該是一個黑箱。於是我們做了一個大膽的決定——把每一筆捐款、每一次撥款、每一件物資，都完整記錄在區塊鏈上：任何人無需登入就能查證，而且永遠無法被偷偷修改。',en:'That helpless feeling — wanting to do good but never seeing the result — became the spark for our foundation. We believe charity should never be a black box. So we made a bold decision: record every donation, every disbursement and every item in full on the blockchain — verifiable by anyone without logging in, and impossible to alter in secret.'},
+  'au.story.p3':{zh:'今天，星火慈善基金把善意与技术放在一起：用区块链守护透明，用一颗颗真心，去温暖山区的孩子、孤寡的老人、走投无路的家庭，也守护街头那些无家可归的猫狗。星火虽小，却愿做那束既让人看得见、也敢于相信的光。',yue:'今天，星火慈善基金把善意與技術放在一起：用區塊鏈守護透明，用一顆顆真心，去溫暖山區的孩子、孤寡的老人、走投無路的家庭，也守護街頭那些無家可歸的貓狗。星火雖小，卻願做那束既讓人看得見、也敢於相信的光。',en:'Today, Spark Charity Foundation brings kindness and technology together: using the blockchain to safeguard transparency, and many sincere hearts to warm mountain children, lonely elders, families with nowhere to turn — and the homeless cats and dogs on the streets. A spark is small — but we hope to be the kind of light you can both see and dare to trust.'},
+  'au.do.h':{zh:'我们在做什么',yue:'我們在做甚麼',en:'What We Do'},
+  'au.do.p':{zh:'星火的关怀，既给人，也给毛孩子。对人，我们守护山区留守儿童、事实孤儿、孤寡老人，做乡村应急备灾与生命紧急救援；对流浪的猫猫狗狗，我们建收容所，推动绝育放归、伤病救治、领养代替购买与越冬守护。从一件过冬棉衣，到一个流浪生命的家，每一个项目背后，都是一个正在等待被看见的生命。',yue:'星火的關懷，既給人，也給毛孩子。對人，我們守護山區留守兒童、事實孤兒、孤寡老人，做鄉村應急備災與生命緊急救援；對流浪的貓貓狗狗，我們建收容所，推動絕育放歸、傷病救治、領養代替購買與越冬守護。從一件過冬棉衣，到一個流浪生命的家，每一個項目背後，都是一個正在等待被看見的生命。',en:'Spark cares for both people and furry friends. For people, we protect left-behind children, de facto orphans and lonely elders, and run rural disaster preparedness and emergency life rescue. For stray cats and dogs, we build shelters and support TNR, medical rescue, "adopt don\'t shop," and winter protection. From a winter coat to a home for a homeless little life, behind every cause is a living being waiting to be seen.'},
+  'au.do.btn':{zh:'💝 了解各个救助项目 →',yue:'💝 了解各個救助項目 →',en:'💝 Explore our causes →'},
+  'au.why.h':{zh:'为什么选择星火',yue:'為甚麼選擇星火',en:'Why Spark'},
+  'au.why.sub':{zh:'捐得安心，看得明白',yue:'捐得安心，看得明白',en:'Give with confidence, see with clarity'},
+  'au.b1.h':{zh:'每一分都上链可查',yue:'每一分都上鏈可查',en:'Every cent on-chain'},
+  'au.b1.p':{zh:'你的每一笔捐款都会生成不可篡改的链上记录与收据号，去向公开透明，随时可追溯。',yue:'你的每一筆捐款都會生成不可篡改的鏈上記錄與收據號，去向公開透明，隨時可追溯。',en:'Every donation creates an immutable on-chain record with a receipt number — transparent and traceable anytime.'},
+  'au.b2.h':{zh:'多渠道便捷捐赠',yue:'多渠道便捷捐贈',en:'Donate your way'},
+  'au.b2.p':{zh:'支持微信、支付宝、AlipayHK、银联、Amex、PayMe 等多种支付方式，也接受物资捐赠与快递上门取件。',yue:'支援微信、支付寶、AlipayHK、銀聯、Amex、PayMe 等多種支付方式，亦接受物資捐贈與快遞上門取件。',en:'Pay via WeChat, Alipay, AlipayHK, UnionPay, Amex, PayMe and more — or donate goods with courier pickup.'},
+  'au.b3.h':{zh:'物资全程可追溯',yue:'物資全程可追溯',en:'Goods fully traceable'},
+  'au.b3.p':{zh:'实物捐赠从登记、入库到发放，每一步都记录在链，绝不让物资去向不明。',yue:'實物捐贈從登記、入庫到發放，每一步都記錄在鏈，絕不讓物資去向不明。',en:'From registration to warehousing to handout, every step is on-chain — no item ever goes missing.'},
+  'au.b4.h':{zh:'多签审批防挪用',yue:'多簽審批防挪用',en:'Multi-sig safeguards'},
+  'au.b4.p':{zh:'大额拨款须经理事会与捐赠人代表多重签名审批，杜绝任何人私自动用善款。',yue:'大額撥款須經理事會與捐贈人代表多重簽名審批，杜絕任何人私自動用善款。',en:'Large disbursements require multi-signature approval from the board and donor reps — no one can move funds alone.'},
+  'au.promise.h':{zh:'我们的承诺',yue:'我們的承諾',en:'Our Promise'},
+  'au.p1l':{zh:'善款去向上链公开',yue:'善款去向上鏈公開',en:'of fund flows on-chain & public'},
+  'au.p2l':{zh:'多签审批才能放款',yue:'多簽審批才能放款',en:'multi-sig before release'},
+  'au.p3l':{zh:'从你的捐款偷偷扣费',yue:'從你的捐款偷偷扣費',en:'hidden fees from your gift'},
+  'au.final.h':{zh:'准备好一起点亮星火了吗？',yue:'準備好一起點亮星火了嗎？',en:'Ready to light a spark with us?'},
+  'au.final.p':{zh:'无论金额大小，你的善意都会被看见、被记录、被守护。',yue:'無論金額大小，你的善意都會被看見、被記錄、被守護。',en:'No matter the amount, your kindness will be seen, recorded and protected.'},
+  'sp.title':{zh:'爱心企业赞助榜',yue:'愛心企業贊助榜',en:'Sponsor Wall'},
+  'sp.cum':{zh:'累计',yue:'累計',en:'Total'},
+  'sp.empty':{zh:'虚位以待 →',yue:'虛位以待 →',en:'Your spot here →'},
+  'sp.disclaimer':{zh:'⚠️ 示例赞助商，仅供演示',yue:'⚠️ 示例贊助商，僅供演示',en:'⚠️ Sample sponsors — for demo only'},
+  'sp.proj.label':{zh:'本项目赞助商',yue:'本項目贊助商',en:'Sponsors'},
+  'sp.rules.title':{zh:'竞选规则',yue:'競選規則',en:'Rules'},
+  'sp.rules.h':{zh:'🏅 爱心企业赞助榜 · 竞选规则',yue:'🏅 愛心企業贊助榜 · 競選規則',en:'🏅 Sponsor Wall · Rules'},
+  'sp.rules.body':{zh:'<b>规则完全公开、人人平等：</b><br>• 仅勾选「以企业名义参与竞选」的捐赠者上榜，个人捐赠不受影响。<br>• 排名只看<b>累计捐赠额</b>，金额越高越靠前，金额全程公开可查。<br>• 首页悬浮榜取全站<b>前 5 名</b>；每个救助项目另设<b>前 3 名</b>小榜。<br>• 实时更新——被超越即让位，持续领先即长期在榜。<br>• 同额时以先达成者优先；平台保留对违规内容的审核权。',yue:'<b>規則完全公開、人人平等：</b><br>• 僅勾選「以企業名義參與競選」的捐贈者上榜，個人捐贈不受影響。<br>• 排名只看<b>累計捐贈額</b>，金額越高越靠前，金額全程公開可查。<br>• 首頁懸浮榜取全站<b>前 5 名</b>；每個救助項目另設<b>前 3 名</b>小榜。<br>• 實時更新——被超越即讓位，持續領先即長期在榜。<br>• 同額時以先達成者優先；平台保留對違規內容的審核權。',en:'<b>Fully public, everyone equal:</b><br>• Only donors who opt in "as a company" appear on the wall; individual donations are unaffected.<br>• Ranking is purely by <b>cumulative donation amount</b> — higher means higher, and amounts are public.<br>• The floating wall shows the <b>top 5</b> site-wide; each cause has its own <b>top-3</b> mini-board.<br>• Updated live — pass someone and you take their spot, stay ahead and you stay on.<br>• Ties break by who reached the amount first; the platform may review improper content.'},
+  'sp.rules.lb':{zh:'当前完整排行榜（按累计捐赠额）',yue:'當前完整排行榜（按累計捐贈額）',en:'Full leaderboard (by cumulative amount)'},
+  'sp.rules.none':{zh:'暂无企业赞助者。',yue:'暫無企業贊助者。',en:'No company sponsors yet.'},
+  'don.sp.title':{zh:'🏢 企业赞助（可选）',yue:'🏢 企業贊助（可選）',en:'🏢 Company sponsorship (optional)'},
+  'don.sp.opt':{zh:'以企业名义参与「爱心企业赞助榜」竞选（公开企业名与累计捐赠额，金额越高排名越靠前；将以上方「捐款人」作为企业名展示）',yue:'以企業名義參與「愛心企業贊助榜」競選（公開企業名與累計捐贈額，金額越高排名越靠前；將上方「捐款人」作為企業名展示）',en:'Compete on the Sponsor Wall as a company (company name & cumulative amount go public; higher = higher rank; the "Donor" field above is shown as your company name)'},
+  'don.sp.slogan':{zh:'企业标语（可选）',yue:'企業標語（可選）',en:'Company slogan (optional)'},
+  'don.sp.slogan.ph':{zh:'例如：专业宠物营养',yue:'例如：專業寵物營養',en:'e.g. Professional pet nutrition'},
+  'don.sp.link':{zh:'官网链接（可选，点击榜位可跳转）',yue:'官網連結（可選，點擊榜位可跳轉）',en:'Website link (optional, clickable on the wall)'},
+  'don.sp.link.ph':{zh:'例如：https://www.yourcompany.com',yue:'例如：https://www.yourcompany.com',en:'e.g. https://www.yourcompany.com'},
+  'don.sp.logo':{zh:'企业 Logo（可选，上传图片）',yue:'企業 Logo（可選，上傳圖片）',en:'Company logo (optional, upload image)'},
+  't.spJoined':{zh:'🏅 已以企业名义参与赞助榜竞选！',yue:'🏅 已以企業名義參與贊助榜競選！',en:'🏅 You\'re now competing on the Sponsor Wall!'},
+  'ink.confirmNext':{zh:'✅ 多方确认下一步',yue:'✅ 多方確認下一步',en:'✅ Confirm next step'},
+  'ink.trace':{zh:'🔍 全程追溯',yue:'🔍 全程追溯',en:'🔍 Full trace'},
+  'ink.code':{zh:'追溯码',yue:'追溯碼',en:'Tracking ID'},
+  'conf.h':{zh:'多方确认 · 推进到「{s}」',yue:'多方確認 · 推進到「{s}」',en:'Multi-party confirm · advance to "{s}"'},
+  'conf.rule':{zh:'需以下角色中至少 {n} 方独立确认才可上链{req}：',yue:'需以下角色中至少 {n} 方獨立確認才可上鏈{req}：',en:'Needs at least {n} of these roles to confirm independently before going on-chain{req}:'},
+  'conf.reqRecipient':{zh:'（受助机构必须确认）',yue:'（受助機構必須確認）',en:' (recipient must confirm)'},
+  'conf.confirm':{zh:'✔ 确认',yue:'✔ 確認',en:'✔ Confirm'},
+  'conf.signed':{zh:'✔ 已确认',yue:'✔ 已確認',en:'✔ Confirmed'},
+  'conf.oracle':{zh:'📡 拉取承运商扫描（预言机）',yue:'📡 拉取承運商掃描（預言機）',en:'📡 Pull carrier scan (oracle)'},
+  'conf.progress':{zh:'已确认 {x} / 需 {y}',yue:'已確認 {x} / 需 {y}',en:'Confirmed {x} / need {y}'},
+  'conf.commit':{zh:'✅ 满足条件，提交上链',yue:'✅ 滿足條件，提交上鏈',en:'✅ Conditions met — submit on-chain'},
+  'conf.noPhoto':{zh:'自动扫描事件（无照片）',yue:'自動掃描事件（無照片）',en:'Auto scan event (no photo)'},
+  'conf.waybill':{zh:'运单号',yue:'運單號',en:'Waybill'},
+  'conf.close':{zh:'取消',yue:'取消',en:'Cancel'},
+  'trace.h':{zh:'🔍 全程追溯 · {id}',yue:'🔍 全程追溯 · {id}',en:'🔍 Full Trace · {id}'},
+  'trace.reg':{zh:'物资登记',yue:'物資登記',en:'Item registered'},
+  'trace.confirmers':{zh:'确认方',yue:'確認方',en:'Confirmed by'},
+  'trace.hash':{zh:'证据哈希',yue:'證據哈希',en:'Evidence hash'},
+  'trace.evidence':{zh:'证据',yue:'證據',en:'evidence'},
+  'trace.tip':{zh:'每一步都由多方独立确认、附证据并上链，凭此追溯码任何人都可全程核验，杜绝一个人说了算。',yue:'每一步都由多方獨立確認、附證據並上鏈，憑此追溯碼任何人都可全程核驗，杜絕一個人說了算。',en:'Every step is independently confirmed by multiple parties with evidence on-chain — anyone can verify the whole journey by this tracking ID, so no single person decides.'},
+  't.stCommitted':{zh:'✅ 多方确认通过，物资 {id} 状态「{s}」已上链',yue:'✅ 多方確認通過，物資 {id} 狀態「{s}」已上鏈',en:'✅ Multi-party confirmed; item {id} status "{s}" on-chain'},
+  't.oraclePulled':{zh:'📡 已拉取承运商扫描，运单号 {w}',yue:'📡 已拉取承運商掃描，運單號 {w}',en:'📡 Carrier scan pulled, waybill {w}'},
+  't.stDoneFlow':{zh:'该物资已发放，流程结束',yue:'該物資已發放，流程結束',en:'Item already distributed — flow complete'},
   'dash.h':{zh:'公开透明仪表盘',yue:'公開透明儀表盤',en:'Public Transparency Dashboard'},
   'dash.sub':{zh:'任何人无需登录即可查看每一分善款与每一件物资的去向。数据全部来自下方不可篡改的链上账本。',yue:'任何人無需登入即可查看每一分善款與每一件物資的去向。數據全部來自下方不可篡改的鏈上賬本。',en:'Anyone can see where every dollar and every item goes — no login required. All data comes from the tamper-proof ledger below.'},
   'dash.empty':{zh:'🧡 还没有捐赠记录，成为第一笔善款的主人吧',yue:'🧡 還沒有捐贈記錄，成為第一筆善款的主人吧',en:'🧡 No donations yet — be the very first to give'},
@@ -533,7 +791,7 @@ const I18N={
   'ink.note.ph':{zh:'例如：全新、含运送',yue:'例如：全新、含運送',en:'e.g. Brand new, delivery included'},
   'ink.reg.btn':{zh:'📦 登记并上链',yue:'📦 登記並上鏈',en:'📦 Register & on-chain'},
   'ink.ledger.h':{zh:'物资台账（链上）',yue:'物資台賬（鏈上）',en:'Item ledger (on-chain)'},
-  'ink.ledger.note':{zh:'物资按<b>件数和参考估值</b>单独统计，<b>不计入现金资金池</b>。点台账里的按钮推进状态，每次状态变更都会生成一条新的链上记录。',yue:'物資按<b>件數和參考估值</b>單獨統計，<b>不計入現金資金池</b>。點台賬裏的按鈕推進狀態，每次狀態變更都會生成一條新的鏈上記錄。',en:'Items are counted by <b>quantity and est. value</b> and are <b>not added to the cash pool</b>. Use the buttons to advance status; each change creates a new on-chain record.'},
+  'ink.ledger.note':{zh:'每件物资都有<b>唯一追溯码</b>；状态推进<b>须经多方独立确认（含受助方亲自签收）并附证据上链</b>，杜绝一个人说了算。点「全程追溯」可凭追溯码核验完整流转链。物资按件数与估值单独统计，不计入现金资金池。',yue:'每件物資都有<b>唯一追溯碼</b>；狀態推進<b>須經多方獨立確認（含受助方親自簽收）並附證據上鏈</b>，杜絕一個人說了算。點「全程追溯」可憑追溯碼核驗完整流轉鏈。物資按件數與估值單獨統計，不計入現金資金池。',en:'Each item has a <b>unique tracking ID</b>; advancing its status <b>requires independent multi-party confirmation (incl. the recipient\'s own sign-off) with evidence on-chain</b> — no single person decides. Tap "Full trace" to verify the whole journey by its ID. Items are counted separately from the cash pool.'},
   'pick.h':{zh:'申请快递上门取件 🚚',yue:'申請快遞上門取件 🚚',en:'Request Courier Pickup 🚚'},
   'pick.sub':{zh:'家里的旧衣旧鞋旧家具，也许正是山里孩子、独居老人需要的温暖。填写申请，审核通过后我们安排快递上门。',yue:'家裏的舊衣舊鞋舊傢俬，也許正是山區孩子、獨居老人需要的溫暖。填寫申請，審核通過後我們安排快遞上門。',en:'Your used clothes, shoes and furniture may be exactly the warmth a mountain child or a lonely elder needs. Submit a request; once approved we arrange a courier.'},
   'pick.name':{zh:'联系人',yue:'聯絡人',en:'Contact name'},
@@ -710,6 +968,12 @@ const LBL={
   '已发放':{zh:'已发放',yue:'已發放',en:'Distributed'},
   '待审核':{zh:'待审核',yue:'待審核',en:'Pending review'},
   '审核通过·已安排快递':{zh:'审核通过·已安排快递',yue:'審核通過·已安排快遞',en:'Approved · courier arranged'},
+  '仓库管理员':{zh:'仓库管理员',yue:'倉庫管理員',en:'Warehouse staff'},
+  '志愿者':{zh:'志愿者',yue:'志願者',en:'Volunteer'},
+  '物流承运商':{zh:'物流承运商',yue:'物流承運商',en:'Logistics carrier'},
+  '受助机构':{zh:'受助机构',yue:'受助機構',en:'Recipient org'},
+  '物流派送员':{zh:'物流派送员',yue:'物流派送員',en:'Delivery courier'},
+  '顺丰速运':{zh:'顺丰速运',yue:'順豐速運',en:'SF Express'},
   '食品/饮用水':{zh:'食品/饮用水',yue:'食品/飲用水',en:'Food / water'},
   '衣物':{zh:'衣物',yue:'衣物',en:'Clothing'},
   '床上用品/毛毯':{zh:'床上用品/毛毯',yue:'床上用品/毛毯',en:'Bedding / blankets'},
@@ -753,7 +1017,7 @@ function refreshDynamic(){
     fillPurposes(); fillProjectTags(); fillCats(); fillPuTypes(); fillSlots();
     renderPayGrid(); renderProjects(); renderDocs(); updateSubProjName();
     renderInkind(); renderPickups(); renderPending(); renderNotifications();
-    renderDashboard(); renderAboutStats(); renderChain();
+    renderDashboard(); renderAboutStats(); renderChain(); renderSponsors();
   }catch(e){ console.warn(e); }
 }
 function setLang(l){ LANG=l; try{localStorage.setItem('spark_lang',l)}catch(e){}; applyI18n(); refreshDynamic(); updateLangButtons(); }
@@ -845,6 +1109,12 @@ function svgElder(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http:/
 function svgDisaster(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe2bf"/><stop offset="1" stop-color="#ffd0cf"/></linearGradient></defs><rect width="400" height="200" fill="url(#dg)"/><path d="M200 38 l54 18 v40 c0 40 -28 58 -54 70 c-26 -12 -54 -30 -54 -70 v-40 z" fill="#f6a51d"/><path d="M200 38 l54 18 v40 c0 40 -28 58 -54 70 z" fill="#f28c00"/><path d="M178 92 l16 18 l34 -36" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="40" y="120" width="64" height="50" rx="6" fill="#ff7a45"/><path d="M40 120 h64 M72 120 v50" stroke="#fff3e6" stroke-width="3"/><ellipse cx="320" cy="60" rx="34" ry="20" fill="#fff" opacity=".85"/><g stroke="#7fbfff" stroke-width="4" stroke-linecap="round"><line x1="305" y1="84" x2="300" y2="96"/><line x1="322" y1="84" x2="317" y2="98"/><line x1="339" y1="84" x2="334" y2="96"/></g></svg>`;}
 function svgRescue(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6d2"/><stop offset="1" stop-color="#ffe7cf"/></linearGradient></defs><rect width="400" height="200" fill="url(#rg)"/><path d="M200 70 c-22 -30 -74 -22 -74 18 c0 30 46 56 74 74 c28 -18 74 -44 74 -74 c0 -40 -52 -48 -74 -18 z" fill="#ef5350"/><path d="M120 132 h44 l14 -30 l20 56 l16 -34 h66" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="80" cy="56" r="8" fill="#fff" opacity=".7"/><circle cx="330" cy="150" r="6" fill="#fff" opacity=".7"/></svg>`;}
 
+function svgShelter(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="shg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe7c2"/><stop offset="1" stop-color="#cdeee8"/></linearGradient></defs><rect width="400" height="200" fill="url(#shg)"/><polygon points="118,96 210,40 302,96" fill="#ff8a5b"/><rect x="135" y="96" width="150" height="80" fill="#fff3e6"/><path d="M185 176 v-32 a25 25 0 0 1 50 0 v32 z" fill="#ffd2a6"/><g fill="#fff" opacity=".92"><circle cx="210" cy="76" r="7"/><circle cx="200" cy="66" r="4"/><circle cx="210" cy="63" r="4"/><circle cx="220" cy="66" r="4"/></g><g transform="translate(72,118)"><ellipse cx="0" cy="42" rx="26" ry="17" fill="#b9824f"/><circle cx="20" cy="20" r="15" fill="#c79461"/><ellipse cx="9" cy="12" rx="6" ry="11" fill="#9c6c3c"/><circle cx="25" cy="18" r="2.5" fill="#3a2a1a"/><ellipse cx="22" cy="26" rx="4" ry="3" fill="#5a3b22"/></g><g transform="translate(332,150)"><ellipse cx="0" cy="2" rx="14" ry="20" fill="#8593a1"/><circle cx="0" cy="-22" r="13" fill="#8593a1"/><polygon points="-12,-30 -5,-18 -15,-20" fill="#8593a1"/><polygon points="12,-30 5,-18 15,-20" fill="#8593a1"/><circle cx="-4" cy="-22" r="2" fill="#2a3340"/><circle cx="4" cy="-22" r="2" fill="#2a3340"/></g></svg>`;}
+function svgTNR(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="tng" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9f0ea"/><stop offset="1" stop-color="#fff0d6"/></linearGradient></defs><rect width="400" height="200" fill="url(#tng)"/><g transform="translate(195,108)"><ellipse cx="0" cy="42" rx="42" ry="30" fill="#9aa7b3"/><circle cx="0" cy="-6" r="40" fill="#9aa7b3"/><polygon points="-34,-34 -14,-44 -22,-12" fill="#9aa7b3"/><polygon points="34,-30 18,-44 20,-12" fill="#9aa7b3"/><rect x="20" y="-44" width="16" height="6" rx="2" fill="#7a8794"/><circle cx="-15" cy="-8" r="5" fill="#2a3340"/><circle cx="15" cy="-8" r="5" fill="#2a3340"/><polygon points="-4,2 4,2 0,8" fill="#ff9aae"/><path d="M0 8 q-8 6 -16 2 M0 8 q8 6 16 2" stroke="#2a3340" stroke-width="1.5" fill="none"/></g><path d="M322 58 c-7 -9 -22 -7 -22 5 c0 9 13 17 22 23 c9 -6 22 -14 22 -23 c0 -12 -15 -14 -22 -5 z" fill="#ff6f9c"/></svg>`;}
+function svgVet(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vtg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9d2"/><stop offset="1" stop-color="#ffe9d6"/></linearGradient></defs><rect width="400" height="200" fill="url(#vtg)"/><g transform="translate(322,56)"><circle r="27" fill="#fff"/><path d="M-6 -16 h12 v10 h10 v12 h-10 v10 h-12 v-10 h-10 v-12 h10 z" fill="#ef5350"/></g><g transform="translate(168,110)"><ellipse cx="0" cy="46" rx="42" ry="28" fill="#caa06e"/><circle cx="0" cy="0" r="42" fill="#d8ad79"/><ellipse cx="-36" cy="-6" rx="12" ry="22" fill="#b98a52"/><ellipse cx="36" cy="-6" rx="12" ry="22" fill="#b98a52"/><circle cx="-15" cy="0" r="5" fill="#3a2a1a"/><circle cx="15" cy="0" r="5" fill="#3a2a1a"/><ellipse cx="0" cy="16" rx="8" ry="6" fill="#5a3b22"/><g transform="rotate(-16)"><rect x="-46" y="-30" width="58" height="14" rx="4" fill="#fff" opacity=".96"/><line x1="-40" y1="-30" x2="-30" y2="-16" stroke="#e9d8c4" stroke-width="2"/><line x1="-22" y1="-30" x2="-12" y2="-16" stroke="#e9d8c4" stroke-width="2"/></g></g></svg>`;}
+function svgAdopt(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="adg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ead9ff"/><stop offset="1" stop-color="#ffe3ec"/></linearGradient></defs><rect width="400" height="200" fill="url(#adg)"/><path d="M200 66 c-16 -22 -56 -16 -56 14 c0 24 36 44 56 58 c20 -14 56 -34 56 -58 c0 -30 -40 -36 -56 -14 z" fill="#ff8fb0"/><polygon points="200,84 226,104 174,104" fill="#fff"/><rect x="182" y="104" width="36" height="28" fill="#fff"/><rect x="195" y="113" width="10" height="19" fill="#a273ff"/><g fill="#a273ff" opacity=".7"><circle cx="80" cy="152" r="7"/><circle cx="70" cy="142" r="3.5"/><circle cx="80" cy="139" r="3.5"/><circle cx="90" cy="142" r="3.5"/></g><g fill="#ff6f9c" opacity=".7"><circle cx="322" cy="152" r="7"/><circle cx="312" cy="142" r="3.5"/><circle cx="322" cy="139" r="3.5"/><circle cx="332" cy="142" r="3.5"/></g></svg>`;}
+function svgWinter(){return `<svg class="pic" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wtg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe6ff"/><stop offset="1" stop-color="#fff0e0"/></linearGradient></defs><rect width="400" height="200" fill="url(#wtg)"/><g fill="#fff"><circle cx="60" cy="40" r="4"/><circle cx="120" cy="68" r="3"/><circle cx="300" cy="38" r="4"/><circle cx="350" cy="78" r="3"/><circle cx="205" cy="34" r="3"/><circle cx="255" cy="62" r="3"/></g><rect x="138" y="108" width="132" height="72" rx="10" fill="#ff9a6b"/><path d="M138 120 h132" stroke="#ffd2a6" stroke-width="4"/><g transform="translate(205,150)"><ellipse cx="0" cy="8" rx="48" ry="24" fill="#e0a86b"/><circle cx="-30" cy="-2" r="16" fill="#e0a86b"/><polygon points="-43,-13 -34,-2 -45,-2" fill="#e0a86b"/><polygon points="-20,-15 -26,-2 -16,-4" fill="#e0a86b"/><circle cx="-34" cy="-2" r="2" fill="#3a2a1a"/><path d="M30 2 q14 4 12 18" stroke="#c98a4e" stroke-width="6" fill="none" stroke-linecap="round"/></g></svg>`;}
+
 const PROJECTS=[
   {id:'山区留守儿童救助',color:'var(--brand)',svg:svgChildren,
    name:{zh:'山区留守儿童救助',yue:'山區留守兒童救助',en:'Aid for Left-Behind Children'},
@@ -876,19 +1146,58 @@ const PROJECTS=[
    detail:{zh:'有些家庭，被一场突如其来的重病或意外推到了悬崖边——高昂的医药费，让本就拮据的他们走投无路。<br><br>星火设立生命救援专项，为这些与命运抗争的人提供紧急医疗资助，帮他们抓住那根「救命稻草」。我们坚信：不该有人，因为没钱，就被迫放弃活下去的希望。',
      yue:'有些家庭，被一場突如其來的重病或意外推到了懸崖邊——高昂的醫藥費，讓本就拮据的他們走投無路。<br><br>星火設立生命救援專項，為這些與命運抗爭的人提供緊急醫療資助，幫他們抓住那根「救命稻草」。我們堅信：不該有人，因為沒錢，就被迫放棄活下去的希望。',
      en:'Some families are pushed to the cliff\'s edge by a sudden illness or accident — sky-high medical bills leave the already-struggling with nowhere to turn.<br><br>Spark runs a Life Rescue fund, giving emergency medical aid to those fighting fate, helping them grab the lifeline. We firmly believe no one should be forced to give up the hope of living simply for lack of money.'}},
+  {id:'毛孩子关爱·流浪猫狗收容所',color:'#ff8a5b',svg:svgShelter,
+   name:{zh:'毛孩子关爱·流浪猫狗收容所',yue:'毛孩子關愛·流浪貓狗收容所',en:'Furry Friends · Stray Shelter'},
+   tease:{zh:'给流浪的猫猫狗狗，一个遮风挡雨的家。',yue:'給流浪的貓貓狗狗，一個遮風擋雨的家。',en:'A roof over the heads of stray cats and dogs.'},
+   detail:{zh:'城市的角落里，有一群没有名字的小生命：被遗弃的猫、走失的狗，饿了翻垃圾桶，冷了缩在车底，受了伤也只能默默舔舐。<br><br>星火想为它们建一个收容所——有干净的窝、温热的饭、定期的疫苗和体检，还有愿意蹲下来摸摸它们的人。在这里，它们不再是「流浪」，而是在等一个家。我们相信，一个社会的温度，也藏在它如何对待最弱小的生命里。',
+     yue:'城市的角落裏，有一群沒有名字的小生命：被遺棄的貓、走失的狗，餓了翻垃圾桶，冷了縮在車底，受了傷也只能默默舔舐。<br><br>星火想為牠們建一個收容所——有乾淨的窩、溫熱的飯、定期的疫苗和體檢，還有願意蹲下來摸摸牠們的人。在這裏，牠們不再是「流浪」，而是在等一個家。我們相信，一個社會的溫度，也藏在它如何對待最弱小的生命裏。',
+     en:'In the corners of the city live small lives with no names: abandoned cats, lost dogs — digging through bins when hungry, curling under cars when cold, licking their wounds in silence.<br><br>Spark wants to build them a shelter — clean beds, warm meals, regular vaccines and check-ups, and people willing to kneel down and pet them. Here they are no longer "strays," but souls waiting for a home. We believe the warmth of a society is hidden in how it treats its most fragile lives.'}},
+  {id:'流浪动物绝育放归',color:'var(--teal)',svg:svgTNR,
+   name:{zh:'流浪动物绝育放归 TNR',yue:'流浪動物絕育放歸 TNR',en:'Stray TNR (Trap-Neuter-Return)'},
+   tease:{zh:'一次绝育，少一窝流浪的悲伤。',yue:'一次絕育，少一窩流浪的悲傷。',en:'One spay, one fewer litter born to the streets.'},
+   detail:{zh:'街头的一只流浪猫狗，几年内可以繁衍出几十甚至上百只后代，而它们中的大多数，逃不过饥饿、车祸与疾病。<br><br>星火资助「捕捉—绝育—放归」(TNR)：把社区流浪动物温和地接来绝育、打疫苗，再放回它们熟悉的地方。这不是冷漠的「减少」，而是用最人道的方式，从源头减少新的流浪悲剧，让已经在街头的它们，至少能更健康、更安稳地活着。',
+     yue:'街頭的一隻流浪貓狗，幾年內可以繁衍出幾十甚至上百隻後代，而牠們之中的大多數，逃不過飢餓、車禍與疾病。<br><br>星火資助「捕捉—絕育—放歸」(TNR)：把社區流浪動物溫和地接來絕育、打疫苗，再放回牠們熟悉的地方。這不是冷漠的「減少」，而是用最人道的方式，從源頭減少新的流浪悲劇，讓已經在街頭的牠們，至少能更健康、更安穩地活著。',
+     en:'A single street cat or dog can produce dozens — even hundreds — of descendants within a few years, and most never escape hunger, traffic and disease.<br><br>Spark funds Trap-Neuter-Return (TNR): gently bringing community strays in to be spayed and vaccinated, then returning them to the places they know. This is not cold "reduction," but the most humane way to stop new tragedies at the source — so the animals already on the streets can at least live healthier, steadier lives.'}},
+  {id:'伤病受虐动物救助',color:'var(--red)',svg:svgVet,
+   name:{zh:'伤病·受虐动物医疗救助',yue:'傷病·受虐動物醫療救助',en:'Medical Rescue for Hurt Animals'},
+   tease:{zh:'它们不会说痛，但我们听得见。',yue:'牠們不會說痛，但我們聽得見。',en:"They can't say it hurts — but we hear them."},
+   detail:{zh:'一只被车撞断腿的狗，一只被人恶意烫伤的猫——它们不会喊疼，也付不起医药费，往往就这样被放弃。<br><br>星火设立动物医疗专项，为受伤、受虐、重病的流浪动物提供紧急手术与治疗，并在康复后帮它们寻找领养。每一条被救回的小生命都在提醒我们：善良，不应该有物种的界限。',
+     yue:'一隻被車撞斷腿的狗，一隻被人惡意燙傷的貓——牠們不會喊疼，也付不起醫藥費，往往就這樣被放棄。<br><br>星火設立動物醫療專項，為受傷、受虐、重病的流浪動物提供緊急手術與治療，並在康復後幫牠們尋找領養。每一條被救回的小生命都在提醒我們：善良，不應該有物種的界限。',
+     en:'A dog with a leg broken by a car, a cat deliberately scalded by a person — they cannot cry out, and they cannot pay the vet bills, so they are often simply given up on.<br><br>Spark runs a dedicated animal-medical fund, providing emergency surgery and treatment for injured, abused and seriously ill strays, then helping them find adoption once they recover. Every little life pulled back reminds us: kindness should know no species boundary.'}},
+  {id:'领养代替购买',color:'var(--purple)',svg:svgAdopt,
+   name:{zh:'领养代替购买',yue:'領養代替購買',en:"Adopt, Don't Shop"},
+   tease:{zh:'不是没人要它，只是还没遇到你。',yue:'不是沒人要牠，只是還沒遇到你。',en:"Not unwanted — just hasn't met you yet."},
+   detail:{zh:'每一只在收容所等待的猫狗，都曾以为自己会被爱一辈子。我们想让更多人明白：一个生命，不该被当作橱窗里的商品挑选或丢弃。<br><br>星火搭建领养配对平台，做严格的领养前评估与领养后回访，并走进社区与校园，开展「负责任养宠、拒绝虐待与遗弃」的公众教育。我们希望有一天，「领养代替购买」不再只是口号，而是大多数人的选择。',
+     yue:'每一隻在收容所等待的貓狗，都曾以為自己會被愛一輩子。我們想讓更多人明白：一個生命，不該被當作櫥窗裏的商品挑選或丟棄。<br><br>星火搭建領養配對平台，做嚴格的領養前評估與領養後回訪，並走進社區與校園，開展「負責任養寵、拒絕虐待與遺棄」的公眾教育。我們希望有一天，「領養代替購買」不再只是口號，而是大多數人的選擇。',
+     en:'Every cat and dog waiting in a shelter once believed it would be loved for life. We want more people to understand: a living being should never be picked out — or thrown away — like goods in a shop window.<br><br>Spark runs an adoption-matching platform with strict pre-adoption screening and post-adoption follow-ups, and brings education on responsible ownership and against cruelty and abandonment into communities and schools. We hope one day "adopt, don\'t shop" is no longer a slogan, but most people\'s choice.'}},
+  {id:'流浪动物越冬守护',color:'var(--accent)',svg:svgWinter,
+   name:{zh:'流浪动物越冬守护',yue:'流浪動物越冬守護',en:'Winter Shelter for Strays'},
+   tease:{zh:'再冷的冬天，也别让它们独自发抖。',yue:'再冷的冬天，也別讓牠們獨自發抖。',en:'However cold the winter, no one shivers alone.'},
+   detail:{zh:'寒潮来临的夜晚，街头的流浪动物只能蜷在车底或墙角，有的清晨就再也没能醒来。<br><br>星火在入冬前布设保暖猫窝狗窝与定点喂食站，备足粮食和干净饮水，并组织志愿者在最冷的日子里巡查投喂。我们做不到把每一只都接回家，但至少，能让它们在最难熬的季节里，多一处避风的角落、多一顿热乎的饭。',
+     yue:'寒潮來臨的夜晚，街頭的流浪動物只能蜷在車底或牆角，有的清晨就再也沒能醒來。<br><br>星火在入冬前布設保暖貓窩狗窩與定點餵食站，備足糧食和乾淨飲水，並組織志願者在最冷的日子裏巡查投餵。我們做不到把每一隻都接回家，但至少，能讓牠們在最難熬的季節裏，多一處避風的角落、多一頓熱乎的飯。',
+     en:'On nights when the cold snap hits, strays can only curl up under cars or in corners — and some never wake up the next morning.<br><br>Before winter, Spark sets up insulated cat and dog houses and fixed feeding stations, stocks up on food and clean water, and sends volunteers to patrol and feed on the coldest days. We can\'t take every one of them home, but we can give them, in the harshest season, one more sheltered corner and one more warm meal.'}},
 ];
 function renderProjects(){
-  document.getElementById('projectGrid').innerHTML=PROJECTS.map((p,i)=>`
-    <div class="proj" id="proj-${i}">
+  const med=['🥇','🥈','🥉'];
+  document.getElementById('projectGrid').innerHTML=PROJECTS.map((p,i)=>{
+    const sp=projSponsors(p.id); let chips='';
+    for(let j=0;j<3;j++){ const s=sp[j];
+      if(s){ const inner=`${med[j]} ${spLogoHtml(s,'pl')} <span>${escapeHtml(s.name)}</span> <b style="color:var(--brand2)">¥${s.amount.toLocaleString()}</b>`;
+        chips += s.link?`<a class="ps-chip" href="${escapeHtml(s.link)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${inner}</a>`:`<span class="ps-chip">${inner}</span>`; }
+      else { chips+=`<span class="ps-chip empty" onclick="event.stopPropagation();goView('donate')">${med[j]} ${t('sp.empty')}</span>`; }
+    }
+    return `<div class="proj" id="proj-${i}">
       ${p.svg()}
       <div class="pbody">
         <div class="pname" onclick="toggleProj(${i})"><span style="border-left:5px solid ${p.color};padding-left:10px">${p.name[LANG]||p.name.zh}</span><span class="chev">▼</span></div>
         <div class="ptease">${p.tease[LANG]||p.tease.zh}</div>
+        <div class="proj-sponsors"><span class="ps-label">🏅 ${t('sp.proj.label')}</span>${chips}</div>
         <div class="detail"><p>${p.detail[LANG]||p.detail.zh}</p>
           <button class="btn sm dbtn" onclick="donateTo('${p.id}')">${t('proj.support')}</button>
         </div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 function toggleProj(i){
   const card=document.getElementById('proj-'+i), d=card.querySelector('.detail');
@@ -970,6 +1279,47 @@ function openDoc(i){ document.getElementById('docTitle').textContent=dl(DOCS[i].
 document.getElementById('closeDocBtn').onclick=()=>document.getElementById('docOverlay').classList.remove('show');
 document.getElementById('docOverlay').onclick=e=>{ if(e.target.id==='docOverlay')e.currentTarget.classList.remove('show'); };
 
+/* ===================== 爱心企业赞助榜 ===================== */
+const SP_MEDALS=['🥇','🥈','🥉','4️⃣','5️⃣'];
+function sponsorDonations(){ return allTx().filter(x=>x.type==='donation' && x.sponsor); }
+function sponsorAgg(list){
+  const map={};
+  list.forEach(d=>{ const k=d.from; if(!map[k])map[k]={name:k,amount:0,slogan:'',link:'',logo:'',logoText:'',logoColor:''};
+    map[k].amount+=d.amount; if(d.slogan)map[k].slogan=d.slogan; if(d.link)map[k].link=d.link; if(d.logo)map[k].logo=d.logo; if(d.logoText)map[k].logoText=d.logoText; if(d.logoColor)map[k].logoColor=d.logoColor; });
+  return Object.values(map).sort((a,b)=>b.amount-a.amount);
+}
+function bigSponsors(){ return sponsorAgg(sponsorDonations()).slice(0,5); }
+function projSponsors(pid){ return sponsorAgg(sponsorDonations().filter(d=>d.purpose===pid)).slice(0,3); }
+function spLogoHtml(s,cls){ return s.logo?`<span class="${cls}"><img src="${s.logo}"></span>`:`<span class="${cls} badge" style="background:${s.logoColor||'#ff8a5b'}">${escapeHtml((s.logoText||s.name).slice(0,2))}</span>`; }
+function spLink(s,text){ return s.link?`<a href="${escapeHtml(s.link)}" target="_blank" rel="noopener">${text}</a>`:text; }
+function renderSponsors(){
+  const box=document.getElementById('sponsorSlots'); if(!box)return;
+  const list=bigSponsors(); let html='';
+  for(let i=0;i<5;i++){ const s=list[i];
+    if(s){ html+=`<div class="sp-slot"><span class="sp-rank">${SP_MEDALS[i]}</span>${spLogoHtml(s,'sp-logo')}<div class="sp-info"><div class="sp-name">${spLink(s,escapeHtml(s.name))}</div>${s.slogan?`<div class="sp-slogan">${escapeHtml(s.slogan)}</div>`:''}<div class="sp-amt">${t('sp.cum')} ¥${s.amount.toLocaleString()}</div></div></div>`; }
+    else { html+=`<div class="sp-slot empty" onclick="goView('donate')"><span class="sp-rank">${SP_MEDALS[i]}</span><span class="sp-logo badge" style="background:#e9d8c4">＋</span><div class="sp-info"><div class="sp-name" style="color:var(--muted)">${t('sp.empty')}</div></div></div>`; }
+  }
+  box.innerHTML=html;
+}
+function renderLeaderboard(){
+  const box=document.getElementById('sponsorLeaderboard'); if(!box)return;
+  const list=sponsorAgg(sponsorDonations());
+  box.innerHTML=list.length?list.map((s,i)=>`<div class="lb-row"><span style="width:26px">${i<5?SP_MEDALS[i]:'#'+(i+1)}</span>${spLogoHtml(s,'sp-logo')}<span>${spLink(s,escapeHtml(s.name))}</span><span class="lb-amt">¥${s.amount.toLocaleString()}</span></div>`).join(''):`<p class="sub" style="margin:0">${t('sp.rules.none')}</p>`;
+}
+document.getElementById('spToggle').onclick=()=>{ document.getElementById('sponsorWidget').style.display='none'; document.getElementById('sponsorReopen').style.display='block'; };
+document.getElementById('sponsorReopen').onclick=()=>{ document.getElementById('sponsorWidget').style.display='block'; document.getElementById('sponsorReopen').style.display='none'; };
+document.getElementById('spRulesBtn').onclick=()=>{ renderLeaderboard(); document.getElementById('sponsorOverlay').classList.add('show'); };
+document.getElementById('spRulesClose').onclick=()=>document.getElementById('sponsorOverlay').classList.remove('show');
+document.getElementById('sponsorOverlay').onclick=e=>{ if(e.target.id==='sponsorOverlay')e.currentTarget.classList.remove('show'); };
+// 企业赞助表单
+let spLogoData=null;
+document.getElementById('spOn').addEventListener('change',function(){ document.getElementById('spFields').style.display=this.checked?'block':'none'; });
+document.getElementById('spLogo').addEventListener('change',function(){
+  const f=this.files[0]; if(!f){ spLogoData=null; document.getElementById('spLogoPrev').innerHTML=''; return; }
+  const r=new FileReader(); r.onload=e=>{ spLogoData=e.target.result; document.getElementById('spLogoPrev').innerHTML=`<img class="puimg" src="${spLogoData}" style="max-width:90px">`; }; r.readAsDataURL(f);
+});
+function normalizeLink(u){ if(!u)return ''; if(!/^https?:\/\//i.test(u))u='https://'+u; return u; }
+
 /* ===================== 视图切换 ===================== */
 document.querySelectorAll('#nav button').forEach(btn=>{
   btn.onclick=()=>{
@@ -1025,7 +1375,11 @@ document.getElementById('confirmPayBtn').onclick=()=>{
   const subAll=document.getElementById('subAll').checked;
   const subProject=document.getElementById('subProject').checked;
   const contact=document.getElementById('subContact').value.trim();
-  const tx={id:txid(),type:'donation',from:payCtx.name,amount:payCtx.amount,purpose:payCtx.purpose,method:payCtx.method.id,methodName:payCtx.method.name,orderNo:payCtx.orderNo,receipt:rc,subAll,subProject,contact};
+  const spOn=document.getElementById('spOn').checked;
+  const slogan=spOn?document.getElementById('spSlogan').value.trim():'';
+  const link=spOn?normalizeLink(document.getElementById('spLink').value.trim()):'';
+  const logo=spOn?(spLogoData||''):'';
+  const tx={id:txid(),type:'donation',from:payCtx.name,amount:payCtx.amount,purpose:payCtx.purpose,method:payCtx.method.id,methodName:payCtx.method.name,orderNo:payCtx.orderNo,receipt:rc,subAll,subProject,contact,sponsor:spOn,slogan,link,logo};
   const {block,nonce}=chain.addTxBlock([tx]);
   document.getElementById('payOverlay').classList.remove('show');
   let subMsg='';
@@ -1034,8 +1388,9 @@ document.getElementById('confirmPayBtn').onclick=()=>{
   document.getElementById('mineTip').textContent=t('t.mineTip',{b:block.index,m:payCtx.method.name,r:rc,n:nonce,s:subMsg});
   lastCert={receipt:rc,from:payCtx.name,amount:payCtx.amount,purpose:payCtx.purpose,method:payCtx.method.name,orderNo:payCtx.orderNo,block:block.index,date:new Date().toLocaleString()};
   showSuccess(lastCert);
-  toast(t('t.paid',{m:payCtx.method.name,n:payCtx.amount.toLocaleString()}));
-  payCtx=null; updateHeight(); renderDashboard();
+  if(spOn){ toast(t('t.spJoined')); document.getElementById('spOn').checked=false; document.getElementById('spFields').style.display='none'; spLogoData=null; document.getElementById('spLogoPrev').innerHTML=''; document.getElementById('spLogo').value=''; }
+  else toast(t('t.paid',{m:payCtx.method.name,n:payCtx.amount.toLocaleString()}));
+  payCtx=null; updateHeight(); renderDashboard(); renderSponsors(); renderProjects();
 };
 function showSuccess(c){
   document.getElementById('certBody').innerHTML=`
@@ -1090,7 +1445,7 @@ document.getElementById('successOverlay').onclick=e=>{ if(e.target.id==='success
 const CATS=['食品/饮用水','衣物','床上用品/毛毯','婴幼儿用品','医疗/卫生用品','学习用品','其他'];
 const PUTYPES=['旧衣物','旧鞋子','旧家具','旧书籍','旧家电','母婴旧物','其他'];
 const SLOTS=['上午 9:00-12:00','下午 13:00-17:00','晚间 18:00-20:00'];
-const PURPOSES=['不指定，由基金会统筹','山区留守儿童救助','事实孤儿救助','孤寡老人慰问','乡村应急备灾','生命救援助力'];
+const PURPOSES=['不指定，由基金会统筹'].concat(PROJECTS.map(p=>p.id));
 function optsKeep(sel,list){ const cur=sel.value; sel.innerHTML=list.map(v=>`<option value="${v}">${tr(v)}</option>`).join(''); if(cur)sel.value=cur; }
 function fillCats(){ optsKeep(document.getElementById('kCat'),CATS); }
 function fillPuTypes(){ optsKeep(document.getElementById('puType'),PUTYPES); }
@@ -1107,30 +1462,79 @@ document.getElementById('inkindBtn').onclick=()=>{
   tip.style.color='var(--green)'; tip.textContent=t('t.inkindRegOk',{id,b:block.index});
   toast(t('t.inkindReg',{i:item,q:qty,u:unit})); updateHeight(); renderInkind(); renderDashboard();
 };
-function advanceInkind(refId){
-  const cur=inkindStatus(refId), idx=INKIND_STATES.indexOf(cur);
-  if(idx>=INKIND_STATES.length-1){ toast(t('t.stDone')); return; }
-  const next=INKIND_STATES[idx+1];
-  chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId,status:next}]);
-  toast(t('t.stUpd',{id:refId,s:tr(next)})); updateHeight(); renderInkind(); renderDashboard();
-}
-function setInkindStatus(refId,status){
-  if(!status)return;
-  if(inkindStatus(refId)===status){ toast(t('t.stNoChange')); return; }
-  chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId,status}]);
-  toast(t('t.stSet',{id:refId,s:tr(status)})); updateHeight(); renderInkind(); renderDashboard();
-}
+/* 物资状态推进：多方独立确认 + 证据上链 + 物流预言机 */
+const STATUS_ROLES={
+  '已入库':{need:2,required:null,roles:[{id:'warehouse'},{id:'volunteer'},{id:'carrier',oracle:true}]},
+  '已发放':{need:2,required:'recipient',roles:[{id:'recipient'},{id:'volunteer'},{id:'courier',oracle:true}]},
+};
+const ROLE_ZH={warehouse:'仓库管理员',volunteer:'志愿者',carrier:'物流承运商',recipient:'受助机构',courier:'物流派送员'};
+let activeReq=null, statusEv={};
 function renderInkind(){
   const tb=document.querySelector('#inkindTable tbody'), items=inkindItems();
   if(!items.length){ tb.innerHTML=`<tr><td class="sub">${t('ink.none')}</td></tr>`; return; }
   tb.innerHTML=items.slice().reverse().map(it=>{ const st=inkindStatus(it.id), done=st===INKIND_STATES[2];
-    const opts=INKIND_STATES.map(s=>`<option value="${s}" ${s===st?'selected':''}>${tr(s)}</option>`).join('');
-    return `<tr><td><b>${escapeHtml(it.item)}</b> ×${it.qty}${escapeHtml(it.unit)}<div class="kv">${escapeHtml(tr(it.category))} · ${escapeHtml(it.donor)} · ${t('exp.est')}¥${(it.estValue||0).toLocaleString()} · ${it.id}</div></td>
+    return `<tr><td><b>${escapeHtml(it.item)}</b> ×${it.qty}${escapeHtml(it.unit)}<div class="kv">${escapeHtml(tr(it.category))} · ${escapeHtml(it.donor)} · ${t('ink.code')} <b>${it.id}</b></div></td>
       <td><span class="pill ${done?'ok':'pend'}">${tr(st)}</span></td>
-      <td>${done?'':`<button class="btn sm purple" onclick="advanceInkind('${it.id}')">${t('ink.advance')}</button>`}
-        <select class="stsel" onchange="setInkindStatus('${it.id}',this.value)"><option value="">${t('ink.setto')}</option>${opts}</select></td></tr>`;
+      <td>${done?'':`<button class="btn sm purple" onclick="openStatusConfirm('${it.id}')">${t('ink.confirmNext')}</button> `}<button class="btn sm ghost" onclick="openTrace('${it.id}')">${t('ink.trace')}</button></td></tr>`;
   }).join('');
 }
+function openStatusConfirm(refId){
+  const cur=inkindStatus(refId), idx=INKIND_STATES.indexOf(cur);
+  if(idx>=INKIND_STATES.length-1){ toast(t('t.stDoneFlow')); return; }
+  const target=INKIND_STATES[idx+1];
+  activeReq={refId,target,cfg:STATUS_ROLES[target],signers:[],waybill:'',carrier:''}; statusEv={};
+  document.getElementById('statusOverlay').classList.add('show'); renderStatusModal();
+}
+function setStatusEvidence(roleId,input){ const f=input.files[0]; if(!f)return; const r=new FileReader(); r.onload=e=>{ statusEv[roleId]=e.target.result; renderStatusModal(); }; r.readAsDataURL(f); }
+function signStatus(roleId){
+  const role=activeReq.cfg.roles.find(r=>r.id===roleId); if(!role||activeReq.signers.some(s=>s.role===roleId))return;
+  let img='',note='',waybill='';
+  if(role.oracle){ waybill='SF'+Date.now().toString().slice(-10); activeReq.waybill=waybill; activeReq.carrier='顺丰速运'; note='承运商扫描签收'; toast(t('t.oraclePulled',{w:waybill})); }
+  else { img=statusEv[roleId]||''; }
+  const time=new Date().toISOString().replace('T',' ').slice(0,19);
+  const hash=hashStr((img||roleId)+'|'+time+'|'+roleId);
+  activeReq.signers.push({by:ROLE_ZH[roleId],role:roleId,img,note,hash,time,waybill});
+  renderStatusModal();
+}
+function reqMet(){ const c=activeReq.cfg; const ok=!c.required||activeReq.signers.some(s=>s.role===c.required); return activeReq.signers.length>=c.need&&ok; }
+function renderStatusModal(){
+  document.getElementById('statusTitle').textContent=t('conf.h',{s:tr(activeReq.target)})+' · '+t('ink.code')+' '+activeReq.refId;
+  document.getElementById('statusRule').textContent=t('conf.rule',{n:activeReq.cfg.need,req:activeReq.cfg.required?t('conf.reqRecipient'):''});
+  document.getElementById('statusRoles').innerHTML=activeReq.cfg.roles.map(role=>{
+    const s=activeReq.signers.find(x=>x.role===role.id);
+    if(s) return `<div class="conf-row done"><span class="cr-name">${escapeHtml(tr(s.by))} ${t('conf.signed')}</span>${s.img?`<img class="trace-ev-img" src="${s.img}">`:`<span class="kv">${role.oracle?t('conf.waybill')+' '+s.waybill:t('conf.noPhoto')}</span>`}</div>`;
+    if(role.oracle) return `<div class="conf-row"><span class="cr-name">${escapeHtml(tr(ROLE_ZH[role.id]))}</span><button class="btn sm blue" onclick="signStatus('${role.id}')">${t('conf.oracle')}</button></div>`;
+    return `<div class="conf-row"><span class="cr-name">${escapeHtml(tr(ROLE_ZH[role.id]))}</span><input type="file" accept="image/*" style="max-width:140px" onchange="setStatusEvidence('${role.id}',this)">${statusEv[role.id]?`<img class="trace-ev-img" src="${statusEv[role.id]}">`:''}<button class="btn sm green" onclick="signStatus('${role.id}')">${t('conf.confirm')}</button></div>`;
+  }).join('');
+  document.getElementById('statusProgress').textContent=t('conf.progress',{x:activeReq.signers.length,y:activeReq.cfg.need});
+  const btn=document.getElementById('statusCommit'); btn.textContent=t('conf.commit'); btn.disabled=!reqMet();
+}
+function commitStatus(){
+  if(!activeReq||!reqMet())return; const r=activeReq;
+  const evidence=r.signers.map(s=>({by:s.by,role:s.role,hash:s.hash,img:s.img,note:s.note,time:s.time}));
+  chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId:r.refId,status:r.target,confirmedBy:r.signers.map(s=>s.by),evidence,waybill:r.waybill,carrier:r.carrier}]);
+  document.getElementById('statusOverlay').classList.remove('show');
+  toast(t('t.stCommitted',{id:r.refId,s:tr(r.target)}));
+  activeReq=null; statusEv={}; updateHeight(); renderInkind(); renderDashboard();
+}
+document.getElementById('statusCommit').onclick=commitStatus;
+document.getElementById('statusCancel').onclick=()=>document.getElementById('statusOverlay').classList.remove('show');
+document.getElementById('statusOverlay').onclick=e=>{ if(e.target.id==='statusOverlay')e.currentTarget.classList.remove('show'); };
+function openTrace(refId){
+  const reg=inkindItems().find(x=>x.id===refId);
+  const steps=allTx().filter(x=>x.type==='inkind_status'&&x.refId===refId);
+  let html='';
+  if(reg) html+=`<div class="trace-step"><h4>📦 ${t('trace.reg')}</h4><div class="kv">${escapeHtml(reg.item)} ×${reg.qty}${escapeHtml(reg.unit)} · ${escapeHtml(tr(reg.category))} · ${escapeHtml(reg.donor)}</div><div class="kv">${t('ink.code')}：<b>${reg.id}</b> · ${reg.timestamp}</div></div>`;
+  steps.forEach(s=>{
+    const evs=(s.evidence||[]).map(e=>`<div class="kv" style="margin-top:5px">${e.img?`<img class="trace-ev-img" src="${e.img}"> `:''}${escapeHtml(tr(e.by))}${e.note?'：'+escapeHtml(e.note):''}<div class="hash-sm">${t('trace.hash')}: ${e.hash}</div></div>`).join('');
+    html+=`<div class="trace-step"><h4>✅ ${escapeHtml(tr(s.status))}</h4><div class="kv">${t('trace.confirmers')}：${(s.confirmedBy||[]).map(b=>escapeHtml(tr(b))).join('、')}${s.waybill?` · ${t('conf.waybill')} ${s.waybill}`:''} · ${s.timestamp}</div>${evs}</div>`;
+  });
+  document.getElementById('traceTitle').textContent=t('trace.h',{id:refId});
+  document.getElementById('traceBody').innerHTML=html;
+  document.getElementById('traceOverlay').classList.add('show');
+}
+document.getElementById('traceClose').onclick=()=>document.getElementById('traceOverlay').classList.remove('show');
+document.getElementById('traceOverlay').onclick=e=>{ if(e.target.id==='traceOverlay')e.currentTarget.classList.remove('show'); };
 
 /* ===================== 物资 - 上门取件 ===================== */
 document.getElementById('inkindSeg').addEventListener('click',e=>{
@@ -1308,7 +1712,7 @@ function renderChain(){
       if(x.type==='donation')return `<div class="kv"><span class="pill don">${t('pill.donation')}</span> ${escapeHtml(x.from)} ${t('exp.verb.donate')} ${yuan(x.amount)} ${t('exp.via')} ${escapeHtml(x.methodName||'')}（${t('exp.purpose')}：${escapeHtml(tr(x.purpose))}）· ${t('exp.receipt')} ${x.receipt||''}</div>`;
       if(x.type==='disbursement')return `<div class="kv"><span class="pill dis">${t('pill.disbursement')}</span> ${yuan(x.amount)} → ${escapeHtml(x.project)}（${escapeHtml(x.reason)}）· ${t('exp.serve')}：${escapeHtml(tr(x.projectTag||'统筹'))} · ${t('exp.sign')}：${(x.approvedBy||[]).join('、')}</div>`;
       if(x.type==='inkind')return `<div class="kv"><span class="pill ink">${t('pill.inkind')}</span> ${escapeHtml(x.donor)} ${t('exp.verb.donate')} ${escapeHtml(x.item)} ×${x.qty}${escapeHtml(x.unit)}（${escapeHtml(tr(x.category))}，${t('exp.est')}${yuan(x.estValue)}）· ${x.id}</div>`;
-      if(x.type==='inkind_status')return `<div class="kv"><span class="pill ink">${t('pill.inkindStatus')}</span> ${x.refId} → ${escapeHtml(tr(x.status))}</div>`;
+      if(x.type==='inkind_status')return `<div class="kv"><span class="pill ink">${t('pill.inkindStatus')}</span> ${x.refId} → ${escapeHtml(tr(x.status))}${x.confirmedBy&&x.confirmedBy.length?` · ${t('trace.confirmers')}：${x.confirmedBy.map(b=>escapeHtml(tr(b))).join('、')}`:''}${x.waybill?` · ${t('conf.waybill')} ${x.waybill}`:''}${x.evidence&&x.evidence.length?` · ${x.evidence.length} ${t('trace.evidence')}`:''}</div>`;
       return `<div class="kv">⛓️ ${escapeHtml(x.note||t('exp.systx'))}</div>`;
     }).join('');
     const donation=b.transactions.find(x=>x.type==='donation');
@@ -1363,9 +1767,26 @@ function setupSubscription(){
   chain.addTxBlock([{id:txid(),type:'donation',from:'爱心企业·绿源科技',amount:50000,purpose:'山区留守儿童救助',method:'wechat',methodName:'微信支付',orderNo:'SP100000001',receipt:receiptNo(),subProject:true,subAll:false,contact:'green@corp.com'}]);
   chain.addTxBlock([{id:txid(),type:'donation',from:'匿名爱心人士',amount:12000,purpose:'孤寡老人慰问',method:'alipay',methodName:'支付宝',orderNo:'SP100000002',receipt:receiptNo(),subAll:true,subProject:false,contact:'anon@mail.com'}]);
   chain.addTxBlock([{id:txid(),type:'donation',from:'David Wong',amount:8000,purpose:'生命救援助力',method:'payme',methodName:'PayMe / 转数快FPS',orderNo:'SP100000003',receipt:receiptNo(),subAll:false,subProject:false,contact:''}]);
-  chain.addTxBlock([{id:txid('IK'),type:'inkind',donor:'暖心服装厂',item:'全新儿童棉袄',category:'衣物',qty:300,unit:'件',estValue:30000,note:'捐赠给山区儿童',source:'收货点登记'}]);
+  const ikDemo=txid('IK');
+  chain.addTxBlock([{id:ikDemo,type:'inkind',donor:'暖心服装厂',item:'全新儿童棉袄',category:'衣物',qty:300,unit:'件',estValue:30000,note:'捐赠给山区儿童',source:'收货点登记'}]);
+  chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId:ikDemo,status:'已入库',confirmedBy:['仓库管理员','物流承运商'],evidence:[{by:'仓库管理员',role:'warehouse',hash:hashStr('warehouse|seed-storein'),img:'',note:'入库清点 300 件'},{by:'物流承运商',role:'carrier',hash:hashStr('carrier|seed-storein'),img:'',note:'承运商扫描签收'}],waybill:'SF7712089903',carrier:'顺丰速运'}]);
+  chain.addTxBlock([{id:txid('ST'),type:'inkind_status',refId:ikDemo,status:'已发放',confirmedBy:['受助机构','物流派送员'],evidence:[{by:'受助机构',role:'recipient',hash:hashStr('recipient|seed-deliver'),img:'',note:'星光乡村小学签收'},{by:'物流派送员',role:'courier',hash:hashStr('courier|seed-deliver'),img:'',note:'派送上门签收'}],waybill:'SF7712089903',carrier:'顺丰速运'}]);
   chain.addTxBlock([{id:txid(),type:'disbursement',project:'星光乡村小学',amount:20000,reason:'为留守儿童采购冬季校服',projectTag:'山区留守儿童救助',approvedBy:['理事·林审计','理事·王监理','理事·陈财务','捐赠人代表·赵爱心']}]);
-  updateHeight(); renderDashboard(); renderNotifications();
+  chain.addTxBlock([{id:txid(),type:'donation',from:'萌爪爱心社',amount:6000,purpose:'毛孩子关爱·流浪猫狗收容所',method:'alipayhk',methodName:'AlipayHK',orderNo:'SP100000004',receipt:receiptNo(),subProject:true,subAll:false,contact:'paw@love.org'}]);
+  chain.addTxBlock([{id:txid('IK'),type:'inkind',donor:'乐宠宠物食品',item:'猫狗干粮',category:'食品/饮用水',qty:200,unit:'袋',estValue:8000,note:'捐赠给流浪动物收容所',source:'收货点登记'}]);
+  // 示例企业赞助（真实公司名 + 真实官网链接；Logo 用原创色块占位）
+  [
+    {c:'皇家 Royal Canin',a:60000,p:'毛孩子关爱·流浪猫狗收容所',lc:'#7a1f2b',lt:'皇家',lk:'https://www.royalcanin.com',sl:'专业宠物营养'},
+    {c:'皇家 Royal Canin',a:28000,p:'伤病受虐动物救助',lc:'#7a1f2b',lt:'皇家',lk:'https://www.royalcanin.com',sl:'专业宠物营养'},
+    {c:'蓝氏 LEGENDSANDY',a:40000,p:'毛孩子关爱·流浪猫狗收容所',lc:'#1f6fb2',lt:'蓝氏',lk:'https://www.legendsandy.com.cn',sl:'天然健康养宠'},
+    {c:'蓝氏 LEGENDSANDY',a:26000,p:'流浪动物绝育放归',lc:'#1f6fb2',lt:'蓝氏',lk:'https://www.legendsandy.com.cn',sl:'天然健康养宠'},
+    {c:'普瑞纳 Purina',a:30000,p:'流浪动物越冬守护',lc:'#e2231a',lt:'普瑞',lk:'https://www.purina.com',sl:'科学喂养每一天'},
+    {c:'普瑞纳 Purina',a:18000,p:'毛孩子关爱·流浪猫狗收容所',lc:'#e2231a',lt:'普瑞',lk:'https://www.purina.com',sl:'科学喂养每一天'},
+    {c:'宝路 Pedigree',a:38000,p:'领养代替购买',lc:'#c8102e',lt:'宝路',lk:'https://www.pedigree.com',sl:'陪伴爱犬成长'},
+    {c:'伟嘉 Whiskas',a:15000,p:'流浪动物绝育放归',lc:'#5b2d8e',lt:'伟嘉',lk:'https://www.whiskas.com',sl:'懂猫，更懂爱'},
+    {c:'伟嘉 Whiskas',a:10000,p:'流浪动物越冬守护',lc:'#5b2d8e',lt:'伟嘉',lk:'https://www.whiskas.com',sl:'懂猫，更懂爱'},
+  ].forEach((s,i)=>chain.addTxBlock([{id:txid(),type:'donation',from:s.c,amount:s.a,purpose:s.p,method:'bank',methodName:'银行转账',orderNo:'SP2000000'+(i+1),receipt:receiptNo(),sponsor:true,slogan:s.sl,link:s.lk,logoText:s.lt,logoColor:s.lc,subProject:false,subAll:false,contact:''}]));
+  updateHeight(); renderDashboard(); renderNotifications(); renderSponsors();
   applyI18n(); updateLangButtons();
   if(LANG!=='zh') refreshDynamic();
 })();
